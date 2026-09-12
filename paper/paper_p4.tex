@@ -27,6 +27,31 @@
 \texttt{report/REFERENCE\_SOURCES.md} & 参考文献来源与核实记录\\
 \bottomrule
 \end{longtable}
+\section{补充图表}
+
+以下三张图为正文中的诊断性插图，为控制正文篇幅移至此处；正文中对应的引用编号保持不变。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_cover_stats.png}
+\caption{左：直径圆不能覆盖定位区域的算例比例；右：超出半径的相对量级（最大仅 0.18\%）}
+\label{fig:q1cover}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../figures/fig_q3_errors.png}
+\caption{残差与一致性检验：左为清除时刻的定位误差分布（中位数 5.0 m，95\% 分位 22.5 m，最大 47.8 m）；中为估计不确定度 $\sigma$ 的累积分布；右为不确定度与实际误差的散点关系，绝大多数点位于 $y=x$ 上方，说明 $\sigma$ 是误差的可靠上界}
+\label{fig:q3err}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../figures/fig_convergence.png}
+\caption{一次完整测试中的检测行为：左为各次检测的位置到出发点距离随虚拟时刻的变化（可见“由内向外”的搜索波前与回访），右为检测结果统计}
+\label{fig:conv}
+\end{figure}
+
 
 \section{完整源程序代码}
 

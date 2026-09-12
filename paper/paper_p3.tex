@@ -215,7 +215,6 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 \end{tabular}
 \end{table}
 
-
 结论：策略对接收半径、测角误差与干扰源个数均保持\textbf{完成率 100\%}；平均时间随源数显著变化（10 源 375.4 s，16 源 249.3 s），因为搜索成本近似固定而被更多目标分摊。$R_{\min}$ 降为 950 m 时平均时间下降，说明\textbf{结果对 $R_{\min}$ 的敏感性主要来自搜索覆盖的设计假设，而非算法本身}。
 
 \section{问题四：含定向干扰源的检测与清除策略}
@@ -375,7 +374,6 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
 \end{tabular}
 \end{table}
 
-
 可见问题四的完成率在全部八组扰动下	extbf{都保持 1.000}，说明该策略不依赖任何单一参数的精确取值；此前观察到的完成率损失已由末段定位的两项改进消除。
 
 \section{模型检验}
@@ -400,20 +398,6 @@ $J^{*}$ 的正确性 & 224 点离散最坏情形搜索 & 4000 次 Monte-Carlo �
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.55\textwidth]{../figures/fig_q3_errors.png}
-\caption{残差与一致性检验：左为清除时刻的定位误差分布（中位数 5.0 m，95\% 分位 22.5 m，最大 47.8 m）；中为估计不确定度 $\sigma$ 的累积分布；右为不确定度与实际误差的散点关系，绝大多数点位于 $y=x$ 上方，说明 $\sigma$ 是误差的可靠上界}
-\label{fig:q3err}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.55\textwidth]{../figures/fig_convergence.png}
-\caption{一次完整测试中的检测行为：左为各次检测的位置到出发点距离随虚拟时刻的变化（可见“由内向外”的搜索波前与回访），右为检测结果统计}
-\label{fig:conv}
-\end{figure}
 
 \subsection{残差结构分析}
 
