@@ -1,0 +1,29 @@
+{
+ "n": 60,
+ "total": 800,
+ "missed": 2,
+ "rows": [
+  {
+   "seed": 70016,
+   "ch": 20,
+   "r": 1784,
+   "kind": "directional",
+   "dir": 144,
+   "dot": 0.98,
+   "lit_pct": 0.284,
+   "r_eff": 1429,
+   "status": "empty"
+  },
+  {
+   "seed": 70032,
+   "ch": 5,
+   "r": 1671,
+   "kind": "directional",
+   "dir": 276,
+   "dot": 0.91,
+   "lit_pct": 3.544,
+   "r_eff": 1193,
+   "status": "empty"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+20 cases, seeds 30000..30019, pure sweep at 900 m
+variant                       ratio      min     time   travel  measure
+A baseline (sp900/m500)      0.9928   0.9231    532.3    22179      367
+B + cert every stop          0.9928   0.9231    529.6    22179      361
+C + no entry census          0.9928   0.9231    532.3    22179      367
+D + margin 900               0.9928   0.9231    517.8    21640      355
+E + better tour              0.9928   0.9231    532.3    22179      367
+F = B+C+D                    0.9928   0.9231    516.0    21640      352
+G = B+C+D+E                  0.9928   0.9231    516.0    21640      352
+report -> data/push_under_500.json

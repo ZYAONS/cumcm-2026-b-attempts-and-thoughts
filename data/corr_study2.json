@@ -1,0 +1,755 @@
+{
+ "gain": 1.3782345603222599,
+ "stats": {
+  "0.0": {
+   "mean": 0.005387617895363441,
+   "sd": 0.5770357485322493,
+   "clip": 0.0,
+   "rms50": 0.8342772154406107
+  },
+  "0.5": {
+   "mean": -0.023174432320058787,
+   "sd": 0.40739922497365744,
+   "clip": 0.0065047518479408655,
+   "rms50": 0.4189872604723024
+  },
+  "0.8": {
+   "mean": -0.038977414012075814,
+   "sd": 0.4706625893424081,
+   "clip": 0.027328405491024287,
+   "rms50": 0.17940910241168653
+  },
+  "1.0": {
+   "mean": -0.04292906402123055,
+   "sd": 0.5506470423260024,
+   "clip": 0.08751847940865892,
+   "rms50": 0.08819590208379133
+  }
+ },
+ "runs": {
+  "0.0": [
+   {
+    "ratio": 0.9913194444444443,
+    "min": 0.875,
+    "time": 1106.4445888908815,
+    "missed": [
+     {
+      "seed": 100003,
+      "channel": 6,
+      "r": 1764,
+      "kind": "directional",
+      "dir": 103,
+      "r_eff": 1471,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5974
+     },
+     {
+      "seed": 100006,
+      "channel": 2,
+      "r": 1761,
+      "kind": "directional",
+      "dir": 163,
+      "r_eff": 1438,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5977
+     },
+     {
+      "seed": 100006,
+      "channel": 7,
+      "r": 1647,
+      "kind": "directional",
+      "dir": 115,
+      "r_eff": 1299,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 29
+     }
+    ],
+    "sources": 298
+   },
+   {
+    "ratio": 0.986904761904762,
+    "min": 0.7857142857142857,
+    "time": 1096.1435159593943,
+    "missed": [
+     {
+      "seed": 101003,
+      "channel": 2,
+      "r": 1371,
+      "kind": "directional",
+      "dir": 284,
+      "r_eff": 1233,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5975
+     },
+     {
+      "seed": 101004,
+      "channel": 3,
+      "r": 1518,
+      "kind": "directional",
+      "dir": 141,
+      "r_eff": 1339,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 18
+     },
+     {
+      "seed": 101004,
+      "channel": 10,
+      "r": 1781,
+      "kind": "directional",
+      "dir": 161,
+      "r_eff": 1110,
+      "status": "located",
+      "n_obs": 7,
+      "n_nosig": 5999
+     },
+     {
+      "seed": 101004,
+      "channel": 15,
+      "r": 1115,
+      "kind": "directional",
+      "dir": 153,
+      "r_eff": 1061,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 18
+     }
+    ],
+    "sources": 306
+   },
+   {
+    "ratio": 0.9967948717948718,
+    "min": 0.9230769230769231,
+    "time": 988.6133337678233,
+    "missed": [
+     {
+      "seed": 102011,
+      "channel": 11,
+      "r": 1773,
+      "kind": "directional",
+      "dir": 237,
+      "r_eff": 1431,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5976
+     }
+    ],
+    "sources": 310
+   }
+  ],
+  "0.5": [
+   {
+    "ratio": 0.9868371212121211,
+    "min": 0.875,
+    "time": 1213.8303399865251,
+    "missed": [
+     {
+      "seed": 100006,
+      "channel": 2,
+      "r": 1761,
+      "kind": "directional",
+      "dir": 163,
+      "r_eff": 1438,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5975
+     },
+     {
+      "seed": 100006,
+      "channel": 7,
+      "r": 1647,
+      "kind": "directional",
+      "dir": 115,
+      "r_eff": 1299,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 27
+     },
+     {
+      "seed": 100013,
+      "channel": 7,
+      "r": 1358,
+      "kind": "directional",
+      "dir": 324,
+      "r_eff": 1129,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5975
+     },
+     {
+      "seed": 100023,
+      "channel": 19,
+      "r": 1597,
+      "kind": "directional",
+      "dir": 295,
+      "r_eff": 1086,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5976
+     }
+    ],
+    "sources": 298
+   },
+   {
+    "ratio": 0.9892191142191141,
+    "min": 0.8181818181818182,
+    "time": 1093.6068031764992,
+    "missed": [
+     {
+      "seed": 101008,
+      "channel": 3,
+      "r": 1782,
+      "kind": "directional",
+      "dir": 36,
+      "r_eff": 1422,
+      "status": "seen",
+      "n_obs": 5,
+      "n_nosig": 5975
+     },
+     {
+      "seed": 101019,
+      "channel": 3,
+      "r": 1171,
+      "kind": "directional",
+      "dir": 297,
+      "r_eff": 1063,
+      "status": "seen",
+      "n_obs": 1,
+      "n_nosig": 16
+     },
+     {
+      "seed": 101019,
+      "channel": 14,
+      "r": 1361,
+      "kind": "directional",
+      "dir": 258,
+      "r_eff": 1222,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5973
+     }
+    ],
+    "sources": 306
+   },
+   {
+    "ratio": 0.9970238095238096,
+    "min": 0.9285714285714286,
+    "time": 961.9390923379578,
+    "missed": [
+     {
+      "seed": 102002,
+      "channel": 6,
+      "r": 1177,
+      "kind": "directional",
+      "dir": 82,
+      "r_eff": 1137,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5976
+     }
+    ],
+    "sources": 310
+   }
+  ],
+  "1.0": [
+   {
+    "ratio": 0.9895833333333334,
+    "min": 0.875,
+    "time": 1056.112818933637,
+    "missed": [
+     {
+      "seed": 100006,
+      "channel": 2,
+      "r": 1761,
+      "kind": "directional",
+      "dir": 163,
+      "r_eff": 1438,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5975
+     },
+     {
+      "seed": 100006,
+      "channel": 7,
+      "r": 1647,
+      "kind": "directional",
+      "dir": 115,
+      "r_eff": 1299,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 27
+     },
+     {
+      "seed": 100022,
+      "channel": 20,
+      "r": 1468,
+      "kind": "directional",
+      "dir": 70,
+      "r_eff": 1416,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 19
+     },
+     {
+      "seed": 100022,
+      "channel": 9,
+      "r": 1323,
+      "kind": "directional",
+      "dir": 84,
+      "r_eff": 1008,
+      "status": "seen",
+      "n_obs": 1,
+      "n_nosig": 5974
+     }
+    ],
+    "sources": 298
+   },
+   {
+    "ratio": 0.9806806041181041,
+    "min": 0.8666666666666667,
+    "time": 1365.4571035705985,
+    "missed": [
+     {
+      "seed": 101001,
+      "channel": 14,
+      "r": 1775,
+      "kind": "directional",
+      "dir": 42,
+      "r_eff": 1039,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 22
+     },
+     {
+      "seed": 101001,
+      "channel": 16,
+      "r": 1540,
+      "kind": "directional",
+      "dir": 139,
+      "r_eff": 1025,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5965
+     },
+     {
+      "seed": 101003,
+      "channel": 2,
+      "r": 1371,
+      "kind": "directional",
+      "dir": 284,
+      "r_eff": 1233,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5974
+     },
+     {
+      "seed": 101007,
+      "channel": 9,
+      "r": 1618,
+      "kind": "directional",
+      "dir": 48,
+      "r_eff": 1412,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5971
+     },
+     {
+      "seed": 101008,
+      "channel": 3,
+      "r": 1782,
+      "kind": "directional",
+      "dir": 36,
+      "r_eff": 1422,
+      "status": "located",
+      "n_obs": 17,
+      "n_nosig": 6005
+     },
+     {
+      "seed": 101022,
+      "channel": 20,
+      "r": 1797,
+      "kind": "directional",
+      "dir": 307,
+      "r_eff": 1417,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5974
+     }
+    ],
+    "sources": 306
+   },
+   {
+    "ratio": 0.9902777777777777,
+    "min": 0.8333333333333334,
+    "time": 1094.9192659013877,
+    "missed": [
+     {
+      "seed": 102001,
+      "channel": 1,
+      "r": 1773,
+      "kind": "directional",
+      "dir": 323,
+      "r_eff": 1001,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5973
+     },
+     {
+      "seed": 102004,
+      "channel": 12,
+      "r": 1366,
+      "kind": "directional",
+      "dir": 335,
+      "r_eff": 1204,
+      "status": "unknown",
+      "n_obs": 0,
+      "n_nosig": 19
+     },
+     {
+      "seed": 102004,
+      "channel": 15,
+      "r": 1077,
+      "kind": "directional",
+      "dir": 82,
+      "r_eff": 1328,
+      "status": "seen",
+      "n_obs": 2,
+      "n_nosig": 5976
+     }
+    ],
+    "sources": 310
+   }
+  ]
+ },
+ "missed": {
+  "0.0": [
+   {
+    "seed": 100003,
+    "channel": 6,
+    "r": 1764,
+    "kind": "directional",
+    "dir": 103,
+    "r_eff": 1471,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5974
+   },
+   {
+    "seed": 100006,
+    "channel": 2,
+    "r": 1761,
+    "kind": "directional",
+    "dir": 163,
+    "r_eff": 1438,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5977
+   },
+   {
+    "seed": 100006,
+    "channel": 7,
+    "r": 1647,
+    "kind": "directional",
+    "dir": 115,
+    "r_eff": 1299,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 29
+   },
+   {
+    "seed": 101003,
+    "channel": 2,
+    "r": 1371,
+    "kind": "directional",
+    "dir": 284,
+    "r_eff": 1233,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5975
+   },
+   {
+    "seed": 101004,
+    "channel": 3,
+    "r": 1518,
+    "kind": "directional",
+    "dir": 141,
+    "r_eff": 1339,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 18
+   },
+   {
+    "seed": 101004,
+    "channel": 10,
+    "r": 1781,
+    "kind": "directional",
+    "dir": 161,
+    "r_eff": 1110,
+    "status": "located",
+    "n_obs": 7,
+    "n_nosig": 5999
+   },
+   {
+    "seed": 101004,
+    "channel": 15,
+    "r": 1115,
+    "kind": "directional",
+    "dir": 153,
+    "r_eff": 1061,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 18
+   },
+   {
+    "seed": 102011,
+    "channel": 11,
+    "r": 1773,
+    "kind": "directional",
+    "dir": 237,
+    "r_eff": 1431,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5976
+   }
+  ],
+  "0.5": [
+   {
+    "seed": 100006,
+    "channel": 2,
+    "r": 1761,
+    "kind": "directional",
+    "dir": 163,
+    "r_eff": 1438,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5975
+   },
+   {
+    "seed": 100006,
+    "channel": 7,
+    "r": 1647,
+    "kind": "directional",
+    "dir": 115,
+    "r_eff": 1299,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 27
+   },
+   {
+    "seed": 100013,
+    "channel": 7,
+    "r": 1358,
+    "kind": "directional",
+    "dir": 324,
+    "r_eff": 1129,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5975
+   },
+   {
+    "seed": 100023,
+    "channel": 19,
+    "r": 1597,
+    "kind": "directional",
+    "dir": 295,
+    "r_eff": 1086,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5976
+   },
+   {
+    "seed": 101008,
+    "channel": 3,
+    "r": 1782,
+    "kind": "directional",
+    "dir": 36,
+    "r_eff": 1422,
+    "status": "seen",
+    "n_obs": 5,
+    "n_nosig": 5975
+   },
+   {
+    "seed": 101019,
+    "channel": 3,
+    "r": 1171,
+    "kind": "directional",
+    "dir": 297,
+    "r_eff": 1063,
+    "status": "seen",
+    "n_obs": 1,
+    "n_nosig": 16
+   },
+   {
+    "seed": 101019,
+    "channel": 14,
+    "r": 1361,
+    "kind": "directional",
+    "dir": 258,
+    "r_eff": 1222,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5973
+   },
+   {
+    "seed": 102002,
+    "channel": 6,
+    "r": 1177,
+    "kind": "directional",
+    "dir": 82,
+    "r_eff": 1137,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5976
+   }
+  ],
+  "1.0": [
+   {
+    "seed": 100006,
+    "channel": 2,
+    "r": 1761,
+    "kind": "directional",
+    "dir": 163,
+    "r_eff": 1438,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5975
+   },
+   {
+    "seed": 100006,
+    "channel": 7,
+    "r": 1647,
+    "kind": "directional",
+    "dir": 115,
+    "r_eff": 1299,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 27
+   },
+   {
+    "seed": 100022,
+    "channel": 20,
+    "r": 1468,
+    "kind": "directional",
+    "dir": 70,
+    "r_eff": 1416,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 19
+   },
+   {
+    "seed": 100022,
+    "channel": 9,
+    "r": 1323,
+    "kind": "directional",
+    "dir": 84,
+    "r_eff": 1008,
+    "status": "seen",
+    "n_obs": 1,
+    "n_nosig": 5974
+   },
+   {
+    "seed": 101001,
+    "channel": 14,
+    "r": 1775,
+    "kind": "directional",
+    "dir": 42,
+    "r_eff": 1039,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 22
+   },
+   {
+    "seed": 101001,
+    "channel": 16,
+    "r": 1540,
+    "kind": "directional",
+    "dir": 139,
+    "r_eff": 1025,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5965
+   },
+   {
+    "seed": 101003,
+    "channel": 2,
+    "r": 1371,
+    "kind": "directional",
+    "dir": 284,
+    "r_eff": 1233,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5974
+   },
+   {
+    "seed": 101007,
+    "channel": 9,
+    "r": 1618,
+    "kind": "directional",
+    "dir": 48,
+    "r_eff": 1412,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5971
+   },
+   {
+    "seed": 101008,
+    "channel": 3,
+    "r": 1782,
+    "kind": "directional",
+    "dir": 36,
+    "r_eff": 1422,
+    "status": "located",
+    "n_obs": 17,
+    "n_nosig": 6005
+   },
+   {
+    "seed": 101022,
+    "channel": 20,
+    "r": 1797,
+    "kind": "directional",
+    "dir": 307,
+    "r_eff": 1417,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5974
+   },
+   {
+    "seed": 102001,
+    "channel": 1,
+    "r": 1773,
+    "kind": "directional",
+    "dir": 323,
+    "r_eff": 1001,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5973
+   },
+   {
+    "seed": 102004,
+    "channel": 12,
+    "r": 1366,
+    "kind": "directional",
+    "dir": 335,
+    "r_eff": 1204,
+    "status": "unknown",
+    "n_obs": 0,
+    "n_nosig": 19
+   },
+   {
+    "seed": 102004,
+    "channel": 15,
+    "r": 1077,
+    "kind": "directional",
+    "dir": 82,
+    "r_eff": 1328,
+    "status": "seen",
+    "n_obs": 2,
+    "n_nosig": 5976
+   }
+  ]
+ }
+}

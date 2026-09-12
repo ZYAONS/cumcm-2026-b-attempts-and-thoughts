@@ -1,0 +1,54 @@
+{
+ "q3": {
+  "n_cases": 60,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 326.97712033312183,
+  "median_time": 313.5243600685902,
+  "sd_time": 57.0683147603653,
+  "mean_travel": 12986.772178065625,
+  "mean_measure": 247.08333333333334,
+  "mean_clear_actions": 25.15,
+  "mean_vtime": 4157.021102279792,
+  "wall_s": 6.455158948898315
+ },
+ "q4": {
+  "n_cases": 60,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 888.3321441078375,
+  "median_time": 877.2637925696804,
+  "sd_time": 170.3279592825037,
+  "mean_travel": 42628.68663571191,
+  "mean_measure": 427.9,
+  "mean_clear_actions": 25.933333333333334,
+  "mean_vtime": 11171.053993809048,
+  "wall_s": 118.71945333480835
+ },
+ "q4_alldir": {
+  "n_cases": 30,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 993.6515552371884,
+  "median_time": 1016.0124691046749,
+  "sd_time": 191.25546047016832,
+  "mean_travel": 44167.67775905713,
+  "mean_measure": 511.76666666666665,
+  "mean_clear_actions": 38.166666666666664,
+  "mean_vtime": 12015.868885144759,
+  "wall_s": 82.97228360176086
+ },
+ "q4_omni": {
+  "n_cases": 30,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 860.6092313001687,
+  "median_time": 893.7017725675736,
+  "sd_time": 176.6267666541999,
+  "mean_travel": 39758.371393002955,
+  "mean_measure": 391.6,
+  "mean_clear_actions": 25.233333333333334,
+  "mean_vtime": 10379.074278600592,
+  "wall_s": 49.53023147583008
+ }
+}

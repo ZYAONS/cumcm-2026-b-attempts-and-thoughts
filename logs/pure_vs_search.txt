@@ -1,0 +1,7 @@
+24 cases, seeds 30000..30023
+config                         stops    ratio      min     time   median   travel measure
+A paper (s1100 + search)        24.0   1.0000   1.0000    874.9    816.7    41648     440
+B pure sweep s900               18.8   0.9974   0.9375    547.8    506.9    22588     383
+C pure sweep s1000              12.9   0.9914   0.9231    522.2    526.6    21548     362
+D pure sweep s900 + cb500       18.5   1.0000   1.0000    540.3    543.0    22343     379
+report -> data/pure_vs_search.json

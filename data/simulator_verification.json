@@ -1,0 +1,659 @@
+{
+ "n_ok": 68,
+ "n_all": 68,
+ "groups": {
+  "A": [
+   18,
+   18
+  ],
+  "D": [
+   8,
+   8
+  ],
+  "B": [
+   8,
+   8
+  ],
+  "C": [
+   16,
+   16
+  ],
+  "E": [
+   5,
+   5
+  ],
+  "F": [
+   4,
+   4
+  ],
+  "G": [
+   5,
+   5
+  ],
+  "H": [
+   4,
+   4
+  ]
+ },
+ "checks": [
+  {
+   "group": "A",
+   "key": "route_enter",
+   "name": "route_enter",
+   "ok": true,
+   "detail": "enter accepted",
+   "expected": "200",
+   "got": "200"
+  },
+  {
+   "group": "A",
+   "key": "route_unknown_404",
+   "name": "route_unknown_404",
+   "ok": true,
+   "detail": "unknown path",
+   "expected": "404",
+   "got": "404"
+  },
+  {
+   "group": "A",
+   "key": "content_type_415",
+   "name": "content_type_415",
+   "ok": true,
+   "detail": "non-json content type",
+   "expected": "415",
+   "got": "415"
+  },
+  {
+   "group": "A",
+   "key": "content_encoding_415",
+   "name": "content_encoding_415",
+   "ok": true,
+   "detail": "compressed body",
+   "expected": "415",
+   "got": "415"
+  },
+  {
+   "group": "A",
+   "key": "body_too_large_413",
+   "name": "body_too_large_413",
+   "ok": true,
+   "detail": "70000 byte body",
+   "expected": "413",
+   "got": "413"
+  },
+  {
+   "group": "A",
+   "key": "bad_json_400",
+   "name": "bad_json_400",
+   "ok": true,
+   "detail": "malformed json",
+   "expected": "400",
+   "got": "400"
+  },
+  {
+   "group": "A",
+   "key": "body_not_object_400",
+   "name": "body_not_object_400",
+   "ok": true,
+   "detail": "json array body",
+   "expected": "400",
+   "got": "400"
+  },
+  {
+   "group": "A",
+   "key": "extra_field_accepted_false",
+   "name": "extra_field_accepted_false",
+   "ok": true,
+   "detail": "undeclared field",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "missing_field_400",
+   "name": "missing_field_400",
+   "ok": true,
+   "detail": "no robot_id",
+   "expected": "400",
+   "got": "400"
+  },
+  {
+   "group": "A",
+   "key": "arena_id_mismatch",
+   "name": "arena_id_mismatch",
+   "ok": true,
+   "detail": "wrong arena_id",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "robot_id_mismatch",
+   "name": "robot_id_mismatch",
+   "ok": true,
+   "detail": "wrong robot_id",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "bad_position",
+   "name": "bad_position",
+   "ok": true,
+   "detail": "4 malformed positions",
+   "expected": "rejected",
+   "got": "[True, True, True, True]"
+  },
+  {
+   "group": "A",
+   "key": "bad_channel",
+   "name": "bad_channel",
+   "ok": true,
+   "detail": "channel 0/21/1.5/'1'/true",
+   "expected": "400",
+   "got": "[True, True, True, True, True]"
+  },
+  {
+   "group": "A",
+   "key": "idempotent_replay",
+   "name": "idempotent_replay",
+   "ok": true,
+   "detail": "identical replay returns first response",
+   "expected": "26.0",
+   "got": "26.0"
+  },
+  {
+   "group": "A",
+   "key": "double_enter",
+   "name": "double_enter",
+   "ok": true,
+   "detail": "second enter rejected",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "measure_after_exit",
+   "name": "measure_after_exit",
+   "ok": true,
+   "detail": "measure after exit",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "measure_before_enter",
+   "name": "measure_before_enter",
+   "ok": true,
+   "detail": "no session yet",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "A",
+   "key": "exit_before_enter",
+   "name": "exit_before_enter",
+   "ok": true,
+   "detail": "exit without a session",
+   "expected": "200/false",
+   "got": "200/False"
+  },
+  {
+   "group": "D",
+   "key": "enter_fields",
+   "name": "enter_fields",
+   "ok": true,
+   "detail": "enter response carries the four limits",
+   "expected": "('accepted', 'virtual_time_s', 'max_virtual_duration_s', 'max_real_duration_s')",
+   "got": "['accepted', 'max_real_duration_s', 'max_virtual_duration_s', 'real_timestamp_ms', 'remaining_real_duration_s', 'virtual_time_s']"
+  },
+  {
+   "group": "D",
+   "key": "limits_match_attachment",
+   "name": "limits_match_attachment",
+   "ok": true,
+   "detail": "100 h virtual / 20 min real",
+   "expected": "360000/1200",
+   "got": "360000.0/1200.0"
+  },
+  {
+   "group": "D",
+   "key": "measure_fields",
+   "name": "measure_fields",
+   "ok": true,
+   "detail": "measure response fields",
+   "expected": "result+times",
+   "got": "['accepted', 'measure_result', 'real_timestamp_ms', 'virtual_time_s']"
+  },
+  {
+   "group": "D",
+   "key": "measure_result_enum",
+   "name": "measure_result_enum",
+   "ok": true,
+   "detail": "three state result",
+   "expected": "no_signal/near/direction",
+   "got": "no_signal"
+  },
+  {
+   "group": "D",
+   "key": "clear_result_enum",
+   "name": "clear_result_enum",
+   "ok": true,
+   "detail": "two state result",
+   "expected": "success/no_target_in_range",
+   "got": "no_target_in_range"
+  },
+  {
+   "group": "D",
+   "key": "exit_fields",
+   "name": "exit_fields",
+   "ok": true,
+   "detail": "exit response",
+   "expected": "accepted+time",
+   "got": "['accepted', 'exit_reason', 'real_timestamp_ms', 'virtual_time_s']"
+  },
+  {
+   "group": "B",
+   "key": "enter_exit_free",
+   "name": "enter_exit_free",
+   "ok": true,
+   "detail": "enter+exit cost 0 s",
+   "expected": "0.0",
+   "got": "0.0"
+  },
+  {
+   "group": "B",
+   "key": "movement_cost",
+   "name": "movement_cost",
+   "ok": true,
+   "detail": "cost = travelled distance / 5 s, five successive moves",
+   "expected": "0.0",
+   "got": "2.84e-14"
+  },
+  {
+   "group": "B",
+   "key": "switch_cost",
+   "name": "switch_cost",
+   "ok": true,
+   "detail": "same ch 5 s, new ch 6 s",
+   "expected": "5.0/6.0",
+   "got": "5.0/6.0"
+  },
+  {
+   "group": "B",
+   "key": "measure_5s",
+   "name": "measure_5s",
+   "ok": true,
+   "detail": "no_signal measure still costs 5 s",
+   "expected": "5.0",
+   "got": "5.0"
+  },
+  {
+   "group": "B",
+   "key": "clear_cost",
+   "name": "clear_cost",
+   "ok": true,
+   "detail": "hit = move+5 s, miss = move+3 s",
+   "expected": "105.0/103.0",
+   "got": "105.0/103.0"
+  },
+  {
+   "group": "B",
+   "key": "clear_keeps_channel",
+   "name": "clear_keeps_channel",
+   "ok": true,
+   "detail": "clear must not retune the receiver",
+   "expected": "5",
+   "got": "5"
+  },
+  {
+   "group": "B",
+   "key": "clock_monotone",
+   "name": "clock_monotone",
+   "ok": true,
+   "detail": "40 actions, clock never decreases",
+   "expected": "monotone",
+   "got": "True"
+  },
+  {
+   "group": "B",
+   "key": "cleared_is_silent",
+   "name": "cleared_is_silent",
+   "ok": true,
+   "detail": "after a successful clear the channel is silent",
+   "expected": "direction/no_signal",
+   "got": "direction/no_signal"
+  },
+  {
+   "group": "C",
+   "key": "gen_count_10_16",
+   "name": "gen_count_10_16",
+   "ok": true,
+   "detail": "300 cases, 10..16 sources",
+   "expected": "10..16",
+   "got": "ok"
+  },
+  {
+   "group": "C",
+   "key": "gen_channels_valid",
+   "name": "gen_channels_valid",
+   "ok": true,
+   "detail": "distinct channels inside 1..20",
+   "expected": "distinct",
+   "got": "ok"
+  },
+  {
+   "group": "C",
+   "key": "gen_r_eff_range",
+   "name": "gen_r_eff_range",
+   "ok": true,
+   "detail": "R_eff inside [1000,1500]",
+   "expected": "[1000,1500]",
+   "got": "ok"
+  },
+  {
+   "group": "C",
+   "key": "gen_inside_disk",
+   "name": "gen_inside_disk",
+   "ok": true,
+   "detail": "every source inside the 1800 m disk",
+   "expected": "<=1800",
+   "got": "ok"
+  },
+  {
+   "group": "C",
+   "key": "gen_area_uniform",
+   "name": "gen_area_uniform",
+   "ok": true,
+   "detail": "area-uniform sampling (expect 0.5 inside R/sqrt2)",
+   "expected": "0.500",
+   "got": "0.5030"
+  },
+  {
+   "group": "C",
+   "key": "no_signal_beyond_radius",
+   "name": "no_signal_beyond_radius",
+   "ok": true,
+   "detail": "beyond R_eff silent, inside R_eff detected",
+   "expected": "no_signal/direction",
+   "got": "no_signal/direction"
+  },
+  {
+   "group": "C",
+   "key": "near_within_5m",
+   "name": "near_within_5m",
+   "ok": true,
+   "detail": "4 m -> near",
+   "expected": "near",
+   "got": "near"
+  },
+  {
+   "group": "C",
+   "key": "bearing_error_bound",
+   "name": "bearing_error_bound",
+   "ok": true,
+   "detail": "|error| <= 1 deg over 400 samples",
+   "expected": "<=1.0",
+   "got": "0.9966"
+  },
+  {
+   "group": "C",
+   "key": "bearing_repeat_identical",
+   "name": "bearing_repeat_identical",
+   "ok": true,
+   "detail": "the reading is a function of the location (附件 1)",
+   "expected": "identical",
+   "got": "400/400"
+  },
+  {
+   "group": "C",
+   "key": "bearing_not_constant",
+   "name": "bearing_not_constant",
+   "ok": true,
+   "detail": "the error actually varies with the location",
+   "expected": "varied",
+   "got": "400"
+  },
+  {
+   "group": "C",
+   "key": "clear_radius_in",
+   "name": "clear_radius_in",
+   "ok": true,
+   "detail": "distance 19.9 m",
+   "expected": "True",
+   "got": "True"
+  },
+  {
+   "group": "C",
+   "key": "clear_radius_in",
+   "name": "clear_radius_in",
+   "ok": true,
+   "detail": "distance 20.0 m",
+   "expected": "True",
+   "got": "True"
+  },
+  {
+   "group": "C",
+   "key": "clear_radius_out",
+   "name": "clear_radius_out",
+   "ok": true,
+   "detail": "distance 20.1 m",
+   "expected": "False",
+   "got": "False"
+  },
+  {
+   "group": "C",
+   "key": "directional_halfplane",
+   "name": "directional_halfplane",
+   "ok": true,
+   "detail": "180 deg sector incl. both generatrices; the opposite half is dark",
+   "expected": "ok",
+   "got": "[True, True, True, True, True, True, True, True]"
+  },
+  {
+   "group": "C",
+   "key": "directional_blind_side",
+   "name": "directional_blind_side",
+   "ok": true,
+   "detail": "50 m behind the source is silent",
+   "expected": "no_signal/direction",
+   "got": "no_signal/direction"
+  },
+  {
+   "group": "C",
+   "key": "clear_independent_of_sector",
+   "name": "clear_independent_of_sector",
+   "ok": true,
+   "detail": "10 m behind a directional source is still cleared",
+   "expected": "success",
+   "got": "success"
+  },
+  {
+   "group": "D",
+   "key": "log_lines_complete",
+   "name": "log_lines_complete",
+   "ok": true,
+   "detail": "4 actions, 5 mandatory fields each",
+   "expected": "4 rows",
+   "got": "4 rows"
+  },
+  {
+   "group": "D",
+   "key": "log_measure_fields",
+   "name": "log_measure_fields",
+   "ok": true,
+   "detail": "measure log carries the cost breakdown",
+   "expected": "5 fields",
+   "got": "['action', 'channel', 'move_m', 'move_s', 'n_cleared', 'pos', 'request_id', 'result', 'svd_deg', 'switch_s', 't']"
+  },
+  {
+   "group": "E",
+   "key": "constants_match_reference",
+   "name": "constants_match_reference",
+   "ok": true,
+   "detail": "12 physics/time constants identical to the open-source driver",
+   "expected": "all equal",
+   "got": "all equal"
+  },
+  {
+   "group": "E",
+   "key": "measure_cost_matches_reference",
+   "name": "measure_cost_matches_reference",
+   "ok": true,
+   "detail": "300 random measure actions, step-by-step identical cost",
+   "expected": "0.0",
+   "got": "7.16e-12"
+  },
+  {
+   "group": "E",
+   "key": "clear_cost_matches_reference",
+   "name": "clear_cost_matches_reference",
+   "ok": true,
+   "detail": "clear actions, step-by-step identical cost",
+   "expected": "0.0",
+   "got": "0.00e+00"
+  },
+  {
+   "group": "E",
+   "key": "case_stats_match_reference",
+   "name": "case_stats_match_reference",
+   "ok": true,
+   "detail": "n in 10..16, mean R_eff ~1250, half the sources inside R/sqrt2",
+   "expected": "1250/0.5",
+   "got": "1251.8/0.4950"
+  },
+  {
+   "group": "E",
+   "key": "deviation_from_reference_error_model",
+   "name": "deviation_from_reference_error_model",
+   "ok": true,
+   "detail": "reference mock redraws a random error at every call; 附件 1 requires a location dependent reading, which this simulator implements",
+   "expected": "deterministic",
+   "got": "identical"
+  },
+  {
+   "group": "F",
+   "key": "clock_conservation",
+   "name": "clock_conservation",
+   "ok": true,
+   "detail": "sum of logged components equals the final virtual clock",
+   "expected": "4334.754",
+   "got": "4334.754"
+  },
+  {
+   "group": "F",
+   "key": "travel_conservation",
+   "name": "travel_conservation",
+   "ok": true,
+   "detail": "logged distances equal the travelled distance",
+   "expected": "13948.8",
+   "got": "13948.8"
+  },
+  {
+   "group": "F",
+   "key": "run_completes",
+   "name": "run_completes",
+   "ok": true,
+   "detail": "a full strategy run on one case clears everything",
+   "expected": "1.000",
+   "got": "1.0000"
+  },
+  {
+   "group": "F",
+   "key": "brain_clock_not_below_arena",
+   "name": "策略内部时钟不低于竞技场时钟（缓存复用导致）",
+   "ok": true,
+   "detail": "the strategy estimate includes movements that never reach the arena (cached readings), so it can only be larger than the logged clock",
+   "expected": ">= 4334.754",
+   "got": "4334.754"
+  },
+  {
+   "group": "G",
+   "key": "incremental_equals_bruteforce",
+   "name": "增量认证与暴力重算逐次等价",
+   "ok": true,
+   "detail": "every scan call compared with a from-scratch recomputation (full uncovered set, no early exit)",
+   "expected": "identical",
+   "got": "27 comparisons, 0 mismatches "
+  },
+  {
+   "group": "G",
+   "key": "instrumented_run_equivalent",
+   "name": "插桩不改变单局结果",
+   "ok": true,
+   "detail": "instrumenting the scan does not change the outcome of a run",
+   "expected": "1.0000/1119.7",
+   "got": "1.0000/1119.7"
+  },
+  {
+   "group": "G",
+   "key": "rim_patrol_outside",
+   "name": "边界外补测点确实位于目标域之外",
+   "ok": true,
+   "detail": "patrol samples lie beyond the arena rim",
+   "expected": "all outside",
+   "got": "9 pts, outside=True"
+  },
+  {
+   "group": "G",
+   "key": "rim_patrol_capped",
+   "name": "单次补测点数有上限",
+   "ok": true,
+   "detail": "the number of outside samples per step is capped",
+   "expected": "<=9",
+   "got": "9"
+  },
+  {
+   "group": "G",
+   "key": "rim_patrol_ignores_interior",
+   "name": "内部候选点不触发域外补测",
+   "ok": true,
+   "detail": "interior candidates never trigger a trip outside",
+   "expected": "no points",
+   "got": "[]"
+  },
+  {
+   "group": "H",
+   "key": "discovery_guaranteed",
+   "name": "保证发现：目标域内任一点都在某个搜索站位的 R_min 内",
+   "ok": true,
+   "detail": "every point of the disk is within R_min of a survey stop (triangular lattice: covering radius = spacing/sqrt(3))",
+   "expected": "<= 1000 m for every spacing",
+   "got": "ok"
+  },
+  {
+   "group": "H",
+   "key": "seven_point_covering",
+   "name": "七点覆盖定理的闭式条件成立",
+   "ok": true,
+   "detail": "ring_radius=1280 m gives a covering radius of 1876.9 m",
+   "expected": ">= 1800",
+   "got": "1876.9"
+  },
+  {
+   "group": "H",
+   "key": "rim_not_certifiable_inside",
+   "name": "贴边候选点在域内数学上不可认证（定理2）",
+   "ok": true,
+   "detail": "for a source 5 m inside the rim every in-domain reading direction has a negative component along the outward normal, so no convex hull of them can contain the source (theorem 2)",
+   "expected": "< 0",
+   "got": "-295.0"
+  },
+  {
+   "group": "H",
+   "key": "hull_predicate_vs_cross_product",
+   "name": "原点在凸包内判据与叉积符号法一致",
+   "ok": true,
+   "detail": "the origin-in-hull test agrees with the cross product sign test on 200 random point sets",
+   "expected": "0 mismatches",
+   "got": "0"
+  }
+ ],
+ "reference": {
+  "mean_reff": 1251.8257535467535,
+  "frac_half": 0.49496867286880575,
+  "n_min": 10,
+  "n_max": 16
+ },
+ "reference_source": "https://github.com/Jammers-Simulator-Lab/JammersSimulator-Tool"
+}

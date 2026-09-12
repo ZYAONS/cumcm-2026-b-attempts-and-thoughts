@@ -1,0 +1,33 @@
+{
+ "cases": 12,
+ "task": {
+  "clear": {
+   "count": 150,
+   "travel": 118817.29999999999,
+   "time": 34699.3
+  },
+  "localise": {
+   "count": 116,
+   "travel": 49326.8,
+   "time": 17125.4
+  },
+  "probe": {
+   "count": 291,
+   "travel": 342478.99999999994,
+   "time": 82787.9
+  },
+  "census": {
+   "count": 12,
+   "travel": 0.0,
+   "time": 1428.0
+  }
+ },
+ "travel": 499344.30669493484,
+ "vtime": 133784.86133898696,
+ "stops": 291,
+ "measure": 5476,
+ "switch": 5147,
+ "clear_actions": 363,
+ "tour_floor": 230735.36650057562,
+ "sources": 150
+}

@@ -1,0 +1,8 @@
+scenario,n_stations,diameter_m,n_vertices,diameter_calipers_m,diameter_asymptotic_m,rel_diff_pct,R_mec_m,disk_covers_region,max_thales_product_m2
+"symmetric 2-station, gamma=67",2,68.1,4,68.1,68.1,0.0788,34.1,yes,-643.88
+"right angle, gamma=90",2,41.9,4,41.9,41.9,0.0406,21.0,no,0.00
+"far source, gamma=151",2,101.5,4,101.5,87.3,16.2401,50.8,yes,-410.91
+near-collinear (unbounded),2,inf,3,6650.6,-,-,-,-,69094057.11
+3 stations,3,50.0,6,50.0,50.0,0.0308,25.0,yes,-172.27
+4 stations,4,47.1,6,47.1,50.0,5.8213,23.5,yes,-104.87
+5 stations,5,47.1,6,47.1,50.0,5.8213,23.5,yes,-104.87

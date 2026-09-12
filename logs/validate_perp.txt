@@ -1,0 +1,9 @@
+--- Q3 : 40 independent cases (seeds 12000..12039)
+before (pre-optimisation)      ratio=1.0000 min=1.0000 time=  329.3 median=  323.1 p90=  405.4 travel=  15067  (8 s)
+after  (verified + tuned)      ratio=1.0000 min=1.0000 time=  320.3 median=  307.8 p90=  396.0 travel=  13720  (10 s)
+  delta: time -2.7 %  ratio +0.0000  travel -8.9 %
+--- Q4 : 40 independent cases (seeds 62000..62039)
+before (pre-optimisation)      ratio=0.9977 min=0.9091 time= 1376.5 median= 1383.6 p90= 1627.9 travel=  68924  (114 s)
+after  (verified + tuned)      ratio=0.9959 min=0.9091 time=  923.3 median=  872.6 p90= 1094.3 travel=  45564  (202 s)
+  delta: time -32.9 %  ratio -0.0018  travel -33.9 %
+report -> data/final_validation.json

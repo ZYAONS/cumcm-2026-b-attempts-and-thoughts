@@ -1,0 +1,31 @@
+P4 paper     pool A : ratio=1.0000 min=1.0000 fails= 0 time=  599.7 median=  592.9
+P4 paper     pool B : ratio=0.9978 min=0.9333 fails= 1 time=  632.7 median=  611.8
+P4 paper     pool C : ratio=1.0000 min=1.0000 fails= 0 time=  575.9 median=  553.6
+P4 paper     pool D : ratio=1.0000 min=1.0000 fails= 0 time=  579.8 median=  575.2
+   --> P4 paper     over 4 pools: worst ratio 0.9978  mean time 597.0  total failing cases 1/120
+
+s900 pure    pool A : ratio=0.9873 min=0.9167 fails= 5 time=  610.7 median=  608.0
+s900 pure    pool B : ratio=0.9901 min=0.9091 fails= 4 time=  647.8 median=  655.7
+s900 pure    pool C : ratio=0.9919 min=0.9167 fails= 3 time=  588.6 median=  565.7
+s900 pure    pool D : ratio=0.9911 min=0.8000 fails= 2 time=  593.7 median=  589.2
+   --> s900 pure    over 4 pools: worst ratio 0.9873  mean time 610.2  total failing cases 14/120
+
+s1000 pure   pool A : ratio=0.9917 min=0.8333 fails= 2 time=  577.7 median=  575.1
+s1000 pure   pool B : ratio=0.9879 min=0.8462 fails= 4 time=  615.1 median=  602.7
+s1000 pure   pool C : ratio=0.9948 min=0.9167 fails= 2 time=  562.2 median=  542.7
+s1000 pure   pool D : ratio=0.9869 min=0.9091 fails= 5 time=  574.5 median=  552.3
+   --> s1000 pure   over 4 pools: worst ratio 0.9869  mean time 582.4  total failing cases 13/120
+
+s950 pure    pool A : ratio=0.9858 min=0.9167 fails= 6 time=  579.8 median=  578.1
+s950 pure    pool B : ratio=0.9926 min=0.8462 fails= 2 time=  618.6 median=  603.2
+s950 pure    pool C : ratio=0.9929 min=0.9167 fails= 3 time=  561.0 median=  545.0
+s950 pure    pool D : ratio=0.9819 min=0.8000 fails= 5 time=  561.9 median=  561.2
+   --> s950 pure    over 4 pools: worst ratio 0.9819  mean time 580.3  total failing cases 16/120
+
+s1000 + cert6 pool A : ratio=0.9917 min=0.8333 fails= 2 time=  585.4 median=  575.8
+s1000 + cert6 pool B : ratio=0.9879 min=0.8462 fails= 4 time=  624.2 median=  609.9
+s1000 + cert6 pool C : ratio=0.9948 min=0.9167 fails= 2 time=  570.9 median=  551.1
+s1000 + cert6 pool D : ratio=0.9869 min=0.9091 fails= 5 time=  584.3 median=  556.9
+   --> s1000 + cert6 over 4 pools: worst ratio 0.9869  mean time 591.2  total failing cases 13/120
+
+report -> data/multi_pool.json

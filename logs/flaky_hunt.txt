@@ -1,0 +1,6 @@
+run  0 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4
+run  1 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4
+run  2 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4
+run  3 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4
+run  4 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4
+run  5 : 68/68 checks passed   A18/18 B8/8 C16/16 D8/8 E5/5 F4/4 G5/5 H4/4

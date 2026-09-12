@@ -1,0 +1,5 @@
+n_stations,n_valid,n_unbounded,n_not_covered,pct_not_covered,worst_thales_product_m2,mean_Rmec_over_halfD,max_Rmec_over_halfD
+2,12903,114,145,1.1338,81.07,1.000002,1.000574
+3,6192,0,155,2.5032,58.91,1.000004,1.001836
+4,3231,0,97,3.0022,39.36,1.000003,1.000565
+5,1675,0,62,3.7015,35.45,1.000005,1.000511

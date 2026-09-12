@@ -1,0 +1,10 @@
+16 cases, seeds 30000..30015
+variant                  stops    ratio      min  fails     time   travel   meas
+s950 rim12 (now)          24.5   1.0000   1.0000      0    603.3    23508    448
+ring1250 rim0 ps250        9.8   0.9673   0.8462      6    541.4    21219    357
+ring1155 rim0 ps250       10.4   0.9676   0.9091      7    559.7    22475    354
+ring1000 rim0 ps250       11.2   0.9810   0.9091      4    593.6    24713    359
+ring1155 rim6 ps250       10.2   0.9676   0.9091      7    564.0    22604    357
+ring1155 rim12 ps250      10.3   0.9676   0.9091      7    557.1    22304    354
+s1300 rim0 ps250          10.3   0.9668   0.8462      6    556.1    21891    360
+report -> data/ring_bootstrap.json

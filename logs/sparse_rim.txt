@@ -1,0 +1,9 @@
+s950 rim0        worst=0.9803  mean_time= 515.1 s  stops= 12.9  failing=21/120
+s950 rim4        worst=0.9804  mean_time= 537.2 s  stops= 16.6  failing=15/120
+s950 rim6        worst=0.9808  mean_time= 552.3 s  stops= 18.4  failing=22/120
+s950 rim8        worst=0.9835  mean_time= 559.2 s  stops= 20.2  failing=15/120
+s950 rim12       worst=0.9819  mean_time= 580.3 s  stops= 23.7  failing=16/120
+s950 rim6 r1650  worst=0.9850  mean_time= 552.9 s  stops= 18.5  failing=17/120
+s950 rim8 r1650  worst=0.9899  mean_time= 552.9 s  stops= 20.4  failing=11/120
+s900 rim6        worst=0.9816  mean_time= 578.3 s  stops= 24.2  failing=15/120
+report -> data/sparse_plus_rim.json

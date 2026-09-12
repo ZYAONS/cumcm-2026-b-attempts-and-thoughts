@@ -1,0 +1,2 @@
+pool: 24 cases, seeds 62000..62023, mix 0.5
+base (no coupling)     ratio=1.0000 min=1.0000 time=  881.3 travel=  44356  (110 s)

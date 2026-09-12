@@ -1,0 +1,27 @@
+24 cases, seeds 30000..30023 ; pure sweep + relocate + exhaustive + cb500
+ spacing   stops    ratio      min  fails     time   median  travel
+     850    18.6   0.9908   0.9091      3    542.7    529.3   21997
+     900    18.5   1.0000   1.0000      0    540.3    543.0   22343
+     950    12.9   0.9831   0.8000      4    506.7    485.2   20639
+    1000    12.8   0.9831   0.8000      4    509.2    494.4   20692
+    1050     7.0   0.9426   0.8000     13    429.4    431.6   16435
+python : Traceback (most recent call last):
+所在位置 行:1 字符: 207
++ ... 建模b题\code"; python -u perfect_scan.py 24 30000 > ..\logs\perfect_scan ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "code\perfect_scan.py", line 76, in <module>
+    r = ev(sp, seeds)
+  File "code\perfect_scan.py", line 49, in ev
+    st = br.run()
+  File "code\robot_core.py", line 1047, in run
+    n_act = self._run_planned(n_act, max_actions)
+  File "code\robot_core.py", line 1524, in _run_planned
+    ok = self.clear_channel(task[1])
+  File "code\robot_core.py", line 912, in clear_channel
+    and self._exhaustive_clear(c, est[:2], est[2])):
+  File "code\robot_core.py", line 862, in _exhaustive_clear
+    for _, q in pts:
+ValueError: too many values to unpack (expected 2)

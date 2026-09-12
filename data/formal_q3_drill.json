@@ -1,0 +1,278 @@
+[
+ {
+  "n_sources": 10,
+  "n_cleared": 10,
+  "clear_ratio": 1.0,
+  "mean_time": 375.00689749961265,
+  "virtual_time": 3750.0689749961266,
+  "travel_m": 13310.344874980636,
+  "n_measure": 167,
+  "n_clear": 29,
+  "n_switch": 146,
+  "n_no_signal": 118,
+  "brain_vtime": 3888.4903001663156,
+  "task_travel": {
+   "clear": 7774.2,
+   "localise": 550.0,
+   "probe": 5678.3,
+   "census": 0.0
+  },
+  "task_count": {
+   "clear": 10,
+   "localise": 1,
+   "probe": 6,
+   "census": 1
+  },
+  "task_time": {
+   "clear": 2055.8,
+   "localise": 116.0,
+   "probe": 1597.7,
+   "census": 119.0
+  },
+  "wall_s": 1.274702548980713,
+  "n_requests": 198,
+  "http_wall_s": 1.011800765991211,
+  "case": [
+   {
+    "channel": 16,
+    "x": -211.35583310140072,
+    "y": -550.087208171806,
+    "r_eff": 1049.3180277913477,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 7,
+    "x": -950.0709511528463,
+    "y": -1182.9038008575294,
+    "r_eff": 1459.450131689708,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 3,
+    "x": -1174.1083920931392,
+    "y": -883.5377205974189,
+    "r_eff": 1490.9538166060902,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 8,
+    "x": 1636.2702129604702,
+    "y": 115.99508929857582,
+    "r_eff": 1192.1454049300173,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 10,
+    "x": -766.1334407419646,
+    "y": -771.1279294271787,
+    "r_eff": 1237.319486225111,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 4,
+    "x": -180.6540240887792,
+    "y": -773.1700741804672,
+    "r_eff": 1471.7067553870545,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 11,
+    "x": 1014.7929178284778,
+    "y": -819.89842164238,
+    "r_eff": 1133.2720717810994,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 15,
+    "x": 835.8091138823062,
+    "y": -584.110788507213,
+    "r_eff": 1153.0576765771639,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 12,
+    "x": -1182.802028210032,
+    "y": -1280.2963760956804,
+    "r_eff": 1345.0201315555196,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 18,
+    "x": 868.291409151667,
+    "y": -1276.7550551572308,
+    "r_eff": 1449.5677682752585,
+    "kind": "omni",
+    "direction": null
+   }
+  ],
+  "case_code": "Q3-770001-03040708101112151618",
+  "log": "logs\\drill\\drill_seed770001.log"
+ },
+ {
+  "n_sources": 15,
+  "n_cleared": 15,
+  "clear_ratio": 1.0,
+  "mean_time": 273.04675041995677,
+  "virtual_time": 4095.7012562993514,
+  "travel_m": 14643.50628149676,
+  "n_measure": 176,
+  "n_clear": 36,
+  "n_switch": 149,
+  "n_no_signal": 108,
+  "brain_vtime": 4209.63012055378,
+  "task_travel": {
+   "clear": 10209.6,
+   "localise": 550.0,
+   "probe": 4453.5,
+   "census": 0.0
+  },
+  "task_count": {
+   "clear": 15,
+   "localise": 1,
+   "probe": 6,
+   "census": 1
+  },
+  "task_time": {
+   "clear": 2753.9,
+   "localise": 116.0,
+   "probe": 1220.7,
+   "census": 119.0
+  },
+  "wall_s": 1.5569255352020264,
+  "n_requests": 214,
+  "http_wall_s": 1.4425201416015625,
+  "case": [
+   {
+    "channel": 15,
+    "x": 1276.4381614604356,
+    "y": 770.8739621074027,
+    "r_eff": 1091.9273975021076,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 1,
+    "x": -501.4898091803458,
+    "y": -699.3663413203178,
+    "r_eff": 1347.9522574424182,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 3,
+    "x": -586.1291834407546,
+    "y": -1183.9986775456334,
+    "r_eff": 1263.760319751765,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 19,
+    "x": 235.73425788444015,
+    "y": -835.2901710708759,
+    "r_eff": 1075.760686557108,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 17,
+    "x": -590.3067203726832,
+    "y": 839.8254501574704,
+    "r_eff": 1120.5624178507833,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 13,
+    "x": -1283.906676151683,
+    "y": 527.0178953426009,
+    "r_eff": 1192.374332134268,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 8,
+    "x": -1269.0304165634043,
+    "y": 1075.9027505876843,
+    "r_eff": 1340.4144394206028,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 16,
+    "x": 1107.717704641198,
+    "y": -1303.790499242281,
+    "r_eff": 1158.5646862532594,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 9,
+    "x": -625.7423608207943,
+    "y": -31.241571623504765,
+    "r_eff": 1415.707682699161,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 6,
+    "x": 526.2152744722191,
+    "y": -1673.937238994791,
+    "r_eff": 1431.933025631473,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 4,
+    "x": -346.29504724151735,
+    "y": -175.68125601619002,
+    "r_eff": 1258.1374212119783,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 20,
+    "x": -391.21535726762926,
+    "y": 762.8023403645826,
+    "r_eff": 1113.4606953353,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 11,
+    "x": 993.9494252687738,
+    "y": 165.0619077044835,
+    "r_eff": 1091.5065582748118,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 12,
+    "x": -959.7672072825867,
+    "y": -573.5582649683474,
+    "r_eff": 1094.5380965543861,
+    "kind": "omni",
+    "direction": null
+   },
+   {
+    "channel": 18,
+    "x": -250.06109078427724,
+    "y": -734.5969175980439,
+    "r_eff": 1398.5670449528384,
+    "kind": "omni",
+    "direction": null
+   }
+  ],
+  "case_code": "Q3-770002-010304060809111213151617181920",
+  "log": "logs\\drill\\drill_seed770002.log"
+ }
+]

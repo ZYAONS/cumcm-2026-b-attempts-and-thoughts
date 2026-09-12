@@ -1,0 +1,13 @@
+OFF (before this round)  pool A: ratio=1.0000 min=1.0000 fails= 0 time=  847.2  missed 0
+OFF (before this round)  pool B: ratio=0.9978 min=0.9333 fails= 1 time=  921.1  missed 1
+OFF (before this round)  pool C: ratio=0.9954 min=0.9231 fails= 2 time=  914.6  missed 2
+OFF (before this round)  pool D: ratio=1.0000 min=1.0000 fails= 0 time=  858.2  missed 0
+   --> OFF (before this round) total missed 3 sources, 3 failing cases, mean time 885.3 s
+
+ON  (this round)         pool A: ratio=1.0000 min=1.0000 fails= 0 time=  870.2  missed 0
+ON  (this round)         pool B: ratio=0.9978 min=0.9333 fails= 1 time=  928.9  missed 1
+ON  (this round)         pool C: ratio=1.0000 min=1.0000 fails= 0 time=  851.6  missed 0
+ON  (this round)         pool D: ratio=1.0000 min=1.0000 fails= 0 time=  872.0  missed 0
+   --> ON  (this round)     total missed 1 sources, 1 failing cases, mean time 880.7 s
+       still missed: seed 51029 ch 2 r=1780 directional dir=348 R_eff=1418 status=empty obs=0
+

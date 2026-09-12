@@ -1,0 +1,40 @@
+{
+ "planned_q3": {
+  "n_cases": 60,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 326.97712033312183,
+  "median_time": 313.5243600685902,
+  "sd_time": 57.0683147603653,
+  "mean_travel": 12986.772178065625,
+  "mean_measure": 247.08333333333334,
+  "mean_clear_actions": 25.15,
+  "mean_vtime": 4157.021102279792,
+  "wall_s": 6.455158948898315
+ },
+ "greedy_q3": {
+  "n_cases": 30,
+  "mean_ratio": 0.9979166666666667,
+  "mean_time": 327.36526253047833,
+  "mean_travel": 14721.023305107208
+ },
+ "planned_q4": {
+  "n_cases": 60,
+  "mean_ratio": 1.0,
+  "min_ratio": 1.0,
+  "mean_time": 888.3321441078375,
+  "median_time": 877.2637925696804,
+  "sd_time": 170.3279592825037,
+  "mean_travel": 42628.68663571191,
+  "mean_measure": 427.9,
+  "mean_clear_actions": 25.933333333333334,
+  "mean_vtime": 11171.053993809048,
+  "wall_s": 118.71945333480835
+ },
+ "greedy_q4": {
+  "n_cases": 30,
+  "mean_ratio": 0.5653921078921077,
+  "mean_time": Infinity,
+  "mean_travel": 9716.992976709456
+ }
+}

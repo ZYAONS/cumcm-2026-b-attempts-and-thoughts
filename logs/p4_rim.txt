@@ -1,0 +1,5 @@
+P4 (no rim)    worst=0.9978 mean_time=  880.7 s  failing= 1/120  missed=1
+P4 + rim6      worst=0.9978 mean_time=  906.9 s  failing= 1/120  missed=1
+P4 + rim9      worst=0.9978 mean_time=  889.7 s  failing= 1/120  missed=1
+P4 + rim12     worst=0.9978 mean_time=  753.1 s  failing= 1/120  missed=1
+report -> data/p4_rim.json

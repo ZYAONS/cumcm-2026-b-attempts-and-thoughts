@@ -1,0 +1,23 @@
+pools of 24 cases each: 3 pools
+
+--- what the error mixture looks like ---
+a=0.0  mean=+0.010  sd=0.576  at the +-1 deg clip:   0.0%  rms|e(p)-e(p+50m)|=0.834 deg
+a=0.5  mean=-0.014  sd=0.356  at the +-1 deg clip:   0.0%  rms|e(p)-e(p+50m)|=0.418 deg
+a=0.8  mean=-0.028  sd=0.354  at the +-1 deg clip:   0.0%  rms|e(p)-e(p+50m)|=0.175 deg
+a=1.0  mean=-0.038  sd=0.419  at the +-1 deg clip:   0.0%  rms|e(p)-e(p+50m)|=0.066 deg
+
+--- strategy performance ---
+a=0.0 pool0  ratio=0.9974 min=0.9375 time=  919.8  missed 1/298 sources  failing cases 1/24
+a=0.0 pool1  ratio=1.0000 min=1.0000 time=  870.8  missed 0/306 sources  failing cases 0/24
+a=0.0 pool2  ratio=0.9962 min=0.9091 time=  897.7  missed 1/310 sources  failing cases 1/24
+a=0.0 TOTAL  weighted ratio=0.9979  missed 2/914 sources
+a=0.5 pool0  ratio=0.9974 min=0.9375 time=  915.4  missed 1/298 sources  failing cases 1/24
+a=0.5 pool1  ratio=0.9962 min=0.9091 time=  900.9  missed 1/306 sources  failing cases 1/24
+a=0.5 pool2  ratio=0.9962 min=0.9091 time=  888.5  missed 1/310 sources  failing cases 1/24
+a=0.5 TOTAL  weighted ratio=0.9966  missed 3/914 sources
+a=1.0 pool0  ratio=0.9974 min=0.9375 time=  932.7  missed 1/298 sources  failing cases 1/24
+a=1.0 pool1  ratio=1.0000 min=1.0000 time=  894.1  missed 0/306 sources  failing cases 0/24
+a=1.0 pool2  ratio=0.9962 min=0.9091 time=  895.6  missed 1/310 sources  failing cases 1/24
+a=1.0 TOTAL  weighted ratio=0.9979  missed 2/914 sources
+
+report -> data/corr_study.json

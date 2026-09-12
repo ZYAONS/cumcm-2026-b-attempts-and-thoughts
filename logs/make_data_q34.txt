@@ -1,0 +1,52 @@
+[Q3] omnidirectional strategy
+   case 0: n=13 cleared=13 ratio=1.00 mean=  311.8 s travel= 13054
+   case 1: n=12 cleared=12 ratio=1.00 mean=  351.5 s travel= 12679
+   case 2: n=12 cleared=12 ratio=1.00 mean=  271.6 s travel=  9830
+   case 3: n=16 cleared=16 ratio=1.00 mean=  265.6 s travel= 13930
+   case 4: n=10 cleared=10 ratio=1.00 mean=  385.6 s travel= 11457
+  wrote q3_cases.csv (60 rows)
+  wrote q3_agg.json
+  Q3: ratio=1.0000 mean=328.0 s travel=13484 m
+   nominal              ratio=1.000  mean=327.2 s
+   R_min=950            ratio=1.000  mean=330.4 s
+   R_min=1050           ratio=1.000  mean=310.1 s
+   R_max=1400           ratio=1.000  mean=313.4 s
+   bearing_err=0.8deg   ratio=1.000  mean=317.1 s
+   bearing_err=1.0deg   ratio=1.000  mean=303.1 s
+   n_sources=10         ratio=1.000  mean=395.7 s
+   n_sources=16         ratio=1.000  mean=267.3 s
+  wrote q3_sensitivity.csv (8 rows)
+[Q4] mixed strategy
+   case 0: n=11 cleared=11 ratio=1.00 mean= 1490.2 s travel= 64354
+   case 1: n=16 cleared=16 ratio=1.00 mean=  950.1 s travel= 64945
+   case 2: n=10 cleared=10 ratio=1.00 mean= 1510.5 s travel= 58044
+   case 3: n=11 cleared=11 ratio=1.00 mean= 1377.3 s travel= 58410
+   case 4: n=12 cleared=12 ratio=1.00 mean= 1219.5 s travel= 56112
+  wrote q4_cases.csv (60 rows)
+  wrote q4_agg.json
+  Q4 (mixed): ratio=0.9948 mean=1214.2 s travel=60344 m
+  wrote q4_alldir_cases.csv (30 rows)
+  wrote q4_alldir_agg.json
+  q4_alldir: ratio=0.984 mean=1463.3
+  wrote q4_omni_cases.csv (30 rows)
+  wrote q4_omni_agg.json
+  q4_omni: ratio=1.000 mean=1163.4
+   nominal              ratio=0.995  mean=1169.7 s
+   R_min=950            ratio=0.992  mean=1271.7 s
+   R_min=1050           ratio=1.000  mean=1083.1 s
+   R_max=1400           ratio=0.994  mean=1097.0 s
+   bearing_err=0.8deg   ratio=1.000  mean=1137.5 s
+   bearing_err=1.0deg   ratio=0.994  mean=1204.8 s
+   n_sources=10         ratio=1.000  mean=1519.4 s
+   n_sources=16         ratio=1.000  mean=1008.9 s
+  wrote q4_sensitivity.csv (8 rows)
+  wrote q34_agg.json
+[Q3] baseline policy comparison
+  wrote q3_greedy_cases.csv (30 rows)
+  wrote q3_greedy_agg.json
+  greedy: ratio=0.998 mean=331.5 s
+  wrote q4_greedy_cases.csv (30 rows)
+  wrote q4_greedy_agg.json
+  greedy Q4: ratio=0.484 mean=inf s
+  wrote policy_compare.json
+total 506 s

@@ -1,0 +1,23 @@
+{
+ "params": {
+  "census": true,
+  "probe_spacing": 1300.0,
+  "probe_min_angle": 45.0,
+  "locate_sigma": 250.0,
+  "term_iters": 9,
+  "term_cap": 420.0,
+  "vantage_b": 700.0,
+  "vantage_phi": 25.0,
+  "survey_spacing": 1100.0,
+  "clear_bonus": 180.0,
+  "localise_bonus": 120.0,
+  "probe_bonus": 150.0,
+  "max_channels_probe": 20,
+  "dir_search_r": 60.0,
+  "oracle_count": false
+ },
+ "holdout_mean": 296.2754796551863,
+ "holdout_mis": 0.0,
+ "default_mean": 323.74495289076367,
+ "default_mis": 0.003708791208791207
+}

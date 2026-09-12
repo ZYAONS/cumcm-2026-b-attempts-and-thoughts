@@ -1,0 +1,7 @@
+[q3] baseline ratio=1.0000 min=1.0000 time=324.63 travel=14636
+[q3] pass0 ring_radius        = 1150.0   -> ratio=1.0000 min=1.0000 time=231.24
+[q3] pass0 ring_radius        = 1250.0   -> ratio=1.0000 min=1.0000 time=181.06
+[q3] pass 0 finished, improved=True, elapsed=309 s
+[q3] pass 1 finished, improved=False, elapsed=625 s
+[q3] FINAL ratio=1.0000 min=1.0000 time=181.06 travel=7500
+[q3] PARAMS {"census": true, "clear_bonus": 260.0, "clear_try_radius": 42.0, "dir_search_r": 60.0, "endgame_radius": 90.0, "endgame_step": 11.0, "hard_attempt_cap": 14, "localise_bonus": 120.0, "locate_sigma": 320.0, "max_attempts": 6, "max_channels_probe": 20, "max_search_stops": 40, "oracle_count": false, "outer_ring_gap": 0.0, "policy": "planned", "probe_bonus": 150.0, "probe_min_angle": 22.0, "probe_spacing": 650.0, "progress_ratio": 0.7, "ring_radius": 1250.0, "ring_rotation": 0.0, "search_cost_bias": 60.0, "survey_mode": "ring", "survey_spacing": 1000.0, "term_cap": 420.0, "term_iters": 9, "use_ring": true, "vantage_b": 1000.0, "vantage_b_local": 550.0, "vantage_max_tries": 3, "vantage_phi": 37.0, "vantage_phi_local": 55.0, "verify_grid": 60.0, "verify_r": 1000.0}

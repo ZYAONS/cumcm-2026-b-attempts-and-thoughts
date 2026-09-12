@@ -1,0 +1,9 @@
+   case 0: n=11 cleared=11 ratio=1.00 mean=  633.6 s travel= 20539
+   case 1: n=16 cleared=16 ratio=1.00 mean=  422.8 s travel= 21420
+   case 2: n=10 cleared=10 ratio=1.00 mean=  757.6 s travel= 22450
+   case 3: n=11 cleared=11 ratio=1.00 mean=  669.6 s travel= 22207
+   case 4: n=12 cleared=12 ratio=1.00 mean=  668.5 s travel= 23935
+  wrote q4_cases.csv (60 rows)
+  wrote q4_agg.json
+  Q4 (mixed): ratio=1.0000 mean=588.5 travel=23403
+stage q4 done in 43 s

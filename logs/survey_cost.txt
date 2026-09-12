@@ -1,0 +1,11 @@
+s950 rim12 (now)   worst=1.0000  time= 606.1 s  stops= 24.5  travel= 23970  meas=  452  failing=0/40
+s950 rim10         worst=1.0000  time= 592.6 s  stops= 22.6  travel= 23581  meas=  440  failing=0/40
+s950 rim8          worst=1.0000  time= 581.0 s  stops= 20.7  travel= 23311  meas=  422  failing=0/40
+s950 rim6          worst=1.0000  time= 574.9 s  stops= 18.9  travel= 23316  meas=  410  failing=0/40
+s1050 rim8         worst=1.0000  time= 602.7 s  stops= 16.9  travel= 25256  meas=  401  failing=0/40
+s1050 rim10        worst=1.0000  time= 603.0 s  stops= 18.6  travel= 25208  meas=  406  failing=0/40
+s1100 rim8         worst=0.9919  time= 605.8 s  stops= 17.0  travel= 25323  meas=  400  failing=2/40
+s1100 rim10        worst=1.0000  time= 609.6 s  stops= 18.5  travel= 25334  meas=  419  failing=0/40
+s950 rim8 m400     worst=1.0000  time= 645.7 s  stops= 22.8  travel= 26728  meas=  441  failing=0/40
+s950 rim6 m400     worst=1.0000  time= 577.3 s  stops= 19.0  travel= 23405  meas=  412  failing=0/40
+report -> data/survey_cost_scan.json

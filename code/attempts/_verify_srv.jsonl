@@ -1,0 +1,7 @@
+{"t": 0.0, "action": "enter", "pos": [0.0, 0.0], "channel": 1, "request_id": "a-enter-1"}
+{"t": 5.0, "action": "measure", "pos": [0.0, 0.0], "channel": 1, "move_m": 0.0, "move_s": 0.0, "switch_s": 0.0, "result": "no_signal", "svd_deg": null, "request_id": "a-robot", "n_cleared": 0}
+{"t": 31.0, "action": "measure", "pos": [100.0, 0.0], "channel": 2, "move_m": 100.0, "move_s": 20.0, "switch_s": 1.0, "result": "no_signal", "svd_deg": null, "request_id": "a-idem-1", "n_cleared": 0}
+{"t": 57.0, "action": "measure", "pos": [0.0, 0.0], "channel": 1, "move_m": 100.0, "move_s": 20.0, "switch_s": 1.0, "result": "no_signal", "svd_deg": null, "request_id": "a2-m0", "n_cleared": 0}
+{"t": 62.0, "action": "measure", "pos": [0.0, 0.0], "channel": 1, "move_m": 0.0, "move_s": 0.0, "switch_s": 0.0, "result": "no_signal", "svd_deg": null, "request_id": "a2-m1", "n_cleared": 0}
+{"t": 62.0, "action": "exit", "pos": [0.0, 0.0], "channel": 1, "request_id": "a2-x1"}
+{"t": 62.0, "action": "exit", "pos": [0.0, 0.0], "channel": 1, "request_id": "d-x"}

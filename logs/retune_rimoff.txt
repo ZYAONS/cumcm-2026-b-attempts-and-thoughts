@@ -1,0 +1,14 @@
+baseline ratio=0.9958 min=0.9333 time=975.3 travel=47737
+survey_spacing     1100.0   ratio=1.0000 min=1.0000 time=  900.3  <== best
+survey_spacing     1300.0   ratio=0.9958 min=0.9333 time=  975.3
+survey_spacing     1500.0   ratio=0.9958 min=0.9333 time=  956.0
+survey_spacing     1700.0   ratio=0.9948 min=0.9167 time= 1117.2
+search_cost_bias   0.0      ratio=1.0000 min=1.0000 time=  877.5  <== best
+search_cost_bias   30.0     ratio=1.0000 min=1.0000 time=  900.3
+search_cost_bias   90.0     ratio=1.0000 min=1.0000 time=  914.8
+search_cost_bias   200.0    ratio=1.0000 min=1.0000 time=  957.7
+probe_spacing      450.0    ratio=0.9919 min=0.9333 time=  953.0
+probe_spacing      900.0    ratio=1.0000 min=1.0000 time=  888.7
+clear_bonus        200.0    ratio=1.0000 min=1.0000 time=  878.8
+clear_bonus        450.0    ratio=1.0000 min=1.0000 time=  890.7
+probe_min_angle    22.0     ratio=1.0000 min=1.0000 time=  871.5  <== best

@@ -1,0 +1,17 @@
+field rescale factor 1.378 (to match sd 0.5774 of U(-1,1))
+
+--- error mixture, now with matched spread ---
+a=0.0  sd=0.5770  clipped  0.0%  rms|e(p)-e(p+50m)|=0.834
+a=0.5  sd=0.4074  clipped  0.7%  rms|e(p)-e(p+50m)|=0.419
+a=0.8  sd=0.4707  clipped  2.7%  rms|e(p)-e(p+50m)|=0.179
+a=1.0  sd=0.5506  clipped  8.8%  rms|e(p)-e(p+50m)|=0.088
+
+--- performance (identical pools, matched spread) ---
+a=0.0 pool0  ratio=0.9974 min=0.9375 time=  932.7  missed 1
+a=0.0 pool1  ratio=1.0000 min=1.0000 time=  880.3  missed 0
+a=0.0 pool2  ratio=0.9934 min=0.9091 time=  904.0  missed 2
+a=0.0 TOTAL ratio=0.9969  missed 3/914 sources (0.328%)
+a=0.5 pool0  ratio=0.9974 min=0.9375 time=  924.1  missed 1
+a=0.5 pool1  ratio=1.0000 min=1.0000 time=  905.7  missed 0
+a=0.5 pool2  ratio=0.9962 min=0.9091 time=  890.8  missed 1
+a=0.5 TOTAL ratio=0.9979  missed 2/914 sources (0.219%)

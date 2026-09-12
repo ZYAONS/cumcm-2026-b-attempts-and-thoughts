@@ -1,0 +1,9 @@
+rim0           worst=0.9978 mean_time=  880.7 s  failing= 1/120  missed=1
+rim12          worst=0.9978 mean_time=  753.1 s  failing= 1/120  missed=1
+rim16          worst=0.9978 mean_time=  650.5 s  failing= 1/120  missed=1
+rim20          worst=0.9974 mean_time=  666.3 s  failing= 2/120  missed=2
+rim24          worst=0.9972 mean_time=  681.8 s  failing= 2/120  missed=2
+rim16 r1600    worst=0.9947 mean_time=  861.7 s  failing= 2/120  missed=2
+rim16 r1700    worst=0.9970 mean_time=  628.6 s  failing= 3/120  missed=3
+rim20 r1650    worst=0.9972 mean_time=  894.7 s  failing= 2/120  missed=2
+report -> data/p4_rim.json

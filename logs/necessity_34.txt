@@ -1,0 +1,11 @@
+=== item 3 : spatially correlated bearing error ===
+pool: 24 cases, seeds 30000..30023
+correlated fraction   0%  ratio=1.0000 min=1.0000 time=  867.7 travel=  41777
+correlated fraction  50%  ratio=0.9968 min=0.9231 time=  938.4 travel=  44998
+correlated fraction  80%  ratio=1.0000 min=1.0000 time=  862.0 travel=  41267
+correlated fraction 100%  ratio=1.0000 min=1.0000 time=  871.2 travel=  41627
+
+=== item 4 : real-time cost of one request ===
+case Q4-910001-0104050607081013171820: 799 requests, HTTP wall time 5.18 s, simulator-internal wall 19.63 s
+per request: 6.48 ms (HTTP)   budget 1200 s   headroom factor 232
+report -> data/necessity_34.json

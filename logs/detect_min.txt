@@ -1,0 +1,11 @@
+16 cases, seeds 30000..30015
+variant                         ratio      min fails     time   travel   meas
+baseline (cb250)               1.0000   1.0000     0    586.9    22926    435
+locate_sigma 300               1.0000   1.0000     0    584.6    22731    435
+locate_sigma 250               1.0000   1.0000     0    588.7    22883    439
+term_cap 260                   1.0000   1.0000     0    594.2    23250    438
+relocate_sigma 700             1.0000   1.0000     0    583.0    22677    436
+locate_sigma 300 + cap260      1.0000   1.0000     0    594.9    23272    440
+endgame_radius 60              1.0000   1.0000     0    581.1    22492    438
+exhaustive_after 1             1.0000   1.0000     0    597.8    23613    434
+report -> data/detect_min.json

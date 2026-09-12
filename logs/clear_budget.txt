@@ -1,0 +1,11 @@
+pool: 20 cases, seeds 30000..30019
+current (max_attempts=6)     ratio=0.9967 min=0.9333 time=  935.6 travel=  47016  (106 s)
+max_attempts=10              ratio=0.9967 min=0.9333 time=  989.1 travel=  50278  (129 s)
+max_attempts=16              ratio=0.9935 min=0.9333 time= 1059.9 travel=  54247  (125 s)
+hard cap 24                  ratio=0.9967 min=0.9333 time= 1069.2 travel=  55171  (120 s)
+hard cap 40                  ratio=0.9967 min=0.9333 time= 1122.6 travel=  58433  (113 s)
+progress_ratio 0.9           ratio=0.9967 min=0.9333 time=  935.6 travel=  47016  (116 s)
+progress_ratio 0.99          ratio=0.9967 min=0.9333 time=  935.6 travel=  47016  (110 s)
+endgame radius 130           ratio=0.9962 min=0.9231 time=  913.8 travel=  44926  (105 s)
+endgame radius 130 + cap40   ratio=0.9962 min=0.9231 time= 1027.0 travel=  50371  (124 s)
+report -> data/clear_budget.json

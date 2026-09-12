@@ -1,0 +1,38 @@
+[Q3] omnidirectional strategy
+   case 0: n=13 cleared=13 ratio=1.00 mean=  296.9 s travel= 11775
+   case 1: n=12 cleared=12 ratio=1.00 mean=  360.8 s travel= 12735
+   case 2: n=12 cleared=12 ratio=1.00 mean=  295.7 s travel= 10544
+   case 3: n=16 cleared=16 ratio=1.00 mean=  273.3 s travel= 14538
+   case 4: n=10 cleared=10 ratio=1.00 mean=  387.5 s travel= 11328
+  wrote q3_cases.csv (60 rows)
+  wrote q3_agg.json
+  Q3: ratio=1.0000 mean=326.8 s travel=13035 m
+   nominal              ratio=1.000  mean=320.9 s
+   R_min=950            ratio=1.000  mean=330.1 s
+   R_min=1050           ratio=1.000  mean=325.0 s
+   R_max=1400           ratio=1.000  mean=324.0 s
+   bearing_err=0.8deg   ratio=1.000  mean=345.1 s
+   bearing_err=1.0deg   ratio=1.000  mean=313.4 s
+   n_sources=10         ratio=1.000  mean=417.9 s
+   n_sources=16         ratio=1.000  mean=260.5 s
+  wrote q3_sensitivity.csv (8 rows)
+[Q4] mixed strategy
+   case 0: n=11 cleared=11 ratio=1.00 mean= 1013.3 s travel= 41059
+   case 1: n=16 cleared=16 ratio=1.00 mean=  612.1 s travel= 37747
+   case 2: n=10 cleared=10 ratio=1.00 mean= 1038.7 s travel= 37707
+   case 3: n=11 cleared=11 ratio=1.00 mean=  969.7 s travel= 39009
+   case 4: n=12 cleared=12 ratio=1.00 mean= 1070.8 s travel= 47190
+  wrote q4_cases.csv (60 rows)
+  wrote q4_agg.json
+  Q4 (mixed): ratio=0.9985 mean=881.3 s travel=42132 m
+  wrote q4_alldir_cases.csv (30 rows)
+  wrote q4_alldir_agg.json
+  q4_alldir: ratio=1.000 mean=983.4
+  wrote q4_omni_cases.csv (30 rows)
+  wrote q4_omni_agg.json
+  q4_omni: ratio=1.000 mean=864.6
+   nominal              ratio=1.000  mean=845.3 s
+   R_min=950            ratio=1.000  mean=912.8 s
+   R_min=1050           ratio=1.000  mean=909.2 s
+   R_max=1400           ratio=1.000  mean=831.8 s
+   bearing_err=0.8deg   ratio=0.994  mean=961.3 s

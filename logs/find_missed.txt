@@ -1,0 +1,9 @@
+pool A (40 cases): 0 missed
+pool B (40 cases): 1 missed
+pool C (40 cases): 1 missed
+pool D (40 cases): 0 missed
+
+TOTAL missed 2 / 2064 sources (0.097%)
+  B seed 51029 ch 2 r=1780 directional dir=348  R_eff=1418 status=empty    obs=0 nosig= 47 attempts=0/0 vantage=0 sigma=None
+  C seed 12010 ch12 r=1799 directional dir=165  R_eff=1477 status=located  obs=38 nosig=116 attempts=2/14 vantage=18 sigma=42
+report -> data/find_missed.json

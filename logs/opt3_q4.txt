@@ -1,0 +1,46 @@
+[guard] ok: repeated evaluation is reproducible (1.0000, 1490.6 s)
+[q4] baseline ratio=0.9974 min=0.9375 time=1395.55 travel=78202
+[q4] pass0 survey_spacing     = 850.0    -> ratio=1.0000 min=1.0000 time=1199.00
+[q4] pass0 survey_spacing     = 1150.0   -> ratio=0.9938 min=0.9231 time=1218.99
+[q4] pass0 survey_spacing     = 1300.0   -> ratio=1.0000 min=1.0000 time=1131.48
+[q4] pass0 probe_spacing      = 450.0    -> ratio=0.9972 min=0.9333 time=1157.91
+[q4] pass0 probe_spacing      = 850.0    -> ratio=0.9946 min=0.9333 time=1234.61
+[q4] pass0 locate_sigma       = 220.0    -> ratio=1.0000 min=1.0000 time=1137.62
+[q4] pass0 locate_sigma       = 440.0    -> ratio=1.0000 min=1.0000 time=1138.78
+[q4] pass0 clear_bonus        = 0.0      -> ratio=1.0000 min=1.0000 time=1127.43
+[q4] pass0 clear_bonus        = 450.0    -> ratio=1.0000 min=1.0000 time=1132.79
+[q4] pass0 probe_min_angle    = 12.0     -> ratio=1.0000 min=1.0000 time=1127.88
+[q4] pass0 probe_min_angle    = 35.0     -> ratio=1.0000 min=1.0000 time=1122.04
+[q4] pass0 search_cost_bias   = 30.0     -> ratio=1.0000 min=1.0000 time=1113.95
+[q4] pass0 search_cost_bias   = 70.0     -> ratio=1.0000 min=1.0000 time=1117.58
+[q4] pass0 search_cost_bias   = 150.0    -> ratio=1.0000 min=1.0000 time=1153.04
+[q4] pass0 max_attempts       = 4        -> ratio=1.0000 min=1.0000 time=1113.95
+[q4] pass0 max_attempts       = 10       -> ratio=1.0000 min=1.0000 time=1113.95
+[q4] pass0 rim_step           = 100.0    -> ratio=1.0000 min=1.0000 time=1112.54
+[q4] pass0 rim_step           = 180.0    -> ratio=1.0000 min=1.0000 time=1107.08
+[q4] pass0 max_rim_patrols    = 4        -> ratio=1.0000 min=1.0000 time=1145.90
+[q4] pass0 max_rim_patrols    = 8        -> ratio=1.0000 min=1.0000 time=1135.00
+[q4] pass0 max_rim_patrols    = 14       -> ratio=1.0000 min=1.0000 time=1083.53
+[q4] pass 0 done, improved=True, elapsed=906 s
+[q4] pass1 survey_spacing     = 850.0    -> ratio=1.0000 min=1.0000 time=1124.20
+[q4] pass1 survey_spacing     = 1000.0   -> ratio=0.9946 min=0.9333 time=1350.87
+[q4] pass1 survey_spacing     = 1150.0   -> ratio=0.9938 min=0.9231 time=1145.68
+[q4] pass1 probe_spacing      = 450.0    -> ratio=0.9972 min=0.9333 time=1124.11
+[q4] pass1 probe_spacing      = 850.0    -> ratio=0.9946 min=0.9333 time=1196.61
+[q4] pass1 locate_sigma       = 220.0    -> ratio=1.0000 min=1.0000 time=1083.43
+[q4] pass1 locate_sigma       = 440.0    -> ratio=1.0000 min=1.0000 time=1093.69
+[q4] pass1 clear_bonus        = 260.0    -> ratio=1.0000 min=1.0000 time=1090.76
+[q4] pass1 clear_bonus        = 450.0    -> ratio=1.0000 min=1.0000 time=1090.08
+[q4] pass1 probe_min_angle    = 12.0     -> ratio=1.0000 min=1.0000 time=1089.42
+[q4] pass1 probe_min_angle    = 22.0     -> ratio=1.0000 min=1.0000 time=1088.11
+[q4] pass1 search_cost_bias   = 70.0     -> ratio=1.0000 min=1.0000 time=1089.38
+[q4] pass1 search_cost_bias   = 150.0    -> ratio=1.0000 min=1.0000 time=1119.37
+[q4] pass1 max_attempts       = 4        -> ratio=1.0000 min=1.0000 time=1083.43
+[q4] pass1 max_attempts       = 10       -> ratio=1.0000 min=1.0000 time=1083.43
+[q4] pass1 rim_step           = 100.0    -> ratio=1.0000 min=1.0000 time=1095.56
+[q4] pass1 rim_step           = 130.0    -> ratio=1.0000 min=1.0000 time=1087.66
+[q4] pass1 max_rim_patrols    = 4        -> ratio=1.0000 min=1.0000 time=1144.18
+[q4] pass1 max_rim_patrols    = 8        -> ratio=1.0000 min=1.0000 time=1132.67
+[q4] pass 1 done, improved=True, elapsed=1728 s
+[q4] FINAL ratio=1.0000 min=1.0000 time=1083.43 travel=59689
+[q4] PARAMS {"census": true, "clear_bonus": 0.0, "clear_try_radius": 42.0, "dir_search_r": 60.0, "directional": true, "endgame_radius": 90.0, "endgame_step": 11.0, "hard_attempt_cap": 14, "localise_bonus": 120.0, "locate_sigma": 220.0, "max_attempts": 6, "max_channels_probe": 20, "max_rim_patrols": 14, "max_search_stops": 40, "oracle_count": false, "oropt_limit": 12, "outer_ring_gap": 0.0, "policy": "planned", "probe_bonus": 150.0, "probe_min_angle": 35.0, "probe_spacing": 650.0, "progress_ratio": 0.7, "rim_max_pts": 9, "rim_patrol": true, "rim_step": 180.0, "ring_radius": 1280.0, "ring_rotation": 0.0, "search_cost_bias": 30.0, "survey_mode": "lattice", "survey_spacing": 1300.0, "term_cap": 420.0, "term_iters": 9, "use_ring": true, "vantage_b": 1000.0, "vantage_b_local": 550.0, "vantage_max_tries": 3, "vantage_phi": 37.0, "vantage_phi_local": 55.0, "verify_grid": 60.0, "verify_r": 1000.0}

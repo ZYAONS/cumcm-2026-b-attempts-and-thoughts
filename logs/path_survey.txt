@@ -1,0 +1,9 @@
+20 cases, seeds 30000..30019
+variant                      stops    ratio      min  fails     time   travel   meas
+lattice s950 rim12 (now)      24.4   1.0000   1.0000      0    582.2    23323    443
+path batch4 rim12             24.9   0.9792   0.8750      5    570.0    24558    344
+path batch8 rim12             35.0   0.9603   0.8462      9    520.2    21494    328
+path batch8 rim12 ps400       35.0   0.9634   0.8462      8    518.6    21677    322
+path batch8 rim16 ps250       35.0   0.9603   0.8462      9    520.2    21494    328
+path batch12 rim12 ps250      38.6   0.9561   0.8000      9    486.1    19704    315
+report -> data/path_survey.json

@@ -1,0 +1,10 @@
+cap0 rim6 (now-ish)  worst=1.0000  time= 577.1 s  stops= 18.9  travel= 23046  meas=  424  failing=0/40
+cap12 rim6           worst=1.0000  time= 641.6 s  stops= 16.4  travel= 27316  meas=  417  failing=0/40
+cap10 rim6           worst=0.9955  time= 652.1 s  stops= 14.9  travel= 28145  meas=  415  failing=1/40
+cap8 rim6            worst=0.9955  time= 657.4 s  stops= 13.7  travel= 28942  meas=  399  failing=1/40
+cap6 rim6            worst=0.9841  time= 637.5 s  stops= 11.8  travel= 27612  meas=  379  failing=6/40
+cap6 rim10           worst=0.9789  time= 651.0 s  stops= 12.3  travel= 28552  meas=  379  failing=4/40
+cap6 rim12           worst=0.9890  time= 638.6 s  stops= 12.2  travel= 27978  meas=  377  failing=4/40
+cap8 rim8 ps150      worst=0.9928  time= 637.1 s  stops= 13.2  travel= 27038  meas=  409  failing=2/40
+cap6 rim12 ps150     worst=0.9890  time= 643.8 s  stops= 12.2  travel= 27843  meas=  394  failing=4/40
+report -> data/minimal_lattice.json

@@ -1,0 +1,13 @@
+{
+ "n_cases": 30,
+ "mean_ratio": 0.4835390997890998,
+ "min_ratio": 0.0,
+ "mean_time": Infinity,
+ "median_time": 4668.143243238643,
+ "sd_time": NaN,
+ "mean_travel": 8996.137011704708,
+ "mean_measure": 5096.633333333333,
+ "mean_clear_actions": 19.133333333333333,
+ "mean_vtime": 27461.79406900761,
+ "wall_s": 13.206727027893066
+}

@@ -1,0 +1,10 @@
+   nominal              ratio=1.000  mean=872.2 s
+   R_min=950            ratio=0.994  mean=850.1 s
+   R_min=1050           ratio=1.000  mean=1006.7 s
+   R_max=1400           ratio=1.000  mean=891.8 s
+   bearing_err=0.8deg   ratio=0.988  mean=813.3 s
+   bearing_err=1.0deg   ratio=1.000  mean=910.0 s
+   n_sources=10         ratio=0.983  mean=1150.5 s
+   n_sources=16         ratio=0.995  mean=761.6 s
+  wrote q4_sensitivity.csv (8 rows)
+total 216 s

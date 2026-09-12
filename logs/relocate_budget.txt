@@ -1,0 +1,11 @@
+24 cases, seeds 30000..30023
+variant                     ratio      min  fails     time   travel  localise
+levels 7 crawl 4 (now)     1.0000   1.0000      0    540.3    22343      2529
+levels 5 crawl 2           1.0000   1.0000      0    540.3    22343      2529
+levels 4 crawl 1           1.0000   1.0000      0    540.3    22343      2529
+levels 3 crawl 1           1.0000   1.0000      0    540.3    22343      2529
+levels 7 crawl 0           1.0000   1.0000      0    540.3    22343      2529
+levels 4 crawl 0           1.0000   1.0000      0    540.3    22343      2529
+
+PERFECT and fastest: levels 7 crawl 4 (now) -> 540.3 s/source
+report -> data/relocate_budget.json

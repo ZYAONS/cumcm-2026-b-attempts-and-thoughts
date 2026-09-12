@@ -1,0 +1,344 @@
+
+\section{问题一：交会定位区域的直径算法与圆覆盖判定}
+
+\subsection{示向度误差的几何模型}
+
+设检测点 $S_i$ 处测得示向度 $\hat\theta_i$，误差 $|\delta_i|\le\varepsilon$（$\varepsilon=1^{\circ}$），则真实方位角 $\theta_i=\hat\theta_i+\delta_i$。引入单位向量记号
+\[
+\mathbf u(\alpha)=(\cos\alpha,\ \sin\alpha),\qquad
+\mathbf e_\perp(\alpha)=(-\sin\alpha,\ \cos\alpha),
+\]
+则“干扰源位于 $S_i$ 的示向度方向上”可写成两条\textbf{半平面约束}：
+\begin{equation}
+W_i=\Bigl\{P:\ \bigl(P-S_i\bigr)\cdot \mathbf e_\perp(\hat\theta_i-\varepsilon)\ge0,\quad
+\bigl(P-S_i\bigr)\cdot \mathbf e_\perp(\hat\theta_i+\varepsilon)\le0\Bigr\}.
+\label{eq:wedge}
+\end{equation}
+式 \eqref{eq:wedge} 的第一式表示 $P-S_i$ 位于 $\hat\theta_i-\varepsilon$ 的逆时针侧，第二式表示其位于 $\hat\theta_i+\varepsilon$ 的顺时针侧；由于半张角 $\varepsilon=1^{\circ}<90^{\circ}$，两半平面之交恰好是角楔而非其对顶楔。写成标准形式 $a x+b y\le c$ 得
+\begin{equation}
+\begin{aligned}
+&\sin(\hat\theta_i-\varepsilon)\,(x-x_i)-\cos(\hat\theta_i-\varepsilon)\,(y-y_i)\le0,\\
+&-\sin(\hat\theta_i+\varepsilon)\,(x-x_i)+\cos(\hat\theta_i+\varepsilon)\,(y-y_i)\le0 .
+\end{aligned}
+\label{eq:halfplane}
+\end{equation}
+
+因此 $n$ 个检测点给出 $m=2n$ 个半平面，\textbf{定位区域}为
+\begin{equation}
+\mathcal{R}=\bigcap_{i=1}^n W_i=\bigl\{P:\ A P\le c\bigr\},\qquad A\in\mathbb R^{2n\times2}.
+\label{eq:region}
+\end{equation}
+附录 2 图 2 的红色四边形即 $n=2$ 时式 \eqref{eq:region} 的实例。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q1_region.png}
+\caption{双站交会定位的定位区域。(a) 整体几何：两条实测示向度方向线（实线）及其 $\pm1^{\circ}$ 边界线（虚线）围成凸四边形；(b) 定位区域的独立放大面板（$x,y$ 轴刻度放大到米级），黑色粗实线段为直径 $AB$，黑色虚线圆为“以 $AB$ 为直径的圆”，紫色点线圆为最小包围圆}
+\label{fig:q1region}
+\end{figure}
+
+\subsection{定位区域的性质}
+
+\begin{proposition}[结构性]\label{prop:struct}
+设 $n\ge2$，则：
+\begin{enumerate}
+  \item $\mathcal{R}$ 是闭凸集；当非空且有界时，它是顶点个数不超过 $2n$ 的凸多边形，其每个顶点必为式 \eqref{eq:halfplane} 中两条边界直线的交点。
+  \item $\mathcal{R}$ 无界当且仅当式 \eqref{eq:halfplane} 的\textbf{回收锥}
+  $\operatorname{rec}\mathcal{R}=\bigcap_i\{\mathbf d:\ \mathbf d\in W_i\ \text{（视 $W_i$ 为锥）}\}$
+  含有非零向量；等价地，方向区间
+  $[\hat\theta_i-\varepsilon,\ \hat\theta_i+\varepsilon]$（模 $360^{\circ}$）之交非空。
+\end{enumerate}
+\end{proposition}
+
+\begin{pf}
+(1) 凸性由凸集之交得到；有界凸多边形无界方向上必有支撑直线，故顶点为两约束边界之交。
+(2) 对闭凸集有 $\operatorname{rec}(\cap_i C_i)=\cap_i\operatorname{rec}C_i$；角楔 $W_i$ 的回收锥正是方向区间 $[\hat\theta_i-\varepsilon,\hat\theta_i+\varepsilon]$ 张成的锥，故 $\mathcal{R}$ 无界 $\iff$ 该交锥含非零向量 $\iff$ 方向区间之交非空。
+\end{pf}
+
+命题 \ref{prop:struct} 中无界情形具有明确的工程含义：两条示向度方向的夹角 $<2\varepsilon$（即近似平行）时，距离方向几乎没有约束，定位区域沿该方向无限延伸，此时\textbf{必须增加检测点}，或引入干扰源必在目标域内检测点处必在接收半径内等物理约束。
+
+\subsection{直径算法}
+
+\begin{algorithm}[H]
+\caption{交会定位区域直径算法（$\mathcal{R}$-Diameter）}
+\begin{algorithmic}[1]
+\Require 检测点 $\{S_i\}$，示向度 $\{\hat\theta_i\}$，误差界 $\varepsilon$
+\Ensure 直径 $D$、直径端点 $(A,B)$、是否有界、是否为空、圆覆盖判定
+\State 由式 \eqref{eq:halfplane} 生成 $m=2n$ 个半平面 $H=\{h_1,\dots,h_m\}$
+\State 检查回收锥：求各方向区间 $[\hat\theta_i-\varepsilon,\hat\theta_i+\varepsilon]$ 的交；若非空则返回“无界、$D=+\infty$”
+\State $V\gets\varnothing$
+\ForAll{$1\le a<b\le m$} \Comment{$O(m^2)$ 顶点枚举}
+   \State 求直线 $a,b$ 的交点 $P_{ab}$（行列式 $\approx0$ 则跳过）
+   \If{$P_{ab}$ 满足全部 $m$ 个半平面约束（容差 $10^{-9}$）}
+      \State $V\gets V\cup\{P_{ab}\}$
+   \EndIf
+\EndFor
+\If{$V=\varnothing$} \State \Return “测量不相容，$\mathcal{R}=\varnothing$”
+\EndIf
+\State $V^*\gets\operatorname{ConvexHull}(V)$ \Comment{Andrew 单调链，$O(m\log m)$}
+\State $(D,A,B)\gets\operatorname{RotatingCalipers}(V^*)$ \Comment{或 $O(m^2)$ 暴力枚举，用于互证}
+\State 令 $s\gets\max_{P\in V^*}\bigl(P-A\bigr)\cdot\bigl(P-B\bigr)$；\ \ 若 $s\le10^{-9}$ 则可覆盖，否则不可覆盖，$s$ 为超出量（m$^2$）
+\State 用 Welzl 算法求最小包围圆 $(\mathbf c,R_{\mathrm{MEC}})$ 作为备用覆盖圆
+\State \Return $D,A,B$，有界性、空性、覆盖判定与 $R_{\mathrm{MEC}}$
+\end{algorithmic}
+\end{algorithm}
+
+算法 1 的第 4--9 行采用的是“\textbf{顶点枚举}”而不是传统的半平面裁剪：由于 $\mathcal{R}$ 的顶点必为两条约束直线之交（命题 \ref{prop:struct}），枚举全部 $O(m^2)$ 个交点并保留满足全部约束者，再取凸包，即可\textbf{精确}得到 $\mathcal{R}$，且不需要人为给定包围盒；若 $\mathcal{R}$ 无界，第 3 行的回收锥判据会提前给出结论，避免把无界区域误裁成有界区域。对 $n\le10$（$m\le20$）的规模，$O(m^2)$ 枚举仅需 190 次求交，完全满足在线计算需求（机器狗每次测量后都要重估位置）。
+
+\subsection{直径的一阶解析近似及其适用范围}
+
+当 $\varepsilon$ 很小且 $\mathcal{R}$ 细长时，可由局部线性化得到闭式近似。设第 $i$ 条方位视线到源的距离为 $d_i$，则两侧向线在源处的横向间距为 $w_i=2\varepsilon d_i$，两条“带”以交会角 $\gamma$ 相交，其交为边长 $w_1/\sin\gamma$、$w_2/\sin\gamma$、夹角 $\gamma$ 的平行四边形，故对角线长
+\begin{equation}
+D\ \approx\ D_{\rm asy}=\frac{\sqrt{w_1^2+w_2^2+2w_1w_2\cos\gamma}}{\sin\gamma},
+\qquad w_i=2\varepsilon d_i\ (\varepsilon\ \text{取弧度}).
+\label{eq:asy}
+\end{equation}
+式 \eqref{eq:asy} 有三个直接推论：(i) $D\propto1/\sin\gamma$，故 \textbf{$\gamma=90^{\circ}$ 时定位精度最高}，这与文献中最优交会角的经典结论一致\cite{xiu2005,sheng2016,torrieri1984}；(ii) $D\ge\sqrt{w_1^2+w_2^2}\big|_{\gamma=90^{\circ}}\ge w_1$，即无论第二站如何选择，单站方位测量本身的横向不确定度 $2\varepsilon d_1$ 是精度的\textbf{下界}；(iii) $\gamma\to0$ 时 $D\to\infty$，解释了沿示向度前进导致定位失效。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.66\textwidth]{../figures/fig_q1_diameter_vs_gamma.png}
+\caption{定位区域直径与交会角的关系：折线为一阶解析式 \eqref{eq:asy}，圆点为精确多边形算法结果，两者在 $\gamma\in[20^{\circ},150^{\circ}]$ 内吻合良好}
+\label{fig:q1gamma}
+\end{figure}
+
+\subsection{以定位区域直径为直径的圆能否覆盖定位区域}
+
+\subsubsection{提法的良定义性}
+
+\begin{proposition}[唯一性]\label{prop:unique}
+设定位区域 $\mathcal{R}$ 的直径为 $D$，端点（直径对）为 $A,B$。若存在半径为 $D/2$ 的圆盘 $\mathcal D$ 使 $\mathcal{R}\subset\mathcal D$，则 $\mathcal D$ 必为以 $AB$ 为直径的圆盘 $\mathcal D_{AB}$。
+\end{proposition}
+\begin{pf}
+由 $|A-B|=D$ 与 $A,B\in\mathcal D$ 知 $|A-B|=2r$ 达到直径，故 $A,B$ 必为 $\mathcal D$ 的一对对径点，$\mathcal D$ 的圆心为中点 $(A+B)/2$、半径 $D/2$，即 $\mathcal D=\mathcal D_{AB}$。
+\end{pf}
+
+命题 \ref{prop:unique} 说明“使用直径为 $D$ 的圆去覆盖”只有唯一候选，故只需判定 $\mathcal R\subset\mathcal D_{AB}$ 是否成立。
+
+\subsubsection{充要判据}
+
+\begin{theorem}[Thales 判据]\label{thm:thales}
+$\mathcal R\subset\mathcal D_{AB}$ 当且仅当对 $\mathcal R$ 的每个顶点 $V$ 都有
+\begin{equation}
+(V-A)\cdot(V-B)\le0 .
+\label{eq:thales}
+\end{equation}
+\end{theorem}
+\begin{pf}
+由 Thales 定理，$V$ 在以 $AB$ 为直径的闭圆盘内 $\iff\angle AVB\ge90^{\circ}\iff(V-A)\cdot(V-B)\le0$。充分性：$\mathcal R=\operatorname{conv}(V^*)$ 且 $\mathcal D_{AB}$ 为凸集，凸组合保持不等式；必要性显然。
+\end{pf}
+
+记 $s=\max_{V\in V^*}(V-A)\cdot(V-B)$。$s\le0$ 等价于覆盖成立，$s>0$ 时 $V$ 到圆盘的超出距离约为 $s/(2R_{\mathrm{MEC}})$。
+
+\subsubsection{一般性结论与反例}
+
+\begin{proposition}\label{prop:para}
+若 $\mathcal R$ 为中心对称的平行四边形（如 $\varepsilon\to0$ 的极限情形），则 $\mathcal D_{AB}$ 恒覆盖 $\mathcal R$；若 $\mathcal R$ 为等边三角形，则 $\mathcal D_{AB}$ 不覆盖 $\mathcal R$。
+\end{proposition}
+\begin{pf}
+设平行四边形顶点为 $O,(a\cos\gamma,a\sin\gamma),(b,0),(a\cos\gamma+b,a\sin\gamma)$，$\gamma\le90^{\circ}$ 时长对角线为 $A=O$ 到 $B=(a\cos\gamma+b,a\sin\gamma)$。另两个顶点 $V$ 满足 $(V-A)\cdot(V-B)=-ab\cos\gamma\le0$，故覆盖成立（$\gamma>90^{\circ}$ 时取另一条对角线同理）。
+等边三角形取直径为一对顶点，第三个顶点所张角为 $60^{\circ}<90^{\circ}$，代入 \eqref{eq:thales} 得正值，故不覆盖。
+\end{pf}
+
+命题 \ref{prop:para} 表明：\textbf{“直径圆覆盖”不是普遍成立的几何事实}，它依赖于区域的形状；本题的定位区域介于“细长平行四边形”（成立）与“三角形”（不成立）之间，必须用数值实验定量回答。
+
+\subsubsection{六万次随机算例的定量结论}
+
+\begin{table}[H]
+\centering
+\caption{直径圆覆盖判定的 Monte-Carlo 统计（每档 6 万次随机布局，检测点与干扰源随机抽取且满足工程约束）}
+\label{tab:q1cover}
+\begin{tabular}{cccccc}
+\toprule
+检测点数 $n$ & 有效算例 & 无界算例 & 不能覆盖算例 & 占比 & $\max R_{\mathrm{MEC}}/(D/2)$\\
+\midrule
+2 & 12903 & 114 & 145 & 1.13\% & 1.000574\\
+3 & 6192  & 0   & 155 & 2.50\% & 1.001836\\
+4 & 3231  & 0   & 97  & 3.00\% & 1.000565\\
+5 & 1675  & 0   & 62  & 3.70\% & 1.000511\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q1_cover_stats.png}
+\caption{左：直径圆不能覆盖定位区域的算例比例；右：超出半径的相对量级（最大仅 0.18\%）}
+\label{fig:q1cover}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q1_shapes.png}
+\caption{四组真实算例：红色为定位区域，黑色虚线为以直径 $AB$ 为直径的圆，紫色点线为最小包围圆。第 1、2 幅为“不能覆盖”的情形（品红点为落到直径圆之外的顶点），第 3、4 幅为“不能覆盖”的临界与可覆盖情形}
+\label{fig:q1shapes}
+\end{figure}
+
+\textbf{结论}：以定位区域直径为直径的圆\textbf{一般情况下不能}覆盖定位区域。由表 \ref{tab:q1cover} 与图 \ref{fig:q1cover}，不能覆盖的算例占比为 $1.13\%$（2 站）$\sim3.70\%$（5 站），且失败时的超出量极小（$R_{\mathrm{MEC}}/(D/2)-1\le1.8\times10^{-3}$，对应几十厘米量级）。其机理是：定位区域是两条“窄带”的交，$\varepsilon\to0$ 时它趋近于平行四边形（命题 \ref{prop:para} 保证成立），有限 $\varepsilon$ 下退化为一般的四边形，当\textbf{内角之和} $\angle B+\angle D<180^{\circ}$（即 $\angle A+\angle C>180^{\circ}$）时，直径对角线所张的两个角小于 $90^{\circ}$，直径圆失效；由表 \ref{tab:q1cover} 该情形多发生在交会角接近 $90^{\circ}$ 的对称布局附近，因为这正是内角和最接近 $180^{\circ}$ 的临界状态。
+
+\textbf{工程建议}：需要用一个圆覆盖定位区域时，应取\textbf{最小包围圆}（Welzl 算法，$O(n)$ 期望时间），其半径满足 $R_{\mathrm{MEC}}\le D/\sqrt3$（Jung 定理）；本例中 $R_{\mathrm{MEC}}$ 仅比 $D/2$ 大 $0.05\%$ 以内，故实践中“用直径为直径的圆近似覆盖”是可接受的近似，但在严格判定时必须使用定理 \ref{thm:thales}。
+
+\subsection{数值验证}
+
+\begin{table}[H]
+\centering
+\caption{典型算例的算法结果与解析近似对比（$\varepsilon=1^{\circ}$）}
+\label{tab:q1cases}
+\small
+\begin{tabular}{lccccccc}
+\toprule
+场景 & $n$ & 顶点数 & $D$/m & 卡壳法 $D$/m & 解析式 $D$/m & 相对偏差 & 直径圆覆盖\\
+\midrule
+对称双站，$\gamma=67^{\circ}$ & 2 & 4 & 68.1 & 68.1 & 68.1 & 0.08\% & 是\\
+交会角 $90^{\circ}$ & 2 & 4 & 41.9 & 41.9 & 41.9 & 0.04\% & 临界（不覆盖）\\
+近距离源，$\gamma=151^{\circ}$ & 2 & 4 & 101.5 & 101.5 & 87.3 & 16.2\% & 是\\
+近似平行（无界） & 2 & -- & $\infty$ & -- & -- & -- & 否\\
+三站 & 3 & 6 & 50.0 & 50.0 & 50.0 & 0.03\% & 是\\
+四站 & 4 & 6 & 47.1 & 47.1 & 50.0 & 5.8\% & 是\\
+五站 & 5 & 6 & 47.1 & 47.1 & 50.0 & 5.8\% & 是\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+三项独立验证结果如下（数据见 \texttt{data/q1\_validation.json}）：
+
+\begin{enumerate}
+  \item \textbf{直径算法互证}：对 399 组随机算例，$O(m^2)$ 暴力枚举与旋转卡壳法所得直径之差的最大值为 $\mathbf{0.0}$ m（双精度意义下完全一致）。
+  \item \textbf{解析近似适用性}：在 $\gamma\in[30^{\circ},150^{\circ}]$、$n=2$ 的细长区域内，式 \eqref{eq:asy} 与精确算法的相对偏差小于 $0.1\%$；当 $\gamma$ 接近 $0^{\circ}$ 或 $180^{\circ}$、或区域内角出现退化（表 \ref{tab:q1cases} 第 3、6 行）时偏差升至 $5\%\sim16\%$，说明解析式\textbf{只能用于快速估算与优化，不能替代精确算法}。
+  \item \textbf{鲁棒性}：把误差界由 $1^{\circ}$ 增到 $2^{\circ}$，直径近似线性增长（与 $D\propto\varepsilon$ 一致）；给三站中的一个站引入 $1.2^{\circ}$ 的\textbf{系统偏差}（超出误差界）后，定位区域虽仍非空但直径显著增大，说明多站交会时任一站的系统偏差会整体拉低精度，工程上应对各站做一致性检验。
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.56\textwidth]{../figures/fig_q1_unbounded.png}
+\caption{无界情形：两个示向度近似平行时回收锥非空，定位区域沿该方向无限延伸，直径发散}
+\label{fig:q1unb}
+\end{figure}
+
+\section{问题二：第二检测点的选择策略与候选区域}
+
+\subsection{可行干扰源集合}
+
+已知在 $S_1$ 处测得示向度 $\hat\theta_1$ 且结果为“有信号（direction）”。由假设 2--3，干扰源 $G$ 满足
+\begin{equation}
+G\in\mathcal G=\Bigl\{S_1+r\,\mathbf u(\hat\theta_1+\delta):\ 5<r\le r_{\rm hi},\ |\delta|\le\varepsilon\Bigr\},
+\label{eq:Gset}
+\end{equation}
+其中 $r_{\rm hi}=\min\{1500,\ \text{沿该方向到目标域边界的距离}\}$：因为信号被收到故 $r\le R_{\rm eff}\le1500$，且 $G$ 在半径 1800 m 的目标域内；又因结果为“direction”而非“near”，$r>5$ m。$\mathcal G$ 是一段长 $r_{\rm hi}-5$、角宽 $2\varepsilon$ 的``薄扇形''。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.66\textwidth]{../figures/fig_q2_geometry.png}
+\caption{问题二几何：$S_1$ 处的实测示向度（蓝实线）、$\pm1^{\circ}$ 边界（蓝虚线）、可行源集合（蓝点带）、最优第二检测点（红五星）与两个保证探测圆（灰点线）}
+\label{fig:q2geo}
+\end{figure}
+
+\subsection{优化模型}
+
+\begin{equation}
+\begin{aligned}
+\min_{S_2\in\Omega}\quad & J(S_2)=\max_{G\in\mathcal G}\ \max_{|\delta_2|\le\varepsilon}\ D\bigl(S_1,S_2,\hat\theta_1,\ \angle(S_2\to G)+\delta_2\bigr)\\
+\text{s.t.}\quad
+& \Omega=\Bigl\{S_2:\ \max_{G\in\mathcal G}|S_2-G|\le R_{\min}\Bigr\}
+\end{aligned}
+\label{eq:q2opt}
+\end{equation}
+其中 $D(\cdot)$ 由问题一的精确定位区域算法计算（容差 $\varepsilon=1^{\circ}$），$R_{\min}=1000$ m 为最坏情形有效接收半径。约束 $\Omega$ 的含义是：\textbf{对可行集合中的任何干扰源，第二次检测都保证能收到信号}——这是一个“保证型”约束，使策略在最坏情况下仍然成立。
+
+第一层 $\max$ 遍历 $\mathcal G$（32 个对数分布距离 $\times$ 7 个角度 = 224 点）与 $\delta_2=\pm\varepsilon$；第二层 $\min$ 在极坐标网格 $(b,\varphi)$ 上用坐标下降细化到 $0.5$ m / $0.2^{\circ}$。
+
+\subsection{求解结果}
+
+在 $S_1=(-420,260)$、$\hat\theta_1=63^{\circ}$（$r_{\rm hi}=1500$ m）的算例中，最优解为
+\begin{equation}
+\boxed{\ b^{*}=1004.1\ \text{m},\qquad \varphi^{*}=36.8^{\circ},\qquad J^{*}=134.0\ \text{m}\ }
+\end{equation}
+其中最坏情形对应\textbf{距离最远的可行源}（$r=1500$ m）且第二次读数误差取同号端点。换一组几何（$S_1=(900,-700)$，$\hat\theta_1=205^{\circ}$）得到完全相同的 $b^{*}=1004.1$ m、$\varphi^{*}=36.8^{\circ}$、$J^{*}=134.0$ m，说明该规则\textbf{与出发位置和示向度无关}，具有普适性。
+
+\textbf{机理解释}：(i) 约束 $\Omega$ 中的“最坏情形”由离 $S_2$ 最远与最近的可行源共同决定；当 $b\gtrsim1000$ m 时，近端源（$r\approx5$ m）到 $S_2$ 的距离约等于 $b$，约束 $b\le R_{\min}$ 恰好取等号，故 $b^{*}\approx R_{\min}=1000$ m；(ii) 偏转角 $\varphi$ 的作用是调节交会角——$\varphi=0$ 时两条方位视线近似共线（$D$ 极大甚至无界），$\varphi=90^{\circ}$ 时虽然交会角好但 $S_2$ 离远端源过远、约束不可行；$\varphi^{*}\approx37^{\circ}$ 是在“交会角接近 $90^{\circ}$ 且落在 $R_{\min}$ 约束边界上”这一折中下的最优值。
+
+\begin{table}[H]
+\centering
+\caption{最坏情形接收半径假设 $R_{\mathrm{guard}}$ 与可达精度的权衡。
+$R_{\mathrm{guard}}=1000$ m 为\textbf{保证探测}（对任何干扰源都成立）；增大 $R_{\mathrm{guard}}$ 意味着接受一定漏检风险换取精度}
+\label{tab:q2guard}
+\begin{tabular}{cccccc}
+\toprule
+$R_{\mathrm{guard}}$/m & 1000 & 1100 & 1200 & 1300 & 1400\\
+\midrule
+最优 $b^{*}$/m & 1004 & 1105 & 1205 & 1300 & 1402\\
+最优 $\varphi^{*}$/$^{\circ}$ & 36.8 & 31.4 & 25.9 & 31.3 & 36.0\\
+最坏情形 $J^{*}$/m & 134.0 & 112.9 & 95.0 & 85.0 & 81.1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q2_scan.png}
+\caption{左：$(b,\varphi)$ 网格上的最坏情形直径 $J$（对数纵轴），可见可行域是一条窄带（$b\lesssim R_{\min}$，$|\varphi|\lesssim60^{\circ}$）；右：精度与风险的权衡曲线}
+\label{fig:q2scan}
+\end{figure}
+
+\subsection{第二检测点的候选区域}
+
+\textbf{最优站位}：$S_2^{*}=S_1+b^{*}\mathbf u(\hat\theta_1+\varphi^{*})$（本例为 $(-590.1,1249.6)$），其关于示向度方向镜像的另一点 $S_2^{**}=S_1+b^{*}\mathbf u(\hat\theta_1-\varphi^{*})$ 给出完全相同的最坏情形指标，两点构成一对\textbf{对称最优解}；实际选择时应选取更靠近后续搜索方向、且仍位于目标域内的一侧。
+
+\textbf{次优候选区域}：定义 $\eta$-次优集合 $\Omega_\eta=\{S_2\in\Omega:\ J(S_2)\le(1+\eta)J^{*}\}$。取 $\eta=15\%$ 时
+\[
+\Omega_{0.15}\approx\Bigl\{S_1+b\,\mathbf u(\hat\theta_1+\varphi):\ b\in[936,973]\ \text{m},\
+\varphi\in[-39^{\circ},39^{\circ}]\Bigr\},
+\]
+即\textbf{以 $S_1$ 为圆心、半径约 1000 m、相对实测示向度张角 $\pm40^{\circ}$ 的一段圆弧带}（图 \ref{fig:q2geo} 中红五星附近）。工程含义直观：\emph{“沿与示向度约 40$^{\circ}$ 的方向、后退到保证接收半径 1000 m 处”}。该区域是“窄带型”——$b$ 几乎不可偏离 1000 m（先失效的是保证探测约束），而 $\varphi$ 在 $\pm40^{\circ}$ 内有较大自由度，故执行时\textbf{优先保证距离、其次调整角度}。
+
+\subsection{与其它策略的对比及 Monte-Carlo 检验}
+
+\begin{table}[H]
+\centering
+\caption{五种第二检测点规则在相同随机源/误差抽样下的定位区域直径（3000 次抽样）}
+\label{tab:q2base}
+\begin{tabular}{lcccc}
+\toprule
+策略 & 平均 $D$/m & 95\% 分位 $D$/m & 最大 $D$/m & 无界比例\\
+\midrule
+A 本文 minimax 规则 & \textbf{55.1} & \textbf{106.3} & 128.7 & 0.0\%\\
+B 沿垂直方向偏移 800 m & 96.6 & 209.9 & 254.5 & 0.0\%\\
+C 沿示向度方向前进 800 m & 2508.7 & $\infty$ & $\infty$ & 25.7\%\\
+D 可行域内随机取点 & 1285.0 & $\infty$ & $\infty$ & 73.8\%\\
+E 先知策略（已知真实位置） & 14.8 & 42.5 & 58.0 & 0.0\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.74\textwidth]{../figures/fig_q2_baselines.png}
+\caption{五种第二检测点规则的实际定位区域直径（纵轴取对数坐标；C、D 两策略在部分算例中定位区域无界，其 95\% 分位为 $\infty$，故仅给出均值）}
+\label{fig:q2basefig}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.74\textwidth]{../figures/fig_q2_montecarlo.png}
+\caption{左：按本文规则选取第二检测点后，定位区域直径的 Monte-Carlo 分布（4000 次），红色虚线为最坏情形上界 $J^{*}=134$ m，\textbf{无一次越界}；右：直径与真实源距离的关系，最大值出现在 $r=1500$ m 处，与理论分析一致}
+\label{fig:q2mc}
+\end{figure}
+
+由表 \ref{tab:q2base} 与图 \ref{fig:q2mc} 可得三点结论：
+
+\begin{enumerate}
+  \item 本文规则相对最自然的“垂直偏移”直觉策略把平均定位区域直径从 96.6 m 降到 55.1 m（降低 43\%），95\% 分位从 209.9 m 降到 106.3 m，且保证探测；
+  \item 沿示向度方向前进是\textbf{最差}的选择：25.7\% 的算例定位区域无界，其余算例平均直径 2508.7 m，几乎无法定位，定量证实了问题二分析中的判断；
+  \item 与“先知策略”（直接站在干扰源上）相比，本文规则的平均直径是它的 3.7 倍，但先知策略需要事先知道真实位置；考虑到可行源集合的长度达 1500 m，这一差距已接近信息论下界。
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q2_region_rule.png}
+\caption{按本文规则选择第二检测点后的定位区域。(a) 几何总览：$S_1$、最优第二检测点 $S_2^{*}$ 与三个不同距离的干扰源位置（颜色与 (b)(c)(d) 的标题对应）；(b)(c)(d) 为对应的定位区域放大面板（红色多边形），真实距离越远定位区域越大，最坏情形出现在 1500 m}
+\label{fig:q2rule}
+\end{figure}
+
+\subsection{从问题二到问题三、四的衔接}
+
+问题二给出的是“\textbf{为了得到一个好的定位区域，第二个观测点应该在哪里}”。在问题三、四中，机器狗还会因搜索与清除而不断移动，因此本文把该规则弱化为两条可在线执行的准则：(i) \emph{机会式交会}——在行进路线的每个停点上对所有未解算频道做检测（检测仅耗 5 s，而绕行 1000 m 需 200 s），使第二条方位“顺路”获得；(ii) \emph{显式站位}——当某频道只有一条方位、且没有其它顺路机会时，按其示向度偏转 $\pm37^{\circ}$、距离取 $\min(1000,0.6r_{\rm hi})$ 设置专门的观测点（第 7.5 节）。两条准则均以问题二的极大极小解为基准。

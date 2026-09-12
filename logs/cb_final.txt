@@ -1,0 +1,25 @@
+cb500_now    pool A : ratio=1.0000 min=1.0000 fails= 0 time=  601.9 median=  588.0
+cb500_now    pool B : ratio=0.9978 min=0.9333 fails= 1 time=  626.5 median=  633.4
+cb500_now    pool C : ratio=1.0000 min=1.0000 fails= 0 time=  582.4 median=  559.0
+cb500_now    pool D : ratio=1.0000 min=1.0000 fails= 0 time=  587.6 median=  587.1
+   --> cb500_now    over 4 pools: worst ratio 0.9978  mean time 599.6  total failing cases 1/120
+
+cb250        pool A : ratio=0.9976 min=0.9286 fails= 1 time=  593.6 median=  610.2
+cb250        pool B : ratio=0.9978 min=0.9333 fails= 1 time=  623.2 median=  647.3
+cb250        pool C : ratio=0.9970 min=0.9091 fails= 1 time=  595.9 median=  589.2
+cb250        pool D : ratio=1.0000 min=1.0000 fails= 0 time=  577.2 median=  575.1
+   --> cb250        over 4 pools: worst ratio 0.9970  mean time 597.5  total failing cases 3/120
+
+cb350        pool A : ratio=1.0000 min=1.0000 fails= 0 time=  593.4 median=  609.2
+cb350        pool B : ratio=0.9978 min=0.9333 fails= 1 time=  629.6 median=  631.3
+cb350        pool C : ratio=1.0000 min=1.0000 fails= 0 time=  580.1 median=  565.4
+cb350        pool D : ratio=1.0000 min=1.0000 fails= 0 time=  579.9 median=  602.0
+   --> cb350        over 4 pools: worst ratio 0.9978  mean time 595.7  total failing cases 1/120
+
+cb160        pool A : ratio=1.0000 min=1.0000 fails= 0 time=  607.1 median=  619.2
+cb160        pool B : ratio=0.9978 min=0.9333 fails= 1 time=  618.9 median=  636.3
+cb160        pool C : ratio=1.0000 min=1.0000 fails= 0 time=  585.1 median=  566.7
+cb160        pool D : ratio=0.9972 min=0.9167 fails= 1 time=  588.6 median=  571.4
+   --> cb160        over 4 pools: worst ratio 0.9972  mean time 599.9  total failing cases 2/120
+
+report -> data/multi_pool.json

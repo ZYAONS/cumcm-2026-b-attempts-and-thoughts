@@ -1,0 +1,31 @@
+rim12 (now)  pool A : ratio=1.0000 min=1.0000 fails= 0 time=  593.8 median=  609.2
+rim12 (now)  pool B : ratio=0.9978 min=0.9333 fails= 1 time=  630.4 median=  631.3
+rim12 (now)  pool C : ratio=1.0000 min=1.0000 fails= 0 time=  579.9 median=  563.7
+rim12 (now)  pool D : ratio=1.0000 min=1.0000 fails= 0 time=  579.6 median=  602.0
+   --> rim12 (now)  over 4 pools: worst ratio 0.9978  mean time 595.9  total failing cases 1/120
+
+rim6         pool A : ratio=0.9954 min=0.9286 fails= 2 time=  578.6 median=  566.1
+rim6         pool B : ratio=0.9978 min=0.9333 fails= 1 time=  606.0 median=  606.5
+rim6         pool C : ratio=0.9947 min=0.9091 fails= 2 time=  556.8 median=  565.7
+rim6         pool D : ratio=1.0000 min=1.0000 fails= 0 time=  565.7 median=  573.7
+   --> rim6         over 4 pools: worst ratio 0.9947  mean time 576.8  total failing cases 5/120
+
+rim8         pool A : ratio=1.0000 min=1.0000 fails= 0 time=  585.2 median=  574.0
+rim8         pool B : ratio=0.9952 min=0.9231 fails= 2 time=  605.7 median=  593.8
+rim8         pool C : ratio=0.9972 min=0.9167 fails= 1 time=  576.0 median=  566.8
+rim8         pool D : ratio=0.9950 min=0.9167 fails= 2 time=  575.4 median=  573.8
+   --> rim8         over 4 pools: worst ratio 0.9950  mean time 585.6  total failing cases 5/120
+
+rim6 ps650   pool A : ratio=0.9954 min=0.9286 fails= 2 time=  568.5 median=  559.2
+rim6 ps650   pool B : ratio=0.9978 min=0.9333 fails= 1 time=  602.1 median=  609.0
+rim6 ps650   pool C : ratio=0.9947 min=0.9091 fails= 2 time=  557.4 median=  550.8
+rim6 ps650   pool D : ratio=1.0000 min=1.0000 fails= 0 time=  553.2 median=  567.9
+   --> rim6 ps650   over 4 pools: worst ratio 0.9947  mean time 570.3  total failing cases 5/120
+
+rim4         pool A : ratio=0.9947 min=0.9091 fails= 2 time=  581.3 median=  573.0
+rim4         pool B : ratio=0.9901 min=0.9231 fails= 4 time=  605.0 median=  577.6
+rim4         pool C : ratio=0.9978 min=0.9333 fails= 1 time=  574.1 median=  534.4
+rim4         pool D : ratio=0.9856 min=0.8000 fails= 4 time=  569.9 median=  576.0
+   --> rim4         over 4 pools: worst ratio 0.9856  mean time 582.6  total failing cases 11/120
+
+report -> data/multi_pool.json

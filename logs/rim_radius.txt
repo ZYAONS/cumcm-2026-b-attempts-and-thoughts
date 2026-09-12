@@ -1,0 +1,9 @@
+r1750 n12    worst=0.9978  mean_time= 597.0 s  stops= 24.4  failing= 1/120
+r1780 n12    worst=0.9947  mean_time= 600.0 s  stops= 24.4  failing= 3/120
+r1790 n12    worst=0.9972  mean_time= 602.6 s  stops= 24.4  failing= 2/120
+r1795 n12    worst=0.9972  mean_time= 599.5 s  stops= 24.4  failing= 2/120
+r1790 n16    worst=0.9978  mean_time= 621.1 s  stops= 28.2  failing= 2/120
+r1795 n16    worst=0.9978  mean_time= 627.9 s  stops= 28.4  failing= 2/120
+r1795 n20    worst=0.9972  mean_time= 649.1 s  stops= 32.1  failing= 2/120
+r1795 n24    worst=0.9970  mean_time= 679.4 s  stops= 36.2  failing= 2/120
+report -> data/rim_radius_scan.json

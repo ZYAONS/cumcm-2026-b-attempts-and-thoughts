@@ -1,0 +1,37 @@
+{
+ "total_sources": 2064,
+ "missed": [
+  {
+   "pool": "B",
+   "seed": 51029,
+   "ch": 2,
+   "r": 1780,
+   "kind": "directional",
+   "dir": 348,
+   "r_eff": 1418,
+   "status": "empty",
+   "obs": 0,
+   "nosig": 47,
+   "attempts": 0,
+   "total": 0,
+   "vantage": 0,
+   "est": null
+  },
+  {
+   "pool": "C",
+   "seed": 12010,
+   "ch": 12,
+   "r": 1799,
+   "kind": "directional",
+   "dir": 165,
+   "r_eff": 1477,
+   "status": "located",
+   "obs": 38,
+   "nosig": 116,
+   "attempts": 2,
+   "total": 14,
+   "vantage": 18,
+   "est": 42
+  }
+ ]
+}

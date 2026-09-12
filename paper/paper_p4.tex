@@ -1,0 +1,83 @@
+
+\appendix
+\section{支撑材料清单}
+
+支撑材料压缩包内文件如下（所有文件均不含参赛者身份、学校与赛区信息）：
+
+\begin{longtable}{p{6.6cm}p{8.4cm}}
+\toprule
+文件/目录 & 说明\\
+\midrule
+\endhead
+\texttt{code/geom\_core.py} & 几何内核：角楔半平面、定位区域顶点枚举、回收锥有界性判据、卡壳直径、Thales 覆盖判据、Welzl 最小包围圆（问题一）\\
+\texttt{code/q2\_solver.py} & 问题二：可行源集合、极大极小站位优化、候选区域、风险--精度权衡、Monte-Carlo 检验与基线对比\\
+\texttt{code/q2\_strategy.py} & 问题二早期版本（网格搜索与垂直族研究）\\
+\texttt{code/q1\_scan.py}, \texttt{q1\_counterexample.py}, \texttt{q1\_smoke.py} & 问题一的随机算例扫描、直径圆失效反例搜索与冒烟测试\\
+\texttt{code/simulator.py} & 依照附件 1、附件 2 复现的本地模拟器（HTTP+JSON 四条指令、虚拟时间记账、方位误差地点固定、定向覆盖角、日志导出）\\
+\texttt{code/robot\_core.py} & 机器狗策略内核：信息状态、定位区域估计、七点覆盖、任务规划（最近邻+2-opt）、射线归航与末段清除、认证判据（问题三、四）\\
+\texttt{code/run\_http\_tests.py} & 正式测试执行器：启动模拟器 HTTP 服务、机器狗通过 HTTP 交互、导出行为日志与统计\\
+\texttt{code/make\_data.py} & 全部数值结果生成脚本（问题一--四的算例、统计、灵敏度分析）\\
+\texttt{code/make\_figures.py}, \texttt{zh\_labels.json}, \texttt{fix\_labels.py} & 全部论文插图生成脚本与中文标签数据\\
+\texttt{code/tune.py}, \texttt{tune\_q4.py} & 策略参数随机搜索与坐标细化（问题三、四）\\
+\texttt{data/*.csv, *.json} & 运行结果数据：\texttt{q1\_*.csv}、\texttt{q2\_*.csv}、\texttt{q3\_*.csv}、\texttt{q4\_*.csv}、\texttt{formal\_*.json}、\texttt{*\_sensitivity.csv} 等\\
+\texttt{figures/*.png} & 论文全部插图（200 dpi）\\
+\texttt{logs/formal/*.log} & 六次正式测试的机器狗行为日志（JSON Lines，逐条记录虚拟时刻、位置、频道、指令、响应）\\
+\texttt{logs/drill/*.log} & 演练测试日志\\
+\texttt{report/self\_check.md} & 自检报告\\
+\texttt{report/REFERENCE\_SOURCES.md} & 参考文献来源与核实记录\\
+\bottomrule
+\end{longtable}
+
+\section{完整源程序代码}
+
+以下给出全部建模与求解程序的完整源码（可直接运行；运行环境 Python 3.9 + numpy/matplotlib）。为满足“代码中不出现中文”的可移植性要求，程序中的\textbf{标识符与字符串全部为 ASCII}，说明性注释与图形标签分别使用中文注释与外部 UTF-8 标签文件（\texttt{zh\_labels.json}）。
+
+\subsection{几何内核 geom\_core.py}
+\lstinputlisting[language=Python]{../code/geom_core.py}
+
+\subsection{问题二求解 q2\_solver.py}
+\lstinputlisting[language=Python]{../code/q2_solver.py}
+
+\subsection{本地模拟器 simulator.py}
+\lstinputlisting[language=Python]{../code/simulator.py}
+
+\subsection{机器狗策略内核 robot\_core.py}
+\lstinputlisting[language=Python]{../code/robot_core.py}
+
+\subsection{正式测试执行器 run\_http\_tests.py}
+\lstinputlisting[language=Python]{../code/run_http_tests.py}
+
+\subsection{结果数据生成 make\_data.py}
+\lstinputlisting[language=Python]{../code/make_data.py}
+
+\subsection{问题一验证脚本 q1\_scan.py / q1\_counterexample.py}
+\lstinputlisting[language=Python]{../code/q1_scan.py}
+\lstinputlisting[language=Python]{../code/q1_counterexample.py}
+
+\subsection{参数搜索 tune.py / tune\_q4.py}
+\lstinputlisting[language=Python]{../code/tune.py}
+\lstinputlisting[language=Python]{../code/tune_q4.py}
+
+\subsection{插图生成 make\_figures.py（节选：标签与前两部分）}
+\lstinputlisting[language=Python,firstline=1,lastline=120]{../code/make_figures.py}
+
+
+
+\section*{B\quad 灵敏度图（正文表 10、表 13 的图形表示）}
+\addcontentsline{toc}{section}{B\quad 灵敏度图}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q3_sensitivity.png}
+\caption{问题三灵敏度：左为完成率，右为平均定位清除时间}
+\label{fig:q3sens}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{../figures/fig_q4_sensitivity.png}
+\caption{问题四灵敏度：完成率与平均时间对各类扰动的响应均平稳}
+\label{fig:q4sens}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,7 @@
+  wrote q4_alldir_cases.csv (30 rows)
+  wrote q4_alldir_agg.json
+  q4_alldir: ratio=0.9957 mean=702.2
+  wrote q4_omni_cases.csv (30 rows)
+  wrote q4_omni_agg.json
+  q4_omni: ratio=1.0000 mean=547.2
+stage q4ext done in 46 s

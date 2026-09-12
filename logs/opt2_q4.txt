@@ -1,0 +1,3 @@
+[q4] baseline ratio=0.9969 min=0.9375 time=1431.83 travel=79456
+[q4] pass0 survey_spacing     = 850.0    -> ratio=1.0000 min=1.0000 time=1417.84
+[q4] pass0 survey_spacing     = 950.0    -> ratio=1.0000 min=1.0000 time=1397.32

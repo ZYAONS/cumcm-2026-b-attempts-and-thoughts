@@ -1,0 +1,7 @@
+pool 70000..70059 : 60 cases, 800 sources, 2 missed (0.250% of sources)
+mean time 576.1 s/source
+   seed 70016 ch20 r=1784 directional dir=144  R_eff=1429  dot=+0.980  lit= 0.28%  status=empty
+   seed 70032 ch 5 r=1671 directional dir=276  R_eff=1193  dot=+0.910  lit= 3.54%  status=empty
+
+of the 2 missed, 1 are rim-outward (dot>0.8) with a lit region under 1% of the arena -- the documented geometric limit
+report -> data/miss_rate.json

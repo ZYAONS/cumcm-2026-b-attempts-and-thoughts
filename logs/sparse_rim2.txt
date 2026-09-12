@@ -1,0 +1,9 @@
+s950 r16 m90     worst=0.9978  mean_time= 623.2 s  stops= 29.0  failing= 1/120
+s950 r12 m400    worst=0.9978  mean_time= 602.3 s  stops= 24.5  failing= 1/120
+s950 r16 m400    worst=0.9978  mean_time= 618.0 s  stops= 28.6  failing= 2/120
+s950 r16 m600    worst=0.9978  mean_time= 614.9 s  stops= 28.5  failing= 2/120
+s950 r16 m700    worst=0.9978  mean_time= 610.5 s  stops= 28.4  failing= 2/120
+s950 r12 m700    worst=0.9978  mean_time= 597.0 s  stops= 24.4  failing= 1/120
+s1100 r16 m700   worst=0.9952  mean_time= 624.4 s  stops= 23.9  failing= 3/120
+s950 r8 m700     worst=0.9922  mean_time= 573.7 s  stops= 20.7  failing= 6/120
+report -> data/margin_rim_scan.json

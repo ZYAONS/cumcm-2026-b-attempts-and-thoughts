@@ -1,0 +1,12 @@
+20 cases, seeds 30000..30019, s=900 pure sweep
+variant                       ratio      min     time   travel  measure
+nominal                      0.9928   0.9231    516.0    21640      352
+clear_bonus 200              0.9883   0.9091    537.6    22654      356
+clear_bonus 500              0.9921   0.9091    528.9    22149      363
+probe_spacing 1200           0.9928   0.9231    515.9    21640      351
+probe_spacing 2000           0.9928   0.9231    515.9    21640      351
+locate_sigma 400             0.9962   0.9231    516.3    21757      350
+locate_sigma 150             0.9897   0.9231    535.0    22754      356
+cb200 + ps2000               0.9883   0.9091    537.5    22654      356
+cb500 + ps2000 + ls400       1.0000   1.0000    517.4    22072      352
+report -> data/last_16s.json

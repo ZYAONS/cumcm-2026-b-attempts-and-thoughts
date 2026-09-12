@@ -1,0 +1,7 @@
+s1000 rim0   worst ratio 0.9833  mean time   533.8  stops  12.8  failing 14/120   [per pool: 1.000 0.983 0.990 0.986]
+s1000 rim6   worst ratio 0.9879  mean time   558.3  stops  18.7  failing 13/120   [per pool: 0.996 0.988 0.990 0.995]
+s1000 rim9   worst ratio 0.9849  mean time   561.9  stops  21.3  failing 16/120   [per pool: 0.993 0.990 0.985 0.989]
+s1000 rim12  worst ratio 0.9869  mean time   582.4  stops  24.2  failing 13/120   [per pool: 0.992 0.988 0.995 0.987]
+s1000 rim16  worst ratio 0.9905  mean time   583.2  stops  28.0  failing 12/120   [per pool: 0.990 0.993 0.991 0.991]
+s1100 rim12  worst ratio 0.9744  mean time   556.3  stops  18.6  failing 20/120   [per pool: 0.989 0.974 0.993 0.984]
+report -> data/rim_ring_scan.json

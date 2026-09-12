@@ -1,0 +1,9 @@
+--- pool A (62000+) : 40 cases
+   current (paper)           ratio=1.0000 min=1.0000 time=  864.9 median=  868.5 p90= 1034.9 travel=  41409  (83 s)
+   fast (<500 s target)      ratio=0.9884 min=0.9167 time=  538.9 median=  501.4 p90=  673.9 travel=  22329  (15 s)
+   delta: time -37.7 %  ratio -0.0116
+--- pool B (51000+) : 40 cases
+   current (paper)           ratio=0.9983 min=0.9333 time=  945.7 median=  938.1 p90= 1182.9 travel=  42802  (84 s)
+   fast (<500 s target)      ratio=0.9856 min=0.8667 time=  597.0 median=  550.1 p90=  664.7 travel=  22948  (17 s)
+   delta: time -36.9 %  ratio -0.0127
+report -> data/validate_fast.json

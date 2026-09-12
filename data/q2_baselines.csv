@@ -1,0 +1,6 @@
+strategy,mean_D_m,p95_D_m,max_D_m,unbounded_rate
+A_proposed,55.10,106.32,128.72,0.000
+B_perp_800,96.64,209.88,254.45,0.000
+C_along_800,2508.73,inf,inf,0.257
+D_random,1284.98,inf,inf,0.738
+E_oracle,14.84,42.45,58.01,0.000

@@ -1,0 +1,75 @@
+% !TeX program = xelatex
+% ===========================================================================
+%  tech_common.tex -- 两份技术文档共用的导言区
+% ===========================================================================
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[top=2.4cm,bottom=2.4cm,left=2.4cm,right=2.4cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,
+            urlcolor=blue!55!black,bookmarksnumbered=true}
+
+% ---------------------------------------------------------------- 字体/版式
+\setlength{\emergencystretch}{2.5em}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{2em}
+\linespread{1.12}
+
+% ---------------------------------------------------------------- 代码样式
+\definecolor{codebg}{RGB}{247,247,250}
+\definecolor{codekw}{RGB}{0,90,160}
+\definecolor{codecm}{RGB}{0,128,96}
+\definecolor{codest}{RGB}{170,60,60}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{codebg},
+  frame=single, framerule=0.4pt, rulecolor=\color{gray!45},
+  breaklines=true, breakatwhitespace=false,
+  numbers=left, numberstyle=\tiny\color{gray!80}, numbersep=6pt,
+  keywordstyle=\color{codekw}\bfseries, commentstyle=\color{codecm}\itshape,
+  stringstyle=\color{codest}, showstringspaces=false, columns=flexible,
+  tabsize=2, extendedchars=true, captionpos=b,
+  xleftmargin=1.6em, framexleftmargin=1.4em
+}
+\renewcommand{\lstlistingname}{代码}
+
+% ---------------------------------------------------------------- 提示框
+\newtcolorbox{keybox}[1][]{colback=blue!4,colframe=blue!45!black,
+  boxrule=0.6pt,arc=2pt,left=5pt,right=5pt,top=4pt,bottom=4pt,
+  fonttitle=\bfseries,#1}
+\newtcolorbox{warnbox}[1][]{colback=orange!6,colframe=orange!55!black,
+  boxrule=0.6pt,arc=2pt,left=5pt,right=5pt,top=4pt,bottom=4pt,
+  fonttitle=\bfseries,#1}
+
+% ---------------------------------------------------------------- 定理环境
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}{命题}
+\newtheorem{lemma}{引理}
+\renewcommand{\proofname}{\heiti 证明}
+
+% ---------------------------------------------------------------- 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray!70}\leftmark}
+\fancyhead[R]{\small\color{gray!70}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{gray!40}\leaders\hrule height \headrulewidth\hfill}}
+
+\titleformat{\section}{\normalfont\heiti\Large}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\heiti\large}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalfont\heiti\normalsize}{\thesubsubsection}{0.6em}{}
+
+\captionsetup{font=small,labelfont=bf,labelsep=quad}

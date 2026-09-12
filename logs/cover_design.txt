@@ -1,0 +1,7 @@
+grid points 2561, stop candidates 253 (0.0 s to build)
+coverage pairs built (0.1 s)
+near-stop lists built (0.3 s)
+
+RESULT: 0 stops certify 0 of 2561 grid points (2561 left)
+radii: []
+report -> data/cover_design.json

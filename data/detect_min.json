@@ -1,0 +1,74 @@
+[
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 586.9075987819732,
+  "travel": 22926.12832571801,
+  "measure": 434.625,
+  "tag": "baseline (cb250)"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 584.600859185651,
+  "travel": 22731.183485540892,
+  "measure": 434.875,
+  "tag": "locate_sigma 300"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 588.7373737668373,
+  "travel": 22883.28922034073,
+  "measure": 438.75,
+  "tag": "locate_sigma 250"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 594.2144638467615,
+  "travel": 23249.96892565142,
+  "measure": 437.6875,
+  "tag": "term_cap 260"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 583.0229993117166,
+  "travel": 22676.9928430422,
+  "measure": 435.5,
+  "tag": "relocate_sigma 700"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 594.9340332010258,
+  "travel": 23271.757805702266,
+  "measure": 440.0625,
+  "tag": "locate_sigma 300 + cap260"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 581.1167043314207,
+  "travel": 22491.63615697678,
+  "measure": 437.8125,
+  "tag": "endgame_radius 60"
+ },
+ {
+  "ratio": 1.0,
+  "min": 1.0,
+  "fails": 0,
+  "time": 597.8295240622334,
+  "travel": 23613.070989118245,
+  "measure": 434.375,
+  "tag": "exhaustive_after 1"
+ }
+]

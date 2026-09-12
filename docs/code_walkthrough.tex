@@ -1,0 +1,437 @@
+% !TeX program = xelatex
+\input{tech_common.tex}
+
+\title{\heiti 求解代码详细拆解\\[4pt]
+       \large 四个问题的建模代码：模块职责、数据结构、算法实现与调用链\\[2pt]
+       \normalsize —— 逐文件、逐函数的技术说明}
+\author{2026 高教社杯全国大学生数学建模竞赛 B 题}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+\noindent
+本文档逐文件、逐函数拆解本题的全部求解代码。核心求解代码共 6 个模块、约 2700 行：
+几何内核 \texttt{geom\_core.py}（384 行）、问题二优化 \texttt{q2\_solver.py}（316 行）、
+本地模拟器 \texttt{simulator.py}（416 行）、策略内核 \texttt{robot\_core.py}（1087 行）、
+实验数据生成 \texttt{make\_data.py}（347 行）、正式测试执行器 \texttt{run\_http\_tests.py}（103 行）；
+另有绘图 \texttt{make\_figures.py}（1003 行）与字号审计 \texttt{audit\_figures.py}（60 行）。
+
+文档给出：模块依赖关系、四个核心数据结构的精确契约、每个公开函数的输入输出与算法复杂度、
+一次完整动作从决策到落盘的调用链、以及让代码可移植的工程约束（源码纯 ASCII、中文标签外置）。
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ===========================================================================
+\section{总览}
+
+\subsection{模块地图}
+
+\begin{center}
+\begin{tabular}{llp{7.6cm}}
+\toprule
+模块 & 行数 & 职责 \\ \midrule
+\texttt{geom\_core.py} & 384 & 纯几何内核：角楔$\to$半平面、定位区域顶点枚举、有界性判据、
+直径（暴力 $+$ 卡壳）、Thales 圆覆盖判据、最小包围圆（Welzl） \\
+\texttt{q2\_solver.py} & 316 & 问题二：可行源集合采样、最坏情形直径、minimax 求解、基线对照、Monte-Carlo \\
+\texttt{simulator.py} & 416 & 本地模拟器：物理解算（\texttt{Arena}）$+$ 附件 2 的 HTTP 协议层 $+$ 算例生成 \\
+\texttt{robot\_core.py} & 1087 & 策略内核：两个客户端、信息状态与估计、信息获取、末段清除、任务规划、主循环 \\
+\texttt{run\_http\_tests.py} & 103 & 正式测试执行器：起服务、走 HTTP、导出日志与统计 \\
+\texttt{make\_data.py} & 347 & 生成问题一$\sim$四的全部数值结果（CSV/JSON）与灵敏度实验 \\
+\texttt{make\_figures.py} & 1003 & 22 张插图的绘制（含外置图例辅助函数） \\
+\texttt{audit\_figures.py} & 60 & 插图等效字号审计（解析 \texttt{\textbackslash includegraphics} 宽度 $+$ PNG 像素宽） \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{依赖关系}
+
+\begin{lstlisting}[caption={模块依赖（箭头表示 import）}]
+geom_core  <-- q2_solver  <-- make_data / make_figures
+    ^            ^
+    |            |
+robot_core ----+                 simulator  <-- robot_core (LocalClient)
+    ^                                            ^
+    |                                            |
+run_http_tests -------------------------------- (HTTP) ----+
+                                                           |
+make_data / make_figures ----------------------------------+
+
+import 关系（自上而下）：
+  simulator            -> （无内部依赖）
+  geom_core            -> （无内部依赖）
+  q2_solver            -> geom_core
+  robot_core           -> geom_core, simulator(仅常量)
+  run_http_tests       -> simulator, robot_core
+  make_data            -> geom_core, q2_solver, simulator, robot_core
+  make_figures         -> geom_core, q2_solver, simulator, robot_core
+\end{lstlisting}
+
+设计上刻意让 \texttt{geom\_core} 与 \texttt{simulator} 都\textbf{不依赖任何其他内部模块}，
+这样几何算法可以脱离模拟器单独单元测试（\texttt{q1\_smoke.py}、\texttt{q1\_scan.py} 就是这么做的）。
+
+% ===========================================================================
+\section{四个核心数据结构的契约}
+
+代码里几乎所有跨函数传参都围绕下面四种数据，先把它们的"形状"钉死，后面看函数就很快。
+
+\subsection{半平面三元组 \texttt{(a, b, c)}}
+
+表示闭半平面 $\{(x,y):ax+by\le c\}$。角楔"$S$ 处示向度 $\theta$、容差 $\varepsilon$"由两条
+边界直线交叉成两个半平面：
+
+\begin{lstlisting}[language=Python,caption={角楔$\to$半平面（geom\_core.wedge\_halfplanes）}]
+t1, t2 = radians(theta - eps), radians(theta + eps)
+a1, b1 = sin(t1), -cos(t1)            # 由 cross(u(theta-eps), v) >= 0 推出
+hp1 = (a1, b1, a1*sx + b1*sy)
+a2, b2 = -sin(t2), cos(t2)            # 由 cross(u(theta+eps), v) <= 0 推出
+hp2 = (a2, b2, a2*sx + b2*sy)
+return [hp1, hp2]
+\end{lstlisting}
+
+全部约束统一成"$\le$"方向的好处：求交只需枚举直线交点再逐点检验（不需要处理
+\texttt{min}/\texttt{max} 混合的半平面），实现短且不易错。
+
+\subsection{观测四元组 \texttt{obs[c]} 中的元素}
+
+每个频道的观测列表 \texttt{self.obs[c]} 存 \texttt{(x, y, bearing\_deg, t)}：
+检测点坐标、该点的示向度读数、虚拟时刻。归航时取最后一个元素的方位角作为前进方向。
+
+\subsection{估计三元组 \texttt{est[c] = (x, y, sigma)}}
+
+由观测列表算出：\texttt{(x, y)} 是定位区域最小包围圆的圆心，\texttt{sigma} 是它的半径。
+当观测不足或区域退化时，退化为"沿最后一条射线、距离取 $0.6$ 倍可行射线长度"的估计。
+
+\subsection{任务四元组 \texttt{(kind, channel, position, extra)}}
+
+\texttt{kind} $\in$ \texttt{\{"clear", "localise", "stop", "probe"\}}；\texttt{channel} 为 \texttt{None}
+表示不针对特定频道（如 \texttt{stop}）；\texttt{position} 是执行该任务的位置；
+\texttt{extra} 存放任务专属参数（例如 \texttt{localise} 的偏转角）。
+
+% ===========================================================================
+\section{\texttt{geom\_core.py} 逐函数拆解}
+
+\subsection{基础工具（40--62 行）}
+
+\begin{tabular}{p{4.4cm}p{9.4cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\texttt{norm360(a)} & 角度归一化到 $[0,360)$ \\
+\texttt{deg2rad(a)} & 角度$\to$弧度 \\
+\texttt{bearing(px,py,qx,qy)} & 从 $p$ 指向 $q$ 的方位角（度，$[0,360)$） \\
+\texttt{ang\_diff(a,b)} & 两角之差归一化到 $(-180,180]$，用于判断角楔包含关系 \\
+\texttt{unit(a\_deg)} & 单位向量 $(\cos a,\sin a)$ \\
+\bottomrule
+\end{tabular}
+
+\subsection{定位区域核心（68--260 行）}
+
+\begin{longtable}{p{5.0cm}p{9.6cm}}
+\toprule
+函数 & 算法与复杂度 \\ \midrule
+\endhead
+\texttt{wedge\_halfplanes} & 见 2.1；返回 2 个半平面，$O(1)$ \\
+\texttt{halfplanes\_satisfied} & 逐条检验 $ax+by\le c$，带相对容差；$O(m)$ \\
+\texttt{intersect\_lines} & 两直线求交，用相对行列式判平行（$|\det|\le10^{-12}\max(\text{scale},1)$）；
+$O(1)$ \\
+\texttt{convex\_hull} & Andrew 单调链，先按坐标去重+排序，交叉积 $\le$ 容差即弹出（结果丢弃共线边点）；
+$O(n\log n)$ \\
+\texttt{polygon\_vertices} & \textbf{算法主体}：枚举全部 $O(m^2)$ 条直线对的交点，保留满足全部半平面的点，
+再取凸包去重。$m=2n$（$n$ 个检测点），$n\le20$ 时最多 190 次求交，
+满足在线计算需求 \\
+\texttt{\_circular\_\hspace{0pt}arc\_intersection} & 求多个角区间的公共交集（圆周上的区间交），用于给出无界时的回收方向；
+$O(n\log n)$ \\
+\texttt{is\_bounded} & \textbf{回收锥判据}：$\mathcal R$ 无界 $\iff$ 存在非零方向同时落在所有角楔内
+$\iff$ 各角区间的交非空。与顶点枚举解耦，$O(n\log n)$ \\
+\texttt{halfplanes\_from\_bearings} & 把 Stations$+$bearings 展开成半平面列表 \\
+\texttt{region\_from\_bearings} & \textbf{总入口}，返回一个字典：\texttt{vertices}、\texttt{empty}、
+\texttt{bounded}、\texttt{diameter}、\texttt{d\_pair}、\texttt{cover\_ok}、
+\texttt{cover\_slack}、\texttt{mec}（空集与无界情形提前返回，不继续算直径） \\
+\bottomrule
+\end{longtable}
+
+\begin{keybox}[title=为什么"顶点枚举"而不是传统半平面裁剪]
+凸集的顶点必为两条约束边界之交（命题 1 的结构性结论），因此直接枚举交点即可精确得到
+$\mathcal R$，不需要给定包围盒，也避免了裁剪算法在无界情形下的数值困难。
+无界性由第 3 步的回收锥判断\textbf{提前}给出，避免把无界区域误裁成有界区域。
+\end{keybox}
+
+\subsection{直径与圆覆盖（265--347 行）}
+
+\begin{tabular}{p{4.6cm}p{9.2cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\texttt{polygon\_diameter} & $O(m^2)$ 暴力枚举全部顶点对。$m\le40$ 时完全够用，
+且作为卡壳法的\textbf{校验基准}（两者最大差 0.0 m） \\
+\texttt{rotating\_\hspace{0pt}calipers\_diameter} & 旋转卡壳，$O(m)$（$m$ 为凸包顶点数），用于大规模场景 \\
+\texttt{diameter\_disk\_slack} & \textbf{Thales 判据}：返回 $\max_V (V-A)\cdot(V-B)$。
+$\le0$ 即"以 $AB$ 为直径的圆覆盖整个区域"。$O(m)$ \\
+\bottomrule
+\end{tabular}
+
+\subsection{最小包围圆（349--403 行）}
+
+Welzl 随机增量算法，\texttt{\_circle\_from2/\_circle\_from3/\_inside} 为其原语，
+固定随机种子 \texttt{seed=20260913} 保证结果可复现。期望复杂度 $O(m)$。
+该圆半径即策略中使用的\textbf{位置不确定度} $\sigma$。
+
+\subsection{问题二辅助（404--448 行）}
+
+\texttt{two\_station\_region}（两站定位区域的便捷封装）、
+\texttt{region\_intersection\_angle}（由三点的方位角算交会角 $\gamma$）、
+\texttt{asymptotic\_diameter}（实现式 $D\approx\sqrt{w_1^2+w_2^2+2w_1w_2\cos\gamma}/\sin\gamma$，
+$w_i=2\varepsilon d_i$）。
+
+% ===========================================================================
+\section{\texttt{q2\_solver.py} 拆解}
+
+\subsection{函数清单}
+
+\begin{tabular}{p{5.0cm}p{8.8cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\texttt{sector\_points}$(S_1,\theta_1)$ & 按题面约束生成\textbf{可行源集合} $\mathcal G$ 的采样点：
+沿示向度方向、距离 $5\sim r_{\rm hi}$、方位角偏差 $\pm1^{\circ}$、落在目标域内，
+返回 \texttt{(r, phi, (x,y))} 列表 \\
+\texttt{worst\_diameter}$(S_1,S_2,\mathcal G)$ & 对 $\mathcal G$ 中每个源 $G$ 计算两站定位区域直径，
+返回最大值（即最坏情形 $D$） \\
+\texttt{solve\_second\_point} & \textbf{minimax 求解}：外层对偏移距离 $b$、内层对偏转角 $\varphi$
+做网格搜索，返回 $b^{*},\varphi^{*},J^{*},S_2^{*}$；带保证探测约束 $|S_2-G|\le R_{\min}$ \\
+\texttt{monte\_carlo\_check} & 4000 次随机抽样验证 $J^{*}$ 是上界且无越界 \\
+\texttt{baseline\_compare} & 5 种第二检测点规则（A 本文/B 垂直偏移/C 沿示向度前进/D 随机/E 先知）的对照 \\
+\bottomrule
+\end{tabular}
+
+\subsection{求解流程}
+
+\begin{lstlisting}[caption={问题二求解流程}]
+sector_points(S1, th1)                     # 采样可行源集合 G（约 3000 点）
+for b in 400..1500 step 50:                # 偏移距离
+    for phi in 5..60 step 1:               # 偏转角
+        S2 = S1 + b * unit(th1 + phi)
+        if not all(|S2 - G| <= R_min for G in G):  continue   # 保证探测约束
+        J = worst_diameter(S1, S2, G)
+    track argmin J
+-> b*=1004.1 m, phi*=36.75 deg, J*=134.0 m
+\end{lstlisting}
+
+\subsection{基线策略的定义}
+
+为了让"本文规则更好"这一结论可检验，实现了四个基线：\textbf{B 垂直偏移 800 m}（把第二个点放在
+与示向度垂直的方向上）、\textbf{C 沿示向度前进 800 m}（自然的直觉做法）、\textbf{D 可行域内随机}、
+\textbf{E 先知策略}（直接站在真实源上方，给出性能下界）。代码在 \texttt{baseline\_compare} 中
+对同一批随机算例逐一评估，结果写入 \texttt{data/q2\_baselines.csv}。
+
+% ===========================================================================
+\section{\texttt{robot\_core.py} 逐层拆解}
+
+这是最大的模块（1087 行），按职责分成 8 层。
+
+\subsection{第 1 层：两个客户端（55--140 行）}
+
+\begin{itemize}[leftmargin=1.8em]
+  \item \texttt{HTTPClient}：真实走 HTTP。\texttt{\_post} 负责 JSON 编码、\texttt{request\_id}
+        管理、超时与错误码处理；四个方法 \texttt{enter/exit/measure/clear} 与协议一一对应。
+  \item \texttt{LocalClient}：\textbf{接口完全相同}的内存版客户端，直接调用 \texttt{Arena}。
+        用于 60 组演练与参数调优（省掉 HTTP 往返，快一个数量级）。
+\end{itemize}
+
+\begin{keybox}[title=为什么保留两个客户端]
+"能不能在真实协议下跑通"与"能不能大规模调参"是两个不同的需求。
+用同一套 \texttt{Brain} 代码 + 可替换的客户端，可以做到\textbf{策略代码零修改}地在
+本地高速模式与 HTTP 模式之间切换——正式测试时只换一行构造参数。
+\end{keybox}
+
+\subsection{第 2 层：认证判据的原语（142--167 行）}
+
+\texttt{\_origin\_inside\_hull(points, tol)}：判断原点是否严格位于点集凸包内部。
+实现为"凸包顶点按极角排序后，相邻顶点与原点构成的三角形面积同号"，
+等价于原点在每条边的内侧。这是问题四定理 2 的直接代码化。
+
+\subsection{第 3 层：参数与状态（169--250 行）}
+
+\texttt{DEFAULT\_PARAMS} 共 30 个参数，分五组：
+
+\begin{center}
+\begin{tabular}{p{1.85cm}p{4.55cm}p{6.9cm}}
+\toprule
+组别 & 参数 & 作用 \\ \midrule
+信息获取 & \texttt{probe\_spacing, probe\_min\_angle, max\_channels\_probe} &
+移动多远补测一次、交会角多小才值得重测 \\
+定位门槛 & \texttt{locate\_sigma} & 不确定度小于此值才进入清除阶段 \\
+末段清除 & \texttt{term\_iters, term\_cap, clear\_try\_radius, endgame\_radius, endgame\_step} &
+归航迭代次数、单步上限、直接尝试清除的半径、图案清除的半径与步距 \\
+站位与规划 & \texttt{survey\_mode, survey\_spacing, ring\_radius, search\_cost\_bias, clear\_bonus,
+localise\_bonus, probe\_bonus} & 站位模式与间距、任务优先权偏置 \\
+预算与终止 & \texttt{max\_attempts, hard\_attempt\_cap, progress\_ratio, verify\_grid, verify\_r,
+outer\_ring\_gap} & 每频道清除尝试预算、认证网格与半径、域外补测环 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+状态字段包括：位置与时钟 \texttt{pos}、\texttt{cur\_channel}、\texttt{vtime}；
+频道状态 \texttt{status[c]}（取值 \texttt{unknown}、\texttt{seen}、\texttt{located}、
+\texttt{cleared}、\texttt{empty}）；信息集合 \texttt{obs[c]}、\texttt{nosig[c]}、
+\texttt{est[c]}、\texttt{last\_seen[c]}、\texttt{meas\_cache}；以及
+\texttt{\_task\_count}、\texttt{\_task\_travel}、\texttt{\_task\_time}
+（\textbf{任务级统计，是发现故障 4 那类死循环的关键基础设施}）。
+
+\subsection{第 4 层：站位生成（269--336 行）}
+
+\begin{tabular}{lp{10.6cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\texttt{\_make\_survey\_stops} & 按 \texttt{survey\_spacing} 生成格点（问题四用），三角形的交错行布置 \\
+\texttt{\_make\_ring\_stops} & 七点覆盖（问题三用）：中心 $+$ 半径 \texttt{ring\_radius} 的正六边形六顶点 \\
+\texttt{\_all\_search\_stops} & 按 \texttt{survey\_mode} 合并，并可叠加域外补测环（\texttt{outer\_ring\_gap}$>0$） \\
+\texttt{\_verify\_grid} & 认证用候选位置网格（间距 \texttt{verify\_grid}，默认 60 m），
+仅保留在目标域内、且距边界留有余量的点 \\
+\bottomrule
+\end{tabular}
+
+\subsection{第 5 层：认证扫描（337--377 行）}
+
+\texttt{certification\_scan(channels)} 是全代码中\textbf{数学含量最高}的一段：
+
+\begin{lstlisting}[language=Python,caption={认证扫描的两种判据}]
+R = verify_r - verify_grid * 0.7072          # 网格松弛，保证结论保守
+for q in grid:
+    for c in channels:
+        near = [p - q for p in nosig[c] if |p - q| <= R]
+        if not near:                      flags[c] = False    # 该处根本没测过
+        elif directional and not origin_inside_hull(near):
+                                          flags[c] = False    # 存在方向可躲
+        else:                             flags.setdefault(c, True)
+return (len(uncov) == 0), uncov, flags
+\end{lstlisting}
+
+关键设计：\textbf{已经判定为 False 的频道直接跳过}（第 361 行），因为一个未被认证的候选位置
+就足以否决整个频道，无需继续检验其余网格点。
+
+\subsection{第 6 层：估计与信息获取（413--592 行）}
+
+\begin{longtable}{p{4.6cm}p{10.0cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\endhead
+\texttt{update\_estimate} & 把 \texttt{obs[c]} 喂给 \texttt{region\_from\_bearings}；区域为空/无界时
+退化为 \texttt{\_best\_pair}（交会角最大的一对射线）的解，并按 $1/\sin\gamma$ 放大 $\sigma$ \\
+\texttt{\_best\_pair} / \texttt{\_ray\_intersect} / \texttt{\_intersection\_angle} & 退化情形的支撑原语 \\
+\texttt{\_ray\_limit} & 沿方位射线的可行长度上限（受目标域边界与 $R_{\max}$ 约束） \\
+\texttt{\_worth\_measuring} & 判断某频道在某位置是否值得测：已清除/已认证跳过；
+预测交会角小于 \texttt{probe\_min\_angle} 跳过（避免无效测量） \\
+\texttt{probe} & 在当前位置对全部"未解算"频道做一轮检测；\textbf{按频道号排序}以最小化切换时间 \\
+\texttt{hear} & 移动到目标点测某频道；\textbf{命中缓存时只付移动时间}（reading 是地点函数，
+同点重测无新信息）——这一细节曾是一个严重 bug，见问题三技术报告 7.2 \\
+\bottomrule
+\end{longtable}
+
+\subsection{第 7 层：末段清除（593--733 行）}
+
+\texttt{clear\_channel(c)} 是四阶段中的第三阶段，主循环 9 次迭代，每次按优先级：
+
+\begin{enumerate}[leftmargin=1.8em]
+  \item $d\le$\texttt{clear\_try\_radius}(42 m) $\to$ 直接 \texttt{\_try\_clear}（未命中仅 3 s）；
+  \item $d\le$\texttt{endgame\_radius}(90 m) $\to$ \texttt{\_local\_clear\_sweep}（六边形图案，
+        半径 $0.55\sigma$ 截断在 $[12,45]$ m）；
+  \item 若不在"上次听到信号的位置" $\to$ \texttt{hear} 一次；\texttt{near} 直接清、
+        \texttt{no\_signal} 则 \texttt{\_retreat}（回退到上次听到信号处）；
+  \item 沿最后一条实测方位前进 $\min(0.7d,\texttt{term\_cap})$，前进后：
+        \texttt{near}$\to$清、\texttt{direction}$\to$更新估计并把步长放大 1.3 倍、
+        \texttt{no\_signal}$\to$\textbf{步长 $\times0.45$ 二分} $+$ \texttt{\_bracket\_clear}（线段分点清除）；
+  \item 若目标点与当前点距离小于 5 m（已到边界被裁剪）$\to$ 随机方向走 8 m 打破僵局。
+\end{enumerate}
+
+\begin{keybox}[title=两个非平凡的设计]
+\textbf{（1）二分收敛}：每次过冲后步长按几何级数缩小，必然最终落入 20 m 清除半径内；
+\textbf{（2）放大 1.3 倍}：收到有效方位说明方向正确，主动加大步长以加速——这是一个
+"成功则加速、失败则减半"的自适应步长，实测比固定步长快约 30\%。
+\end{keybox}
+
+\subsection{第 8 层：任务规划与主循环（765--1145 行）}
+
+\begin{longtable}{p{4.8cm}p{9.8cm}}
+\toprule
+函数 & 说明 \\ \midrule
+\endhead
+\texttt{\_build\_tasks} & 生成候选任务列表：清除（已定位未清除）、定位（只有一条方位且
+\texttt{vantage\_tries} 未超限）、站位（覆盖站位未走完） \\
+\texttt{next\_search\_stop} & 无任务时决定"补测去哪"：贪心选
+$\arg\max\ \frac{\text{新增认证覆盖}}{\text{行程}+\texttt{search\_cost\_bias}}$；
+问题四额外要求新点带来的观测方向与已有邻点夹角 $>55^{\circ}$ \\
+\texttt{\_plan\_tour} & 最近邻构造 $+$ 2-opt 改进（最多 12 轮）。
+最近邻的距离度量中\textbf{减去优先权偏置} \texttt{bonus}，使清除任务在不远时被优先访问 \\
+\texttt{\_run\_planned} & 主循环：\texttt{commit\_estimates}$\to$\texttt{all\_done} 检查$\to$
+构建/复用任务序列$\to$ 执行首个任务$\to$ 每移动 650 m 做一次机会式补测 \\
+\texttt{\_run\_greedy} & 对照策略（纯贪心、无认证判据），供 \S 实验对照使用 \\
+\texttt{run} & 入口：原点普查 20 个频道 $\to$ 进入主循环；返回统计 \\
+\texttt{stats} & 汇总：完成率、平均时间、任务级计数/行程/耗时（调试故障 4 的关键） \\
+\bottomrule
+\end{longtable}
+
+% ===========================================================================
+\section{一次完整动作的调用链}
+
+以"归航过程中前进 300 m 并收到有效方位"为例，跟踪一次调用的完整路径：
+
+\begin{lstlisting}[caption={调用链（自顶向下）}]
+Brain._run_planned()                      # 主循环，选中 CLEAR 任务
+  -> Brain.clear_channel(c)               # 末段归航（第 3 阶段）
+       -> Brain.hear(c, self.pos)         # 确认当前点能听到
+            -> Brain.move_measure(x,y,c)  # 记账 + 发请求
+                 -> self.cl.measure(rid, x, y, c)
+                      -> HTTPClient._post("/measure", {...}, rid)
+                           -> sim._Handler.do_POST()      # 协议校验
+                                -> Arena.measure(...)     # 物理解算
+                           <- {"measure_result": "direction", "svd_deg": 63.42, ...}
+                 <- 更新 vtime / pos / cur_channel / 任务统计
+                 -> Brain._handle_measure(c, pos, r)      # 更新 obs/status/last_seen
+       -> 收到 no_signal? -> _retreat / _bracket_clear
+       -> 收到 direction? -> update_estimate -> region_from_bearings -> MEC -> est[c]
+       -> 前进 300 m: move_measure(...)
+            -> ... 同上 ...
+       -> 若 d_est <= 42 m -> _try_clear -> move_clear -> clear result
+\end{lstlisting}
+
+% ===========================================================================
+\section{复杂度与性能}
+
+\begin{center}
+\begin{tabular}{p{3.5cm}p{3.5cm}p{2.8cm}p{4.4cm}}
+\toprule
+环节 & 复杂度 & 单次耗时（实测） & 说明 \\ \midrule
+定位区域求解 & $O(m^2)$, $m=2n\le40$ & $<0.2$ ms & 每次估计更新调用一次 \\
+最小包围圆 & $O(m)$ 期望 & $<0.1$ ms & Welzl \\
+tour 规划 & $O(k^2)\times12$, $k\le40$ & $<1$ ms & 每次任务变化后重规划 \\
+认证扫描 & $O(|grid|\cdot|C|\cdot|Z|)$ & $2\sim15$ ms & 仅在无任务时调用 \\
+一局（内存模式） & --- & 0.3$\sim$0.6 s & 60 组演练使用 \\
+一局（HTTP 模式） & --- & 1.3$\sim$2.3 s & 约 1500 次请求 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+全部单局程序运行时间都远低于 20 min 上限（最坏 2.3 s，余量三个数量级）。
+
+% ===========================================================================
+\section{工程约束与规范}
+
+\begin{enumerate}[leftmargin=1.8em]
+  \item \textbf{可执行源码纯 ASCII，中文只在注释与外部数据文件}。
+        所有图内中文标签集中在一个外部文件里（\texttt{zh\_labels.json}，100 个键），
+        由 \texttt{T(key)} 读取，因此源码不会乱码，改标签也不必动代码。
+  \item \textbf{固定随机种子}。全部随机过程（算例生成、Welzl、Monte-Carlo、打散方向）
+        都接受显式 \texttt{seed}，保证结果可复现。
+  \item \textbf{实验脚本与策略代码分离}。\texttt{make\_data.py} / \texttt{run\_http\_tests.py}
+        只负责"跑 + 落盘"，策略逻辑全部在 \texttt{robot\_core.py} 内，
+        便于同一策略在不同实验配置下复用。
+  \item \textbf{任务级统计内建}。\texttt{stats()} 输出每类任务的次数/行程/耗时
+        ——这是发现"5957 次 LOCALISE 死循环"这类问题的唯一手段。
+  \item \textbf{失败可诊断}。归航循环支持 \texttt{debug\_channel} 开关，打开后逐迭代打印
+        位置、估计距离、测量结果与步长比例。
+\end{enumerate}
+
+\end{document}

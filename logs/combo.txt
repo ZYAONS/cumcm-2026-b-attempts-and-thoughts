@@ -1,0 +1,8 @@
+s1100 rim16 b40    worst=0.9978  mean_time= 645.7 s  stops= 24.5  failing= 1/120
+s1100 rim16 b12    worst=0.9978  mean_time= 645.7 s  stops= 24.5  failing= 1/120
+s1100 rim16 b6     worst=0.9978  mean_time= 645.7 s  stops= 24.5  failing= 1/120
+s1000 rim16 b40    worst=0.9978  mean_time= 640.6 s  stops= 29.8  failing= 2/120
+s950 rim16 b40     worst=0.9978  mean_time= 623.2 s  stops= 29.0  failing= 1/120
+s900 rim16 b40     worst=0.9978  mean_time= 658.4 s  stops= 34.8  failing= 1/120
+s1000 rim16 b0     worst=0.9978  mean_time= 621.2 s  stops= 28.9  failing= 2/120
+report -> data/combo_scan.json

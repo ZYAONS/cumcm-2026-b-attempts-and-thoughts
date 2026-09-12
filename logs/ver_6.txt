@@ -1,0 +1,12 @@
+==============================================================================
+simulator verification : 68/68 checks passed
+   group A : 18/18
+   group B :  8/ 8
+   group C : 16/16
+   group D :  8/ 8
+   group E :  5/ 5
+   group F :  4/ 4
+   group G :  5/ 5
+   group H :  4/ 4
+==============================================================================
+report -> data\simulator_verification.json

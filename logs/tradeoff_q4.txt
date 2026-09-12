@@ -1,0 +1,9 @@
+full certification (tuned)   ratio=1.0000 min=1.0000 time= 1169.3 travel=  59469  (51 s)
+no rim patrol                ratio=1.0000 min=1.0000 time=  942.1 travel=  47903  (52 s)
+rim trips <= 4               ratio=1.0000 min=1.0000 time= 1002.0 travel=  50848  (51 s)
+rim trips = 0                ratio=1.0000 min=1.0000 time=  942.1 travel=  47903  (50 s)
+search budget 10 stops       ratio=1.0000 min=1.0000 time= 1169.3 travel=  59469  (50 s)
+search budget 4 stops        ratio=1.0000 min=1.0000 time= 1169.3 travel=  59469  (48 s)
+dense lattice 850 m          ratio=0.9967 min=0.9333 time= 1214.3 travel=  60414  (24 s)
+sparse lattice 1500 m        ratio=1.0000 min=1.0000 time= 1149.0 travel=  58495  (34 s)
+report -> data/q4_tradeoff.json

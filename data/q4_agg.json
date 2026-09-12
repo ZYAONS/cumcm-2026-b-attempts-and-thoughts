@@ -1,0 +1,13 @@
+{
+ "n_cases": 60,
+ "mean_ratio": 1.0,
+ "min_ratio": 1.0,
+ "mean_time": 588.5146092401375,
+ "median_time": 586.8929422934045,
+ "sd_time": 102.52018168427135,
+ "mean_travel": 23403.340401635887,
+ "mean_measure": 439.75,
+ "mean_clear_actions": 31.9,
+ "mean_vtime": 7414.95141366051,
+ "wall_s": 42.62837052345276
+}
