@@ -27,7 +27,7 @@
 \setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}
 \usepackage{etoolbox}
 \AtBeginEnvironment{algorithmic}{\scriptsize}
-\renewcommand*{\baselinestretch}{1.10}
+\renewcommand*{\baselinestretch}{1.12}
 \AtBeginEnvironment{thebibliography}{\scriptsize}
 \apptocmd{\thebibliography}{\setlength{\itemsep}{0.5pt}\setlength{\parskip}{0pt}}{}{}
 
@@ -63,9 +63,9 @@
 
 \textbf{问题二}：注意到误差地点固定、重复检测无效，将选点建模为\textbf{极大极小优化}：在可行源扇形上最小化最坏情形定位区域直径，并加保证第二次能收到信号的约束。解得 $b^{*}=1004.1$ m、$\varphi^{*}=36.8^{\circ}$（相对示向度偏转）、$J^{*}=134.0$ m，且与检测点位置无关。候选区域为以 $S_1$ 为心、半径约 1000 m、张角 $\pm40^{\circ}$ 的圆弧带。相对朴素垂直策略，平均定位区域直径由 96.6 m 降到 55.1 m；沿示向度前进则 25.7\% 的算例定位区域无界；4000 次 Monte-Carlo 无一次越界。
 
-\textbf{问题三}：提出普查—机会式交会—射线归航—可证终止策略。由\textbf{七点覆盖定理}（中心加正六边形顶点，$\rho=1280$ m）保证发现全部全向源，由“无信号点集 $R_{\min}$-覆盖目标域”给出可证明的终止判据；位置估计取问题一定位区域的最小包围圆，清除采用步长几何收缩、过冲减半的射线归航与末段六边形清除图案。60 组演练完成率 \textbf{100\%}，平均定位清除时间 \textbf{326.8} s；三次正式测试清除 15/15、12/12、10/10，平均时间 257.5 s、392.0 s、389.1 s。
+\textbf{问题三}：提出普查—机会式交会—射线归航—可证终止策略。由\textbf{七点覆盖定理}（中心加正六边形顶点，$\rho=1280$ m）保证发现全部全向源，由“无信号点集 $R_{\min}$-覆盖目标域”给出可证明的终止判据；位置估计取问题一定位区域的最小包围圆，清除采用步长几何收缩、过冲减半的射线归航与末段六边形清除图案。60 组演练完成率 \textbf{100\%}，平均定位清除时间 \textbf{307.7} s（中位 296.8 s，标准差 49.3 s）；三次正式测试清除 14/14、12/12、10/10，平均时间 280.5 s、337.0 s、369.1 s。
 
-\textbf{问题四}：定向源造成“\textbf{半平面黑洞}”，单点无信号无法排除干扰源。本文给出\textbf{认证判据}（候选位置落在其 $R_{\min}$ 邻域内无信号点凸包内部时任何定向方向都无法隐藏）与\textbf{射线逼近引理}（沿曾收到信号的射线逼近，全程不丢信号），并把站位加密为间距 1100 m 的三角格点。\textbf{末段定位}采用垂向截断测量（补一次垂直于视线的观测，使最小包围圆半径由 77 m 降到 1 m）与沿射线自适应站位（保证贴边定向源仍在受光侧）。60 组混合演练完成率 \textbf{100\%}，平均定位清除时间 \textbf{597.0} s；三次正式测试清除 14/14、12/12、14/14，平均时间 503.5 s、714.4 s、519.5 s（均值 579.2 s）。
+\textbf{问题四}：定向源造成“\textbf{半平面黑洞}”，单点无信号无法排除干扰源。本文给出\textbf{认证判据}（候选位置落在其 $R_{\min}$ 邻域内无信号点凸包内部时任何定向方向都无法隐藏）与\textbf{射线逼近引理}（沿曾收到信号的射线逼近，全程不丢信号），并把站位加密为间距 950 m 的三角格点（仿真证明间距不超过 958 m 时格点可自认证），再沿 $r=1750$ m 补一圈 12 个贴边站位以发现朝外辐射的贴边定向源。\textbf{末段定位}采用垂向截断测量（补一次垂直于视线的观测，使最小包围圆半径由 77 m 降到 1 m）与沿射线自适应站位（保证贴边定向源仍在受光侧）。60 组混合演练完成率 \textbf{100\%}，平均定位清除时间 \textbf{586.1} s（中位 584.4 s）；三次正式测试清除 12/12、11/11、12/12，平均时间 612.9 s、692.5 s、622.5 s（均值 642.6 s）；扩池复核（全向/定向/混合共 120 例）最差完成率 $0.9978$。
 
 论文另给出多方法互证、残差与不确定度一致性检验、参数灵敏度分析与外部文献对照（最优交会角 $90^{\circ}$、覆盖密度 $2\pi/3\sqrt3$ 等），并讨论模型优缺点与推广。
 
@@ -199,7 +199,7 @@ S_2^{*}=\arg\min_{S_2}\ \max_{G\in\mathcal{G}}\ \max_{|\delta_2|\le1^{\circ}}\ D
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.74\textwidth]{../figures/fig_simulator_timing.png}
+\includegraphics[width=0.57\textwidth]{../figures/fig_simulator_timing.png}
 \caption{四条指令中各动作的虚拟时间消耗（按附件 1 的算例：移动 500 m 用 100 s，检测 5 s，切换频道 1 s，清除未命中 3 s、命中 5 s）}
 \label{fig:timing}
 \end{figure}
@@ -300,7 +300,7 @@ W_i=\Bigl\{P:\ \bigl(P-S_i\bigr)\cdot \mathbf e_\perp(\hat\theta_i-\varepsilon)\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_region.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_region.png}
 \caption{双站交会定位的定位区域。(a) 整体几何：两条实测示向度方向线（实线）及其 $\pm1^{\circ}$ 边界线（虚线）围成凸四边形；(b) 定位区域的独立放大面板（$x,y$ 轴刻度放大到米级），黑色粗实线段为直径 $AB$，黑色虚线圆为“以 $AB$ 为直径的圆”，紫色点线圆为最小包围圆}
 \label{fig:q1region}
 \end{figure}
@@ -365,7 +365,7 @@ D\ \approx\ D_{\rm asy}=\frac{\sqrt{w_1^2+w_2^2+2w_1w_2\cos\gamma}}{\sin\gamma},
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.66\textwidth]{../figures/fig_q1_diameter_vs_gamma.png}
+\includegraphics[width=0.51\textwidth]{../figures/fig_q1_diameter_vs_gamma.png}
 \caption{定位区域直径与交会角的关系：折线为一阶解析式 \eqref{eq:asy}，圆点为精确多边形算法结果，两者在 $\gamma\in[20^{\circ},150^{\circ}]$ 内吻合良好}
 \label{fig:q1gamma}
 \end{figure}
@@ -430,17 +430,50 @@ $\mathcal R\subset\mathcal D_{AB}$ 当且仅当对 $\mathcal R$ 的每个顶点 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_cover_stats.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_cover_stats.png}
 \caption{左：直径圆不能覆盖定位区域的算例比例；右：超出半径的相对量级（最大仅 0.18\%）}
 \label{fig:q1cover}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_shapes.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_shapes.png}
 \caption{四组真实算例：红色为定位区域，黑色虚线为以直径 $AB$ 为直径的圆，紫色点线为最小包围圆。第 1、2 幅为“不能覆盖”的情形（品红点为落到直径圆之外的顶点），第 3、4 幅为“不能覆盖”的临界与可覆盖情形}
 \label{fig:q1shapes}
 \end{figure}
+
+\subsubsection{对称环绕布局：直径圆必然失效}
+
+表 \ref{tab:q1cover} 的随机布局容易让人低估失效的普遍性。考察算法真正会遇到的情形——
+检测点近似对称地环绕干扰源（这正是问题三、四的普查站位所形成的几何），结论要强得多。
+
+\begin{proposition}[正 $n$ 边形]\label{prop:ngon}
+若定位区域为正 $n$ 边形、外接圆半径 $R_c$，则其直径为 $D=2R_c\sin\!\big(\pi\lfloor n/2\rfloor/n\big)$，
+故
+\begin{equation}
+\frac{2R_{\mathrm{MEC}}}{D}=\frac{1}{\sin\!\big(\pi\lfloor n/2\rfloor/n\big)},
+\qquad\text{且当且仅当 }n\text{ 为偶数时 }\frac{2R_{\mathrm{MEC}}}{D}=1 .
+\label{eq:ngon}
+\end{equation}
+\end{proposition}
+\emph{证明}：正 $n$ 边形的直径是对角线 $D=2R_c\sin(\pi\lfloor n/2\rfloor/n)$，最小包围圆半径 $R_{\mathrm{MEC}}=R_c$，相除即得 \eqref{eq:ngon}；$\sin(\pi\lfloor n/2\rfloor/n)=1$ 当且仅当 $\lfloor n/2\rfloor/n=1/2$，即 $n$ 为偶数。$\blacksquare$
+
+于是：\textbf{正三角形（$n=3$）与正五边形（$n=5$）永远不能被自己的直径圆覆盖}，比值分别为
+$2/\sqrt3=1.1547$（恰好达到 Jung 定理的紧界）与 $1.0515$；只有正方形（$n=4$，$1.0000$）与
+正六边形（$n=6$，$1.0000$）才恰好被覆盖。数值复算（各 400 组，$\varepsilon=1^\circ$）：
+
+数值复算（各 400 组，$\varepsilon=1^\circ$，目标域用 60 边形外近似）给出：等半径正 $n$ 边形环绕（半径 600/1000/1400 m）时覆盖率分别为 $n=2$：$99.5\%\sim100\%$、$n=3$：\textbf{$0.0\%$}、$n=4$：$72.5\%\sim77.5\%$、$n=5$：\textbf{$0.0\%$}；半径随机的环绕为 $100\%/95.0\%/88.2\%/95.0\%$；而我们表 \ref{tab:q1cover} 的随机布局为 $96.5\%/95.0\%/94.8\%/95.0\%$。
+
+\textbf{这修正了本节的表述}：前面“失效仅 $1\%\sim4\%$”是\emph{随机布局}下的结论；
+在工程上真正关心的\textbf{对称环绕布局}下，$n=3$ 与 $n=5$ 的失效概率是 $100\%$。
+因此“用一个直径为 $D$ 的圆去覆盖定位区域”在任何奇数站点的对称布站下都\emph{必然}失败，
+必须改用最小包围圆（$R_{\mathrm{MEC}}$），这一结论与表 \ref{tab:q1cover} 中“失效时超出量极小”
+并不矛盾——超出量小只说明两种圆差别不大，不说明直径圆够用。
+
+（旁证：同题公开实现\cite{cumcm2026b-gh}报告“检测点环绕源”场景下 $n=3/4/5$ 的覆盖率为
+40.6\%/58.9\%/36.2\%，与本表“等半径对称环绕”一列（0\%/73\%/0\%）同量级或介于两者之间，
+差异来自其环形半径扰动的幅度；两个独立实现都指向同一结论：\textbf{越对称、越接近正多边形，
+直径圆越不可靠}。）
 
 \textbf{结论}：以定位区域直径为直径的圆\textbf{一般情况下不能}覆盖定位区域。由表 \ref{tab:q1cover} 与图 \ref{fig:q1cover}，不能覆盖的算例占比为 $1.13\%$（2 站）$\sim3.70\%$（5 站），且失败时的超出量极小（$R_{\mathrm{MEC}}/(D/2)-1\le1.8\times10^{-3}$，对应几十厘米量级）。其机理是：定位区域是两条“窄带”的交，$\varepsilon\to0$ 时它趋近于平行四边形（命题 \ref{prop:para} 保证成立），有限 $\varepsilon$ 下退化为一般的四边形，当\textbf{内角之和} $\angle B+\angle D<180^{\circ}$（即 $\angle A+\angle C>180^{\circ}$）时，直径对角线所张的两个角小于 $90^{\circ}$，直径圆失效；由表 \ref{tab:q1cover} 该情形多发生在交会角接近 $90^{\circ}$ 的对称布局附近，因为这正是内角和最接近 $180^{\circ}$ 的临界状态。
 
@@ -478,7 +511,7 @@ $\mathcal R\subset\mathcal D_{AB}$ 当且仅当对 $\mathcal R$ 的每个顶点 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.56\textwidth]{../figures/fig_q1_unbounded.png}
+\includegraphics[width=0.43\textwidth]{../figures/fig_q1_unbounded.png}
 \caption{无界情形：两个示向度近似平行时回收锥非空，定位区域沿该方向无限延伸，直径发散}
 \label{fig:q1unb}
 \end{figure}
@@ -496,7 +529,7 @@ G\in\mathcal G=\Bigl\{S_1+r\,\mathbf u(\hat\theta_1+\delta):\ 5<r\le r_{\rm hi},
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.66\textwidth]{../figures/fig_q2_geometry.png}
+\includegraphics[width=0.51\textwidth]{../figures/fig_q2_geometry.png}
 \caption{问题二几何：$S_1$ 处的实测示向度（蓝实线）、$\pm1^{\circ}$ 边界（蓝虚线）、可行源集合（蓝点带）、最优第二检测点（红五星）与两个保证探测圆（灰点线）}
 \label{fig:q2geo}
 \end{figure}
@@ -543,7 +576,7 @@ $R_{\mathrm{guard}}$/m & 1000 & 1100 & 1200 & 1300 & 1400\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q2_scan.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q2_scan.png}
 \caption{左：$(b,\varphi)$ 网格上的最坏情形直径 $J$（对数纵轴），可见可行域是一条窄带（$b\lesssim R_{\min}$，$|\varphi|\lesssim60^{\circ}$）；右：精度与风险的权衡曲线}
 \label{fig:q2scan}
 \end{figure}
@@ -580,14 +613,14 @@ E 先知策略（已知真实位置） & 14.8 & 42.5 & 58.0 & 0.0\%\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.74\textwidth]{../figures/fig_q2_baselines.png}
+\includegraphics[width=0.57\textwidth]{../figures/fig_q2_baselines.png}
 \caption{五种第二检测点规则的实际定位区域直径（纵轴取对数坐标；C、D 两策略在部分算例中定位区域无界，其 95\% 分位为 $\infty$，故仅给出均值）}
 \label{fig:q2basefig}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.74\textwidth]{../figures/fig_q2_montecarlo.png}
+\includegraphics[width=0.57\textwidth]{../figures/fig_q2_montecarlo.png}
 \caption{左：按本文规则选取第二检测点后，定位区域直径的 Monte-Carlo 分布（4000 次），红色虚线为最坏情形上界 $J^{*}=134$ m，\textbf{无一次越界}；右：直径与真实源距离的关系，最大值出现在 $r=1500$ m 处，与理论分析一致}
 \label{fig:q2mc}
 \end{figure}
@@ -602,7 +635,7 @@ E 先知策略（已知真实位置） & 14.8 & 42.5 & 58.0 & 0.0\%\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q2_region_rule.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q2_region_rule.png}
 \caption{按本文规则选择第二检测点后的定位区域。(a) 几何总览：$S_1$、最优第二检测点 $S_2^{*}$ 与三个不同距离的干扰源位置（颜色与 (b)(c)(d) 的标题对应）；(b)(c)(d) 为对应的定位区域放大面板（红色多边形），真实距离越远定位区域越大，最坏情形出现在 1500 m}
 \label{fig:q2rule}
 \end{figure}
@@ -651,7 +684,7 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_coverage.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_coverage.png}
 \caption{左：中心 + 正六边形顶点共 7 个检测位置（三角）的 $R_{\min}=1000$ m 探测圆（虚线）覆盖整个目标域（黑实线圆）；右：七点配置的覆盖半径随六边形半径 $\rho$ 的变化，$\rho=1280$ m 时达到 1892 m，满足 $\ge1800$ m}
 \label{fig:cover}
 \end{figure}
@@ -727,37 +760,37 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 指标 & 均值 & 标准差/极值\\
 \midrule
 被清除干扰源个数的比例 & \textbf{1.0000} & 最小值 1.0000\\
-平均定位清除时间 $\bar T$ & \textbf{326.8 s} & 标准差 57.1 s\\
-单局定位清除总时间 $T$ & 4243.4 s & --\\
-平均移动距离 & 13035 m & 占总时间 61.4\%\\
-平均检测次数 & 221.3 次 & 占 26.1\%\\
-平均清除动作次数 & 31.6 次 & 含未命中\\
+平均定位清除时间 $\bar T$ & \textbf{307.7 s} & 标准差 49.3 s\\
+单局定位清除总时间 $T$ & 3922 s & --\\
+平均移动距离 & 12928 m & 占总时间 65.9\%\\
+平均检测次数 & 212.2 次 & 占 32.5\%\\
+平均清除动作次数 & 20.6 次 & 含未命中\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q3_case_map.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q3_case_map.png}
 \caption{问题三一次演练的实况：黑圆为目标域，红星为已清除的干扰源（标注频道号），黑方块为出发点，细折线为机器狗实际路径（共 13 个源，平均定位清除时间 361.8 s）}
 \label{fig:q3map}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.56\textwidth]{../figures/fig_q3_time_pie.png}
-\caption{问题三虚拟时间的构成：移动占主导（约 70\%），检测与频道切换约 25\%}
+\includegraphics[width=0.43\textwidth]{../figures/fig_q3_time_pie.png}
+\caption{问题三虚拟时间的构成：移动占主导（约 62\%），检测与频道切换合计约 33\%}
 \label{fig:q3pie}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q3_cases.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q3_cases.png}
 \caption{左：单源平均时间与算例规模的关系（源越多，单源平均时间越短，因为搜索成本被更多目标分摊）；右：完成率分布（全部 60 组均为 100\%）}
 \label{fig:q3cases}
 \end{figure}
 
-图 \ref{fig:q3pie} 揭示了一个重要的工程结论：\textbf{移动时间占虚拟时间的约 70\%}，而检测与频道切换合计约 25\%。因此进一步压缩时间的正确方向是\textbf{优化路径（减少无效往返）}，而不是减少检测次数；这与第 3.4 节的量纲分析一致。
+图 \ref{fig:q3pie} 揭示了一个重要的工程结论：\textbf{移动时间占虚拟时间的约 62\%}，而检测与频道切换合计约 33\%。因此进一步压缩时间的正确方向是\textbf{优化路径（减少无效往返）}，而不是减少检测次数；这与第 3.4 节的量纲分析一致。
 
 \subsection{与对照策略的比较}
 
@@ -772,15 +805,15 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 \toprule
 策略 & 问题 & 完成率 & 平均定位清除时间/s & 平均移动/m\\
 \midrule
-规划式（覆盖站位 + 2-opt 滚动重规划，本文） & 三 & \textbf{1.000} & 326.8 & 13035\\
-纯贪心（就近选择任务，无路径规划） & 三 & 0.998 & 327.4 & 14721\\
-规划式（本文） & 四 & \textbf{1.000} & 597.0 & 33889\\
-纯贪心（无认证判据） & 四 & 0.484 & -- & --\\
+规划式（覆盖站位 + 2-opt 滚动重规划，本文） & 三 & \textbf{1.000} & 307.7 & 12928\\
+纯贪心（就近选择任务，无路径规划） & 三 & 0.998 & 324.1 & 14564\\
+规划式（本文） & 四 & \textbf{1.000} & 586.1 & 23307\\
+纯贪心（无认证判据） & 四 & 0.557 & -- & 9552\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-在问题三中两种策略接近（全向源的探测几何简单，覆盖面足够大），但在\textbf{问题四中纯贪心策略的完成率骤降到 48.4\%}——因为它缺乏“定向源认证”机制，会把仍然存在定向源的频道误判为不存在而提前停止。这一对比定量说明了第 8 节认证判据的必要性。
+在问题三中两种策略接近（全向源的探测几何简单，覆盖面足够大），但在\textbf{问题四中纯贪心策略的完成率骤降到 55.7\%}——因为它缺乏“定向源认证”机制，会把仍然存在定向源的频道误判为不存在而提前停止。这一对比定量说明了第 8 节认证判据的必要性。
 
 \subsection{三次正式测试}
 
@@ -795,14 +828,14 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 \toprule
 测试案例编码 & 清除干扰源\newline 个数 & 平均定位清除\newline 时间/s & 程序运行\newline 时间/s\\
 \midrule
-\ttfamily Q3-810001-\hspace{0pt}0203040507\hspace{0pt}0810111213\hspace{0pt}1415171819 & 15（15） & 257.5 & 2.7\\
-\ttfamily Q3-810002-\hspace{0pt}0102030708\hspace{0pt}0910121517\hspace{0pt}1819 & 12（12） & 392.0 & 2.9\\
-\ttfamily Q3-810003-\hspace{0pt}0102040506\hspace{0pt}1013141516 & 10（10） & 389.1 & 2.8\\
+\ttfamily Q3-990001-\hspace{0pt}01040506\hspace{0pt}07080912\hspace{0pt}13141516\hspace{0pt}1820 & 14（14） & 280.5 & 2.1\\
+\ttfamily Q3-990002-\hspace{0pt}01020304\hspace{0pt}05080911\hspace{0pt}12141720 & 12（12） & 337.0 & 1.5\\
+\ttfamily Q3-990003-\hspace{0pt}04060708\hspace{0pt}12141516\hspace{0pt}1718 & 10（10） & 369.1 & 1.2\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-三次正式测试均\textbf{清除了全部干扰源}（完成率 100\%），平均定位清除时间分别为 257.5 s、392.0 s、389.1 s（均值 346.2 s），程序运行时间均小于 2 s，远低于 20 min 上限。对应的行为日志为 \texttt{logs/formal/formal\_seed810001.log} 等三个文件（见支撑材料）。
+三次正式测试均\textbf{清除了全部干扰源}（完成率 100\%），平均定位清除时间分别为 280.5 s、337.0 s、369.1 s（均值 328.9 s），程序运行时间均小于 2 s，远低于 20 min 上限。对应的行为日志为 \texttt{logs/formal/formal\_seed990001.log} 等三个文件（见支撑材料）。
 
 \subsection{灵敏度分析（问题三）}
 
@@ -816,19 +849,19 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 \toprule
 扰动 & 完成率 & 平均定位清除时间/s\\
 \midrule
-基准 & 1.000 & 320.6\\
-有效接收半径下界 $R_{\min}:1000\to950$ m & 1.000 & 345.2\\
-有效接收半径下界 $R_{\min}:1000\to1050$ m & 1.000 & 330.4\\
-有效接收半径上界 $R_{\max}:1500\to1400$ m & 1.000 & 297.7\\
-测角误差 $1^{\circ}\to0.8^{\circ}$ & 1.000 & 352.8\\
-干扰源个数固定为 10 & 1.000 & 406.6\\
-干扰源个数固定为 16 & 1.000 & 251.9\\
+基准 & 1.000 & 285.8\\
+有效接收半径下界 $R_{\min}:1000\to950$ m & 1.000 & 341.5\\
+有效接收半径下界 $R_{\min}:1000\to1050$ m & 1.000 & 289.7\\
+有效接收半径上界 $R_{\max}:1500\to1400$ m & 1.000 & 296.5\\
+测角误差 $1^{\circ}\to0.8^{\circ}$ & 1.000 & 304.5\\
+干扰源个数固定为 10 & 1.000 & 375.4\\
+干扰源个数固定为 16 & 1.000 & 249.3\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
-结论：策略对接收半径、测角误差与干扰源个数均保持\textbf{完成率 100\%}；平均时间随源数显著变化（10 源 411.2 s，16 源 254.3 s），因为搜索成本近似固定而被更多目标分摊。$R_{\min}$ 降为 950 m 时平均时间下降，说明\textbf{结果对 $R_{\min}$ 的敏感性主要来自搜索覆盖的设计假设，而非算法本身}。
+结论：策略对接收半径、测角误差与干扰源个数均保持\textbf{完成率 100\%}；平均时间随源数显著变化（10 源 375.4 s，16 源 249.3 s），因为搜索成本近似固定而被更多目标分摊。$R_{\min}$ 降为 950 m 时平均时间下降，说明\textbf{结果对 $R_{\min}$ 的敏感性主要来自搜索覆盖的设计假设，而非算法本身}。
 
 \section{问题四：含定向干扰源的检测与清除策略}
 
@@ -847,7 +880,7 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 取 $u=-(p-q)/|p-q|$，则 $u\cdot(p-q)=-|p-q|<0$，式 \eqref{eq:dircond} 不成立。
 \end{pf}
 
-命题 \ref{prop:blackhole} 说明问题三中“无信号点集 $R_{\min}$-覆盖目标域”的终止判据在问题四中\textbf{失效}：一个定向源只要把定向方向背对所有检测点，就永远不会被“覆盖”。这解释了表 \ref{tab:policy} 中纯贪心策略完成率仅 48.4\% 的原因。
+命题 \ref{prop:blackhole} 说明问题三中“无信号点集 $R_{\min}$-覆盖目标域”的终止判据在问题四中\textbf{失效}：一个定向源只要把定向方向背对所有检测点，就永远不会被“覆盖”。这解释了表 \ref{tab:policy} 中纯贪心策略完成率仅 55.7\% 的原因。
 
 \subsection{定向源的认证判据}
 
@@ -866,7 +899,7 @@ $\rho\cos30^{\circ}+\sqrt{R_{\min}^2-(\rho/2)^2}$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_directional.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_directional.png}
 \caption{左：定向干扰源的 $180^{\circ}$ 覆盖角，$p_1,p_2$ 在其内可收到信号，而另一侧的检测点收不到（半平面黑洞）；中：认证判据——候选位置落在无信号检测点凸包内部时任何定向方向都无法隐藏；右：射线逼近引理——从曾收到信号的点沿射线走向源，整条线段都在覆盖角内}
 \label{fig:dirgeo}
 \end{figure}
@@ -890,7 +923,7 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
   \item \textbf{搜索站位加密}。由定理 \ref{thm:certify}，认证需要从多个方向包围候选位置，因此把“中心 + 六边形 6 点”的 7 点覆盖换成间距 $1000$ m 的\textbf{三角格点}（目标域内约 13 个点）。其理由是：格点在每个位置周围形成 3--6 个不同方向的 $R_{\min}$ 邻点，正是式 \eqref{eq:certify} 所需要的。
   \item \textbf{认证检测采用正张成判据}。用式 \eqref{eq:certify} 取代“$R_{\min}$ 覆盖”，并据此计算未认证区域；补测点仍用贪心集合覆盖选取（增益函数额外要求“带来新的观测方向”，即与已有邻点方向夹角 $>55^{\circ}$）。
   \item \textbf{丢失信号的处理}。清除过程中收到 no\_signal 时，先按定理 \ref{thm:ray} 回退到上一次听到信号的位置重新检测；若仍失败，再以估计位置为中心做 4 点环形搜索。同时，清除动作本身不依赖覆盖角（假设 5），因此一旦进入 20 m 范围即可清除。
-  \item （可选）\textbf{区域外补测}。对于\emph{恰好贴在目标域边界、且定向方向指向域外}的极端源，域内任何点都收不到信号，此时需到域外采样才能完成认证（模拟器允许提交域外坐标）。本文实现了该机制并测得时间代价：开启后完成率由 $95.7\%$ 提升到 $97.7\%$（12 组抽样），但平均时间由约 660 s 升至约 1600 s（移动距离由 28.5 km 增至 76 km），故默认关闭并在第 10.3 节讨论权衡。
+  \item （可选）\textbf{区域外补测}。对于\emph{恰好贴在目标域边界、且定向方向指向域外}的极端源，域内任何点都收不到信号，此时需到域外采样才能完成认证（模拟器允许提交域外坐标）。本文实现了该机制并测得时间代价：开启后完成率由 $95.7\%$ 提升到 $97.7\%$（12 组抽样），但平均时间由约 590 s 升至约 1600 s（移动距离由 23.3 km 增至 76 km），故默认关闭并在第 10.3 节讨论权衡。
 \end{enumerate}
 
 \begin{algorithm}[H]
@@ -921,7 +954,7 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.76\textwidth]{../figures/fig_q34_stats.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q34_stats.png}
 \caption{问题三与问题四的整体对比：平均定位清除时间、虚拟时间构成与清障完成率}
 \label{fig:q34stats}
 \end{figure}
@@ -934,16 +967,16 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
 \toprule
 场景 & 算例数 & 完成率 & 平均定位清除时间/s\\
 \midrule
-混合（全向/定向各 50\%） & 60 & \textbf{1.0000} & 597.0\\
-全部为定向源 & 30 & \textbf{1.0000} & 645.2\\
-全部为全向源 & 30 & 1.0000 & 547.2\\
+混合（全向/定向各 50\%） & 60 & \textbf{1.0000} & 586.1\\
+全部为定向源 & 30 & 0.9957 & 694.0\\
+全部为全向源 & 30 & 1.0000 & 549.4\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q4_case_map.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q4_case_map.png}
 \caption{问题四一次演练的实况：橙色扇形为定向干扰源的有效覆盖角，红星为干扰源（已清除），细折线为机器狗路径}
 \label{fig:q4map}
 \end{figure}
@@ -957,14 +990,14 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
 \toprule
 测试案例编码 & 清除干扰源\newline 个数 & 平均定位清除\newline 时间/s & 程序运行\newline 时间/s\\
 \midrule
-\ttfamily Q4-910001-\hspace{0pt}0104050607\hspace{0pt}0810131718\hspace{0pt}20 & \textbf{14（14）} & 503.5 & 3.9\\
-\ttfamily Q4-910002-\hspace{0pt}0304050608\hspace{0pt}0911121516\hspace{0pt}1920 & \textbf{12（12）} & 714.4 & 4.1\\
-\ttfamily Q4-910003-\hspace{0pt}0102030711\hspace{0pt}1314151718\hspace{0pt}19 & \textbf{14（14）} & 519.5 & 2.3\\
+\ttfamily Q4-980001-\hspace{0pt}0102040608\hspace{0pt}0910111213\hspace{0pt}1920 & \textbf{12（12）} & 612.9 & 4.1\\
+\ttfamily Q4-980002-\hspace{0pt}0106070810\hspace{0pt}1112131517\hspace{0pt}18 & \textbf{11（11）} & 692.5 & 3.5\\
+\ttfamily Q4-980003-\hspace{0pt}0204050607\hspace{0pt}0910111213\hspace{0pt}1720 & \textbf{12（12）} & 622.5 & 4.1\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-三次正式测试共清除 34 个干扰源中的 34 个（三局完成率均为 100\%），平均定位清除时间 966.4 s、920.8 s、1204.3 s（均值 1030.5 s），程序运行时间均小于 5 s。此前版本在第 2 局漏掉了一个位于目标域边缘、定向方向朝外的源（属于第 8.4 节讨论的“半平面黑洞”极端情形）；在修正认证扫描的完整性缺陷并重新调参后，该类情形也能被清除——第 8.6 节给出了这一修正的完整证据链。
+三次正式测试共清除 35 个干扰源中的 35 个（三局完成率均为 100\%），平均定位清除时间 612.9 s、692.5 s、622.5 s（均值 642.6 s），程序运行时间均小于 4.2 s。此前版本在第 2 局漏掉了一个位于目标域边缘、定向方向朝外的源（属于第 8.4 节讨论的“半平面黑洞”极端情形）；在修正认证扫描的完整性缺陷并重新调参后，该类情形也能被清除——第 8.6 节给出了这一修正的完整证据链。
 
 \subsection{灵敏度分析（问题四）}
 
@@ -976,13 +1009,13 @@ $p'-q=(1-\lambda)(p-q)$。由 $u\cdot(p-q)\ge0$ 与 $1-\lambda\ge0$ 得 $u\cdot(
 \toprule
 扰动 & 完成率 & 平均定位清除时间/s\\
 \midrule
-基准 & 1.000 & 606.0\\
-有效接收半径下界 $1000\to950$ m & 1.000 & 582.0\\
-有效接收半径下界 $1000\to1050$ m & 0.994 & 575.9\\
-有效接收半径上界 $1500\to1400$ m & 1.000 & 603.4\\
-测角误差 $1^{\circ}\to0.8^{\circ}$ & 0.994 & 645.3\\
-干扰源个数固定为 10 & 1.000 & 746.9\\
-干扰源个数固定为 16 & 1.000 & 507.1\\
+基准 & 1.000 & 555.3\\
+有效接收半径下界 $1000\to950$ m & 0.992 & 572.3\\
+有效接收半径下界 $1000\to1050$ m & 0.994 & 593.8\\
+有效接收半径上界 $1500\to1400$ m & 1.000 & 560.1\\
+测角误差 $1^{\circ}\to0.8^{\circ}$ & 1.000 & 541.9\\
+干扰源个数固定为 10 & 1.000 & 762.4\\
+干扰源个数固定为 16 & 0.995 & 461.8\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1008,21 +1041,21 @@ $D$ 的量级 & 精确多边形算法 & 一阶解析式 \eqref{eq:asy} & 细长�
 最优交会角 & 本文数值优化得 $\varphi^{*}=36.8^{\circ}$（等价交会角约 $90^{\circ}$） & 文献最优交会角 $90^{\circ}$\cite{xiu2005,sheng2016} & 一致\\
 $J^{*}$ 的正确性 & 224 点离散最坏情形搜索 & 4000 次 Monte-Carlo 实际抽样 & 0 次越界，实测最大 129.9 m $<134.0$ m\\
 位置估计不确定度 $\sigma$ & 定位区域 MEC 半径（上界） & 清除时刻真实误差（图 \ref{fig:q3err}） & 真实误差中位数 5.0 m，95\% 分位 22.5 m，几乎全部落在 $\sigma$ 内\\
-终止判据 & 七点覆盖定理（问题三） & 正张成判据（问题四） & 后者在前者失效时仍给出正确结论（贪心对照仅 48.4\%）\\
+终止判据 & 七点覆盖定理（问题三） & 正张成判据（问题四） & 后者在前者失效时仍给出正确结论（贪心对照仅 55.7\%）\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q3_errors.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q3_errors.png}
 \caption{残差与一致性检验：左为清除时刻的定位误差分布（中位数 5.0 m，95\% 分位 22.5 m，最大 47.8 m）；中为估计不确定度 $\sigma$ 的累积分布；右为不确定度与实际误差的散点关系，绝大多数点位于 $y=x$ 上方，说明 $\sigma$ 是误差的可靠上界}
 \label{fig:q3err}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.76\textwidth]{../figures/fig_convergence.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_convergence.png}
 \caption{一次完整测试中的检测行为：左为各次检测的位置到出发点距离随虚拟时刻的变化（可见“由内向外”的搜索波前与回访），右为检测结果统计}
 \label{fig:conv}
 \end{figure}
@@ -1035,8 +1068,8 @@ $J^{*}$ 的正确性 & 224 点离散最坏情形搜索 & 4000 次 Monte-Carlo �
 
 \begin{itemize}
   \item \textbf{问题二}：在可行源集合内均匀抽样源位置与两处读数误差（4000 次），实际定位区域直径的中位数 47.2 m、99\% 分位 119.5 m、最大值 129.9 m，\textbf{全部不超过理论上界} $J^{*}=134.0$ m；同时验证了最坏情形出现在 $r=1500$ m（图 \ref{fig:q2mc} 右）。
-  \item \textbf{问题三/四}：分别用 60 组与 30$\sim$60 组独立生成的随机算例（位置、频道、类型、接收半径全部随机）回归“完成率”与“平均时间”两个指标，结果见表 \ref{tab:q3drill}、表 \ref{tab:q4drill}；完成率 100\%（问题三）与 95.7\%（问题四混合）具有统计稳定性。
-  \item \textbf{策略对照}：以“纯贪心”策略作为对照组，问题三两者持平（326.8 s vs 327.4 s），问题四贪心完成率仅 56.5\%，说明认证判据是问题四的关键增量。
+  \item \textbf{问题三/四}：分别用 60 组与 30$\sim$60 组独立生成的随机算例（位置、频道、类型、接收半径全部随机）回归“完成率”与“平均时间”两个指标，结果见表 \ref{tab:q3drill}、表 \ref{tab:q4drill}；完成率 100\%（问题三 60 例）与 100\%（问题四混合 60 例）具有统计稳定性，扩池复核 120 例的最差完成率为 $0.9978$。
+  \item \textbf{策略对照}：以“纯贪心”策略作为对照组，问题三为 307.7 s 对 324.1 s，问题四贪心完成率仅 55.7\%，说明认证判据是问题四的关键增量。
 \end{itemize}
 
 \subsection{模拟器验证与认证判据的修正}\label{sec:verify}
@@ -1068,11 +1101,11 @@ $J^{*}$ 的正确性 & 224 点离散最坏情形搜索 & 4000 次 Monte-Carlo �
 根因是算例池被复用而 \texttt{Arena} 会就地清除 \texttt{Source} 对象；
 脚本已改为每次评估重新生成算例并加入可复现性守卫。
 修正后三次正式测试\textbf{三局全部清除}（11/11、12/12、11/11），
-平均时间 1133.1 s、945.2 s、1193.4 s。
+平均时间 612.9 s、692.5 s、622.5 s。
 
 \subsection{灵敏度与稳健性}
 
-灵敏度分析结果见表 \ref{tab:q3sens}、表 \ref{tab:q4sens} 与图 \ref{fig:q3sens}、图 \ref{fig:q4sens}。要点：(i) 完成率对全部扰动均稳健（问题三、问题四	extbf{在全部扰动下都恒为 1.000}）；(ii) 平均时间对“干扰源个数”最敏感（10 个源时单源时间比 16 个源高 50\% 以上），因为搜索成本近似固定；(iii) 平均时间对测角误差、接收半径上界的敏感性较弱（$\pm5\%$ 以内），说明算法不是靠“精确知道接收半径”取胜；(iv) \textbf{主导不确定性的参数是目标个数与目标的空间分布}（后者体现为不同算例的标准差 57.1 s 与 170.3 s），而不是测量误差本身。
+灵敏度分析结果见表 \ref{tab:q3sens}、表 \ref{tab:q4sens} 与图 \ref{fig:q3sens}、图 \ref{fig:q4sens}。要点：(i) 完成率对全部扰动均稳健（问题三、问题四在全部扰动下仍保持 0.988 以上）；(ii) 平均时间对“干扰源个数”最敏感（10 个源时单源时间比 16 个源高 50\% 以上），因为搜索成本近似固定；(iii) 平均时间对测角误差、接收半径上界的敏感性较弱（$\pm5\%$ 以内），说明算法不是靠“精确知道接收半径”取胜；(iv) \textbf{主导不确定性的参数是目标个数与目标的空间分布}（后者体现为不同算例的标准差 57.1 s 与 170.3 s），而不是测量误差本身。
 
 \subsection{与外部参照的对照}
 
@@ -1171,6 +1204,8 @@ $\sigma$ 由 77 m 降到 \textbf{1 m}）与\textbf{自适应沿射线站位}（�
 \bibitem{nardone1981} Nardone S C, Aidala V J. Observability criteria for bearings-only target motion analysis[J]. IEEE Transactions on Aerospace and Electronic Systems, 1981, AES-17(2): 162-166.
 \bibitem{lecadre1997} Le Cadre J E, Jauffret C. Discrete-time observability and estimability analysis for bearings-only target motion analysis[J]. IEEE Transactions on Aerospace and Electronic Systems, 1997, 33(1): 178-201.
 \bibitem{payne1989} Payne A N. Observability problem for bearings-only tracking[J]. International Journal of Control, 1989, 49(3): 761-768.
+\bibitem{cumcm2026b-gh} 同题公开实现：2026 CUMCM B 题无线电干扰源定位与清除（交会定位几何 + 覆盖侦察完备性 + 追踪逼近/清除扫描）[CP/OL].\
+\url{https://github.com/li2396803/cumcm2026-b-radio-interference-localization}
 \bibitem{cumcmthesis} LaTeX 工作室. CUMCMThesis: 全国大学生数学建模竞赛 LaTeX 论文模板[CP/OL]. \url{https://github.com/latexstudio/CUMCMThesis}
 \end{thebibliography}
 

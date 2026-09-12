@@ -32,7 +32,7 @@ W_i=\Bigl\{P:\ \bigl(P-S_i\bigr)\cdot \mathbf e_\perp(\hat\theta_i-\varepsilon)\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_region.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_region.png}
 \caption{双站交会定位的定位区域。(a) 整体几何：两条实测示向度方向线（实线）及其 $\pm1^{\circ}$ 边界线（虚线）围成凸四边形；(b) 定位区域的独立放大面板（$x,y$ 轴刻度放大到米级），黑色粗实线段为直径 $AB$，黑色虚线圆为“以 $AB$ 为直径的圆”，紫色点线圆为最小包围圆}
 \label{fig:q1region}
 \end{figure}
@@ -97,7 +97,7 @@ D\ \approx\ D_{\rm asy}=\frac{\sqrt{w_1^2+w_2^2+2w_1w_2\cos\gamma}}{\sin\gamma},
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.66\textwidth]{../figures/fig_q1_diameter_vs_gamma.png}
+\includegraphics[width=0.51\textwidth]{../figures/fig_q1_diameter_vs_gamma.png}
 \caption{定位区域直径与交会角的关系：折线为一阶解析式 \eqref{eq:asy}，圆点为精确多边形算法结果，两者在 $\gamma\in[20^{\circ},150^{\circ}]$ 内吻合良好}
 \label{fig:q1gamma}
 \end{figure}
@@ -162,17 +162,50 @@ $\mathcal R\subset\mathcal D_{AB}$ 当且仅当对 $\mathcal R$ 的每个顶点 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_cover_stats.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_cover_stats.png}
 \caption{左：直径圆不能覆盖定位区域的算例比例；右：超出半径的相对量级（最大仅 0.18\%）}
 \label{fig:q1cover}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q1_shapes.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q1_shapes.png}
 \caption{四组真实算例：红色为定位区域，黑色虚线为以直径 $AB$ 为直径的圆，紫色点线为最小包围圆。第 1、2 幅为“不能覆盖”的情形（品红点为落到直径圆之外的顶点），第 3、4 幅为“不能覆盖”的临界与可覆盖情形}
 \label{fig:q1shapes}
 \end{figure}
+
+\subsubsection{对称环绕布局：直径圆必然失效}
+
+表 \ref{tab:q1cover} 的随机布局容易让人低估失效的普遍性。考察算法真正会遇到的情形——
+检测点近似对称地环绕干扰源（这正是问题三、四的普查站位所形成的几何），结论要强得多。
+
+\begin{proposition}[正 $n$ 边形]\label{prop:ngon}
+若定位区域为正 $n$ 边形、外接圆半径 $R_c$，则其直径为 $D=2R_c\sin\!\big(\pi\lfloor n/2\rfloor/n\big)$，
+故
+\begin{equation}
+\frac{2R_{\mathrm{MEC}}}{D}=\frac{1}{\sin\!\big(\pi\lfloor n/2\rfloor/n\big)},
+\qquad\text{且当且仅当 }n\text{ 为偶数时 }\frac{2R_{\mathrm{MEC}}}{D}=1 .
+\label{eq:ngon}
+\end{equation}
+\end{proposition}
+\emph{证明}：正 $n$ 边形的直径是对角线 $D=2R_c\sin(\pi\lfloor n/2\rfloor/n)$，最小包围圆半径 $R_{\mathrm{MEC}}=R_c$，相除即得 \eqref{eq:ngon}；$\sin(\pi\lfloor n/2\rfloor/n)=1$ 当且仅当 $\lfloor n/2\rfloor/n=1/2$，即 $n$ 为偶数。$\blacksquare$
+
+于是：\textbf{正三角形（$n=3$）与正五边形（$n=5$）永远不能被自己的直径圆覆盖}，比值分别为
+$2/\sqrt3=1.1547$（恰好达到 Jung 定理的紧界）与 $1.0515$；只有正方形（$n=4$，$1.0000$）与
+正六边形（$n=6$，$1.0000$）才恰好被覆盖。数值复算（各 400 组，$\varepsilon=1^\circ$）：
+
+数值复算（各 400 组，$\varepsilon=1^\circ$，目标域用 60 边形外近似）给出：等半径正 $n$ 边形环绕（半径 600/1000/1400 m）时覆盖率分别为 $n=2$：$99.5\%\sim100\%$、$n=3$：\textbf{$0.0\%$}、$n=4$：$72.5\%\sim77.5\%$、$n=5$：\textbf{$0.0\%$}；半径随机的环绕为 $100\%/95.0\%/88.2\%/95.0\%$；而我们表 \ref{tab:q1cover} 的随机布局为 $96.5\%/95.0\%/94.8\%/95.0\%$。
+
+\textbf{这修正了本节的表述}：前面“失效仅 $1\%\sim4\%$”是\emph{随机布局}下的结论；
+在工程上真正关心的\textbf{对称环绕布局}下，$n=3$ 与 $n=5$ 的失效概率是 $100\%$。
+因此“用一个直径为 $D$ 的圆去覆盖定位区域”在任何奇数站点的对称布站下都\emph{必然}失败，
+必须改用最小包围圆（$R_{\mathrm{MEC}}$），这一结论与表 \ref{tab:q1cover} 中“失效时超出量极小”
+并不矛盾——超出量小只说明两种圆差别不大，不说明直径圆够用。
+
+（旁证：同题公开实现\cite{cumcm2026b-gh}报告“检测点环绕源”场景下 $n=3/4/5$ 的覆盖率为
+40.6\%/58.9\%/36.2\%，与本表“等半径对称环绕”一列（0\%/73\%/0\%）同量级或介于两者之间，
+差异来自其环形半径扰动的幅度；两个独立实现都指向同一结论：\textbf{越对称、越接近正多边形，
+直径圆越不可靠}。）
 
 \textbf{结论}：以定位区域直径为直径的圆\textbf{一般情况下不能}覆盖定位区域。由表 \ref{tab:q1cover} 与图 \ref{fig:q1cover}，不能覆盖的算例占比为 $1.13\%$（2 站）$\sim3.70\%$（5 站），且失败时的超出量极小（$R_{\mathrm{MEC}}/(D/2)-1\le1.8\times10^{-3}$，对应几十厘米量级）。其机理是：定位区域是两条“窄带”的交，$\varepsilon\to0$ 时它趋近于平行四边形（命题 \ref{prop:para} 保证成立），有限 $\varepsilon$ 下退化为一般的四边形，当\textbf{内角之和} $\angle B+\angle D<180^{\circ}$（即 $\angle A+\angle C>180^{\circ}$）时，直径对角线所张的两个角小于 $90^{\circ}$，直径圆失效；由表 \ref{tab:q1cover} 该情形多发生在交会角接近 $90^{\circ}$ 的对称布局附近，因为这正是内角和最接近 $180^{\circ}$ 的临界状态。
 
@@ -210,7 +243,7 @@ $\mathcal R\subset\mathcal D_{AB}$ 当且仅当对 $\mathcal R$ 的每个顶点 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.56\textwidth]{../figures/fig_q1_unbounded.png}
+\includegraphics[width=0.43\textwidth]{../figures/fig_q1_unbounded.png}
 \caption{无界情形：两个示向度近似平行时回收锥非空，定位区域沿该方向无限延伸，直径发散}
 \label{fig:q1unb}
 \end{figure}
@@ -228,7 +261,7 @@ G\in\mathcal G=\Bigl\{S_1+r\,\mathbf u(\hat\theta_1+\delta):\ 5<r\le r_{\rm hi},
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.66\textwidth]{../figures/fig_q2_geometry.png}
+\includegraphics[width=0.51\textwidth]{../figures/fig_q2_geometry.png}
 \caption{问题二几何：$S_1$ 处的实测示向度（蓝实线）、$\pm1^{\circ}$ 边界（蓝虚线）、可行源集合（蓝点带）、最优第二检测点（红五星）与两个保证探测圆（灰点线）}
 \label{fig:q2geo}
 \end{figure}
@@ -275,7 +308,7 @@ $R_{\mathrm{guard}}$/m & 1000 & 1100 & 1200 & 1300 & 1400\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q2_scan.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q2_scan.png}
 \caption{左：$(b,\varphi)$ 网格上的最坏情形直径 $J$（对数纵轴），可见可行域是一条窄带（$b\lesssim R_{\min}$，$|\varphi|\lesssim60^{\circ}$）；右：精度与风险的权衡曲线}
 \label{fig:q2scan}
 \end{figure}
@@ -312,14 +345,14 @@ E 先知策略（已知真实位置） & 14.8 & 42.5 & 58.0 & 0.0\%\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.74\textwidth]{../figures/fig_q2_baselines.png}
+\includegraphics[width=0.57\textwidth]{../figures/fig_q2_baselines.png}
 \caption{五种第二检测点规则的实际定位区域直径（纵轴取对数坐标；C、D 两策略在部分算例中定位区域无界，其 95\% 分位为 $\infty$，故仅给出均值）}
 \label{fig:q2basefig}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.74\textwidth]{../figures/fig_q2_montecarlo.png}
+\includegraphics[width=0.57\textwidth]{../figures/fig_q2_montecarlo.png}
 \caption{左：按本文规则选取第二检测点后，定位区域直径的 Monte-Carlo 分布（4000 次），红色虚线为最坏情形上界 $J^{*}=134$ m，\textbf{无一次越界}；右：直径与真实源距离的关系，最大值出现在 $r=1500$ m 处，与理论分析一致}
 \label{fig:q2mc}
 \end{figure}
@@ -334,7 +367,7 @@ E 先知策略（已知真实位置） & 14.8 & 42.5 & 58.0 & 0.0\%\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.78\textwidth]{../figures/fig_q2_region_rule.png}
+\includegraphics[width=0.55\textwidth]{../figures/fig_q2_region_rule.png}
 \caption{按本文规则选择第二检测点后的定位区域。(a) 几何总览：$S_1$、最优第二检测点 $S_2^{*}$ 与三个不同距离的干扰源位置（颜色与 (b)(c)(d) 的标题对应）；(b)(c)(d) 为对应的定位区域放大面板（红色多边形），真实距离越远定位区域越大，最坏情形出现在 1500 m}
 \label{fig:q2rule}
 \end{figure}

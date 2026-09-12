@@ -22,3 +22,7 @@ desktop.ini
 
 # 备份目录
 备份*/
+
+# PDF 构建中间产物（安装到正式文件后应删除）
+paper/paper_new.pdf
+paper/paper_print_new.pdf
