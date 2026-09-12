@@ -2,12 +2,12 @@
  "n_cases": 30,
  "mean_ratio": 1.0,
  "min_ratio": 1.0,
- "mean_time": 547.2178190816009,
- "median_time": 568.6035592671994,
- "sd_time": 109.04365601679913,
- "mean_travel": 20474.941992421063,
- "mean_measure": 402.8,
- "mean_clear_actions": 27.833333333333332,
- "mean_vtime": 6598.088398484213,
- "wall_s": 20.590216159820557
+ "mean_time": 549.3956447312469,
+ "median_time": 576.3299401422371,
+ "sd_time": 104.83365856248687,
+ "mean_travel": 20626.27676347083,
+ "mean_measure": 406.1666666666667,
+ "mean_clear_actions": 24.266666666666666,
+ "mean_vtime": 6636.5886860275,
+ "wall_s": 32.75561785697937
 }

@@ -29,7 +29,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.normpath(os.path.join(HERE, "..", "data"))
 os.makedirs(DATA, exist_ok=True)
 
-P3 = {"survey_mode": "ring", "ring_radius": 1250.0, "survey_spacing": 1000.0, "probe_spacing": 450.0, "locate_sigma": 220.0, "clear_bonus": 450.0, "probe_min_angle": 35.0, "search_cost_bias": 60.0, "term_cap": 420.0, "endgame_radius": 90.0, "max_attempts": 6, "rim_step": 130.0, "max_rim_patrols": 12}
+# 问题三配置定稿（两池各 30 例复核，完成率均为 1.0000）：
+#   relocate=False   单条方位的频道改用"斜向站位"而不是"横向二分+沿射线爬行"。
+#                    后者是为定向源设计的（横向偏移可能落在背光侧），全向源用不上，
+#                    反而每源多花 26~46 s。池P:361.3->315.8  池Q:332.0->306.1
+#   ring_radius=1130 七点覆盖条件 0.866*rho+sqrt(R_min^2-rho^2/4)>=1800 在 rho=1130 时
+#                    为 1803.7 m（仍满足定理）；rho=1100 只有 1787.8 m，已否决。
+#   sweep_center_first=True 端末清除图案先试估计中心（估计误差中位数仅几米）
+P3 = {"survey_mode": "ring", "ring_radius": 1130.0, "survey_spacing": 1000.0, "probe_spacing": 450.0, "locate_sigma": 220.0, "clear_bonus": 450.0, "probe_min_angle": 35.0, "search_cost_bias": 60.0, "term_cap": 420.0, "endgame_radius": 90.0, "max_attempts": 6, "rim_step": 130.0, "max_rim_patrols": 12, "relocate": False, "sweep_center_first": True, "adaptive_probe": False}
 P4 = {
     "survey_mode": "lattice",
     "survey_spacing": 950.0,      # 覆盖半径 548 m < R_min；间距 <= 认证半径 958 m

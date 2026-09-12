@@ -177,6 +177,11 @@ DEFAULT_PARAMS = {
     "clear_try_radius": 42.0,   # try the clear action when the estimate is this close
     "endgame_radius": 90.0,     # switch to the local clear pattern below this
     "endgame_step": 11.0,       # spacing of the local clear pattern
+    "sweep_center_first": True,  # try the estimate centre before the ring
+    "orient_belief": False,    # 定向源朝向硬约束可行集（自主设计的改进）
+    "orient_bins": 24,         # 朝向分箱数（24 = 每箱 15 度）
+    "orient_len": 350.0,       # 前向侧取数点的距离
+    "survey_max_r": 1800.0,    # truncate the certification lattice radius
     "vantage_b": VANTAGE_B,
     "vantage_phi": VANTAGE_PHI,
     "vantage_b_local": 550.0,   # short oblique offset used when no covering
@@ -186,7 +191,8 @@ DEFAULT_PARAMS = {
     "survey_mode": "ring",      # "ring" (problem 3) or "lattice" (problem 4)
     "search_cost_bias": 60.0,   # seconds of "fixed cost" per search stop
     "use_ring": True,           # force the planned search stops
-    "ring_radius": 1280.0,      # radius of the 6 primary covering stops
+    "ring_radius": 1280.0,      # radius of the primary covering ring
+    "ring_n": 6,                # number of stops on that ring (6 = hexagon)
     "ring_rotation": 0.0,       # rotation (deg) of the covering hexagon
     "max_attempts": 6,          # per-channel budget of clear attempts
     "hard_attempt_cap": 24,     # absolute cap of clear attempts per channel
@@ -299,6 +305,9 @@ class Brain(object):
         self.total_attempts = dict((c, 0) for c in self.channels)
         self.last_seen = dict((c, None) for c in self.channels)
         self.meas_cache = {}
+        nb = int(self.p.get("orient_bins", 24) or 24)
+        # 朝向可行集：每个频道一组仍可行的朝向分箱
+        self.orient_ok = dict((c, set(range(nb))) for c in self.channels)
 
         self.pos = (0.0, 0.0)
         self.vtime = 0.0
@@ -340,8 +349,15 @@ class Brain(object):
         return (p[0] * k, p[1] * k)
 
     def _make_survey_stops(self, spacing=None):
-        """Triangular lattice of survey stops covering the arena."""
+        """Triangular lattice of survey stops covering the arena.
+
+        `survey_max_r` (default = arena radius) truncates the lattice: only the
+        region that actually has to be certified needs the multi-directional
+        coverage a lattice provides, so the outer shell can be dropped when a
+        separate mechanism (the rim ring) covers it.
+        """
         s = self.p["survey_spacing"] if spacing is None else spacing
+        rmax = float(self.p.get("survey_max_r", self.arena_r))
         stops = []
         ny = int(self.arena_r / (s * math.sqrt(3.0) / 2.0)) + 2
         nx = int(2 * self.arena_r / s) + 2
@@ -349,7 +365,8 @@ class Brain(object):
             y = iy * s * math.sqrt(3.0) / 2.0
             for ix in range(-nx, nx + 1):
                 x = ix * s + (s / 2.0 if iy % 2 else 0.0)
-                if math.hypot(x, y) <= self.arena_r + 1e-9:
+                rr = math.hypot(x, y)
+                if rr <= self.arena_r + 1e-9 and rr <= rmax + 1e-9:
                     stops.append((x, y))
         stops.sort(key=lambda p: math.hypot(p[0], p[1]))
         return stops
@@ -404,15 +421,18 @@ class Brain(object):
 
     def _make_ring_stops(self):
         """
-        Six stops on a circle of radius `ring_radius` (plus the entry point) whose
-        detection disks (radius R_min = 1000 m) cover the whole arena: this is
-        the minimal complete-search configuration, see Kershner (1939) and the
-        covering-radius computation of the paper.
+        Stops on a circle of radius `ring_radius` (plus the entry point) whose
+        detection disks (radius R_min = 1000 m) cover the whole arena.  With
+        `ring_n` = 6 this is the minimal complete-search configuration of the
+        seven-point covering theorem (Kershner 1939); more points keep a larger
+        coverage margin and give better triangulation geometry at the cost of
+        extra legs.
         """
         r = self.p["ring_radius"]
+        n = int(self.p.get("ring_n", 6) or 6)
         a0 = math.radians(self.p["ring_rotation"])
-        return [(r * math.cos(a0 + k * math.pi / 3.0), r * math.sin(a0 + k * math.pi / 3.0))
-                for k in range(6)]
+        return [(r * math.cos(a0 + 2.0 * math.pi * k / n),
+                 r * math.sin(a0 + 2.0 * math.pi * k / n)) for k in range(n)]
 
     # ------------------------------------------------------------ verification
     def _verify_grid(self):
@@ -795,6 +815,55 @@ class Brain(object):
         self.meas_cache[(c, key)] = r
         return r
 
+    # ---------------------------------------------------- orientation belief
+    def _orient_update(self, c, q):
+        """
+        把一次 no_signal 转成对朝向的半平面约束 (q-p).u < 0，更新可行分箱。
+        仅当估计位置与检测点距离不超过 R_min 时该约束才成立（否则可能只是超距）。
+        """
+        if not self.p.get("orient_belief", False):
+            return
+        est = self.est.get(c)
+        if est is None:
+            return
+        dx, dy = q[0] - est[0], q[1] - est[1]
+        d = math.hypot(dx, dy)
+        if d < 1e-6 or d > float(self.p["verify_r"]):
+            return
+        nb = int(self.p.get("orient_bins", 24) or 24)
+        ok = self.orient_ok.get(c)
+        if not ok:
+            return
+        # 可行朝向必须指向背离 q 的一侧，即与 (q-p) 的夹角 > 90 度
+        keep = set()
+        for b in ok:
+            ang = 2.0 * math.pi * (b + 0.5) / nb
+            if math.cos(ang) * dx + math.sin(ang) * dy < 0.0:
+                keep.add(b)
+        self.orient_ok[c] = keep
+
+    def _orient_front(self, c):
+        """
+        返回"源的前向侧"取数点：p + L*u_hat。u_hat 取所有幸存分箱中最靠近当前
+        位置的方向（这样移动距离最短）。可行集为空时退回 None。
+        """
+        est = self.est.get(c)
+        ok = self.orient_ok.get(c)
+        if est is None or not ok:
+            return None
+        nb = int(self.p.get("orient_bins", 24) or 24)
+        L = float(self.p.get("orient_len", 350.0))
+        best = None
+        for b in ok:
+            ang = 2.0 * math.pi * (b + 0.5) / nb
+            pt = (est[0] + L * math.cos(ang), est[1] + L * math.sin(ang))
+            d = self._dist(self.pos, pt)
+            if best is None or d < best[0]:
+                best = (d, pt)
+        if best is None:
+            return None
+        return self._clip_to_arena(best[1])
+
     def _retreat(self, c):
         """
         The channel is silent here.  Go back to the last position where it was
@@ -803,6 +872,13 @@ class Brain(object):
         radiation sector, therefore reception is guaranteed to come back.
         """
         seen = self.last_seen.get(c)
+        if self.p.get("orient_belief", False):
+            # 自主设计的改法：背向丢失时主动绕到源的前向侧，而不是退回去
+            front = self._orient_front(c)
+            if front is not None and self._dist(self.pos, front) > 2.0:
+                r = self.hear(c, front)
+                if r.get("measure_result") in ("direction", "near"):
+                    return True
         if seen is None:
             return False
         if self._dist(self.pos, seen) < 1.0:
@@ -826,10 +902,13 @@ class Brain(object):
         if radius is None:
             s = 30.0 if sigma is None else sigma
             radius = min(max(0.55 * s, 12.0), 45.0)
-        # NB the centre is tried LAST.  A failed sweep then leaves the robot
-        # standing on the estimate, which is where an extra bearing is most
-        # useful; trying the centre first would leave it on the last ring point,
-        # possibly on the dark side of a directional source.
+        # The centre is the single best guess, so by default it is tried FIRST
+        # (a miss costs only 3 s) and repeated LAST, so that a failed sweep still
+        # leaves the robot standing on the estimate -- the position where an extra
+        # bearing is most useful.
+        if self.p.get("sweep_center_first", True):
+            if self._try_clear(c, center):
+                return True
         for k in range(6):
             a = math.radians(60.0 * k)
             p = self._clip_to_arena((center[0] + radius * math.cos(a),
@@ -1013,6 +1092,7 @@ class Brain(object):
                         return True
                     continue
                 if res.get("measure_result") == "no_signal":
+                    self._orient_update(c, self.pos)
                     if not self._retreat(c):
                         return False
                     continue
@@ -1052,6 +1132,7 @@ class Brain(object):
                 if dbg:
                     print("       new est %s" % (tuple(round(v) for v in self.est[c]),))
             else:
+                self._orient_update(c, tgt)
                 step_scale *= 0.45
                 if self.p.get("bracket_clear", True) and self._bracket_clear(c, self.last_seen[c], tgt):
                     return True

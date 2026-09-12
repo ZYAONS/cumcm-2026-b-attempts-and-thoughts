@@ -1,9 +1,9 @@
 variant,clear_ratio,mean_time_s
-nominal,1.000,606.0
-R_min=950,1.000,582.0
-R_min=1050,0.994,575.9
-R_max=1400,1.000,603.4
-bearing_err=0.8deg,0.994,645.3
-bearing_err=1.0deg,1.000,607.0
-n_sources=10,1.000,746.9
-n_sources=16,1.000,507.1
+nominal,1.000,555.3
+R_min=950,0.992,572.3
+R_min=1050,0.994,593.8
+R_max=1400,1.000,560.1
+bearing_err=0.8deg,1.000,541.9
+bearing_err=1.0deg,1.000,568.6
+n_sources=10,1.000,762.4
+n_sources=16,0.995,461.8
