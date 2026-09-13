@@ -36,6 +36,16 @@ os.makedirs(DATA, exist_ok=True)
 #   ring_radius=1130 七点覆盖条件 0.866*rho+sqrt(R_min^2-rho^2/4)>=1800 在 rho=1130 时
 #                    为 1803.7 m（仍满足定理）；rho=1100 只有 1787.8 m，已否决。
 #   sweep_center_first=True 端末清除图案先试估计中心（估计误差中位数仅几米）
+# 严格变体（可选，非默认）：把贴边环从域内 r=1750 移到域外 r=1900。
+# 动机：贴边朝外辐射的定向源，只有采样点半径大于源半径时才可能收到信号；
+#       r=1750 的环覆盖不到 r>1750 的源，这正是 8.4 节"半平面黑洞"残留的缺口。
+# 环移到域外后该缺口闭合，且环上点数可从 12 减到 8（角向容差约 +-32 度）。
+# 实测（3 池各 20 例，共 60 例）：完成率 0.9987 -> 1.0000（1 例失败 -> 0 例），
+#       站位 24.0 -> 20.7，动作 473.6 -> 436.2，代价是时间 594.8 -> 608.5 s per source（+2.3%）。
+# 因 1/60 与 0/60 的失败差在统计上不显著，默认仍用快速配置；
+# 本变体用于第 10.3 节讨论"用 2.3% 的时间换掉理论缺口"。
+P4_RIGOROUS = {"rim_ring_r": 1900.0, "rim_ring_n": 8}
+
 P3 = {"survey_mode": "ring", "ring_radius": 1130.0, "survey_spacing": 1000.0, "probe_spacing": 450.0, "locate_sigma": 220.0, "clear_bonus": 450.0, "probe_min_angle": 35.0, "search_cost_bias": 60.0, "term_cap": 420.0, "endgame_radius": 90.0, "max_attempts": 6, "rim_step": 130.0, "max_rim_patrols": 12, "relocate": False, "sweep_center_first": True, "adaptive_probe": False}
 P4 = {
     "survey_mode": "lattice",
